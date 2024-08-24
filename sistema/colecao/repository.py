@@ -15,9 +15,9 @@ class CollectionRepository:
         return Collection.objects.create(name=name, description=description, id_user=id_user)
     
     @staticmethod
-    def update_collection(collection_id, name, description):
+    def update_collection(id_collection, name, description):
         try:
-            collection = Collection.objects.get(id=collection_id)
+            collection = Collection.objects.get(id=id_collection)
             collection.name = name
             collection.description = description
             collection.save()
@@ -26,9 +26,9 @@ class CollectionRepository:
             return False
     
     @staticmethod
-    def delete_collection(collection_id):
+    def delete_collection(id_collection):
         try:
-            collection = collection.objects.get(id=collection_id)
+            collection = collection.objects.get(id=id_collection)
             collection.delete()
             return True
         except collection.DoesNotExist:
