@@ -1,0 +1,64 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Criar</title>
+{% endblock %}
+
+{% block content %}
+    <div>
+        <div class="text-center mt-4">
+            <h1>
+                Criar Produto
+            </h1>
+        </div>
+        <div class="m-3 ">
+            <div class="container p-3 card "  style="background-color: #eef7ff; border-color: #eef7ff; box-shadow: inset;">
+                <div class="row g-3 mb-4 ">
+                    <div class="col-lg-4">
+                    <label for="inputPassword6"  class="col-form-label"><b>Nome</b>: </label>
+                    </div>
+                    <div class="col-lg-4">
+                    <input type="name" id="inputName" class="form-control" aria-describedby="nameHelpInline">
+                    </div>
+                </div>
+                <br>
+                <div class="row g-3 mb-3 ">
+                    <div class="col-lg-4">
+                    <label for="inputPassword6"  class="col-form-label"><b>Tipo</b>: </label>
+                    </div>
+                    <div class="col-lg-4">
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>selecione o tipo da roupa</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Tbree</option>
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <div class="row g-3 mt-1">
+                    <div class="col-lg-4">
+                    <label for="inputPassword6" class="col-form-label"><b>Descrição</b>: </label>
+                    </div>
+                    <div class="col-lg-4">
+                    <input type="name" id="inputName" class="form-control" aria-describedby="nameHelpInline">
+                    </div>
+                </div>
+                <br>
+                <div class="row g-3 mb-3 mt-3 ">
+                    <div class="col-lg-4">
+                    <label for="inputPassword6"  class="col-form-label"><b>Imagem</b>: </label>
+                    </div>
+                    <div class="col-lg-4">
+                        <input class="form-control" type="file" id="formFile">
+                    </div>
+                </div>
+                <br>
+                <div class="text-center mt-4">
+                    <a href="#" class="btn" style="background-color: #4fe1c9;"><b>Criar</b></a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
