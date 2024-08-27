@@ -2,12 +2,13 @@ from django.db import models
 
 # Create your models here.
 class Parameters(models.Model):
-    impostos = models.FloatField()
-    retirada = models.FloatField()
-    frete = models.FloatField()
-    comissao = models.FloatField()
-    lucro = models.FloatField()
-    divisor = models.FloatField()
+    impostos = models.DecimalField(max_digits=8, decimal_places=2)
+    retirada = models.DecimalField(max_digits=8, decimal_places=2)
+    frete = models.DecimalField(max_digits=8, decimal_places=2)
+    comissao = models.DecimalField(max_digits=8, decimal_places=2)
+    despesas_financeiras = models.DecimalField(max_digits=8, decimal_places=2)
+    despesas_comerciais = models.DecimalField(max_digits=8, decimal_places=2)
+    lucro = models.DecimalField(max_digits=8, decimal_places=2)
 
     def __str__(self):
         return self.divisor
