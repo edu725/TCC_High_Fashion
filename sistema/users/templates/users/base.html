@@ -14,12 +14,18 @@
     {% endblock %}
 </head>
 <body class="d-flex flex-column min-vh-100">
+
+    {% include 'users/partials/_nav.html' %}
+
     {% block content %}
     {% endblock %}
 
     {% block scripts %}
     {% endblock %}
-    
+
+    {% include 'users/partials/_register.html' %}
+    {% include 'users/partials/_login.html' %}
+
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/main.js"></script>
 
