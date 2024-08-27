@@ -28,10 +28,10 @@ class CollectionRepository:
     @staticmethod
     def delete_collection(id_collection):
         try:
-            collection = collection.objects.get(id=id_collection)
+            collection = Collection.objects.get(id=id_collection)
             collection.delete()
             return True
-        except collection.DoesNotExist:
+        except Collection.DoesNotExist:
             return False
         
     @staticmethod

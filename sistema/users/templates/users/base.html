@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -5,14 +6,18 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>base</title>
+    {% block title %}
+        <title>base</title>
+    {% endblock %}
+
+    {% block style %}
+    {% endblock %}
 </head>
 <body>
-    <h1>Base</h1>
-
-
+    {% block content %}
+    {% endblock %}
+    
     <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/main.js"></script>
 </body>
 </html>
