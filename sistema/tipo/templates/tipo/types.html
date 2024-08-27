@@ -1,0 +1,84 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Tipos</title>
+{% endblock %}
+
+{% block content %}
+    <section>
+        <div class=" mb-5">
+            <h1 class="position-absolute top-0 start-50 translate-middle-x">Tipos</h1>
+            <div class="position-absolute top-0 end-0">
+                <a href="" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="green" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
+                        <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <div class="container m-4">
+            <div class="row">
+                <div class="card col-lg-3 m-2" style="width: 18rem;">
+                    <img src="assets/img/Bermuda.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Bermuda</h5> <br>
+                        <p class="card-text">Preço: </p>
+                        <p class="card-text">Tamanho: </p> <br>
+                        <a href="#" class="btn btn-danger">deletar</a>
+                        <a href="#" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal1">editar</a>
+                    </div>
+                </div>
+                <div class="card col-lg-3 m-2" style="width: 18rem;">
+                    <img src="assets/img/Bermuda.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Bermuda</h5> <br>
+                        <p class="card-text">Preço: </p>
+                        <p class="card-text">Tamanho: </p> <br>
+                        <a href="#" class="btn btn-danger">deletar</a>
+                        <a href="#" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal1">editar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Criar Tipo -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Adicionar novo tipo</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="name" class="form-label">Nome</label>
+                        <input type="text" class="form-control" id="name" placeholder="Digite seu nome">
+                    </div>
+                    <hr>
+                    <div class=" m-2 text-center">
+                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Criar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Ediatr Tipo -->
+        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ediatr tipo</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="name" class="form-label">Nome</label>
+                        <input type="text" class="form-control" id="name" placeholder="Digite seu nome">
+                    </div>
+                    <hr>
+                    <div class=" m-2 text-center">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Deletar</button>
+                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Criar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
