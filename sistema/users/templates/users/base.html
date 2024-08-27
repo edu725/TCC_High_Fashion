@@ -13,11 +13,15 @@
     {% block style %}
     {% endblock %}
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     {% block content %}
+    {% endblock %}
+
+    {% block scripts %}
     {% endblock %}
     
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/main.js"></script>
+
 </body>
 </html>
