@@ -1,7 +1,7 @@
 from django.db import models
 from users.models import User
 from tipo.models import Type
-from colecao.models import Colection
+from colecao.models import Collection
 
 
 # Create your models here.
@@ -13,7 +13,7 @@ class Product(models.Model):
     # price_sell = models.FloatField()
     # price_cost = models.FloatField()
     type = models.ForeignKey(Type, on_delete=models.CASCADE)
-    colection = models.ForeignKey(Colection, on_delete=models.CASCADE)
+    collection = models.ForeignKey(Collection, on_delete=models.CASCADE)
     path = models.ImageField()
 
     def __str__(self):

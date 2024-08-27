@@ -110,6 +110,7 @@ class DashboardManagerPage(View):
         return render(request, self.template_name)
 
 
+
 @method_decorator(user_is_manager_or_common, name='dispatch')
 class UserProfileView(View):
     template_name = 'users/profile.html'
