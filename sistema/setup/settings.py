@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'produto',
     'tipo',
     'users',
+    'notifications'
     'rest_framework',
 ]
 
