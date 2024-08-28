@@ -11,13 +11,13 @@ class ProductRepository:
         return Product.objects.all()
 
     @staticmethod
-    def create_product(name, description, type, path):
-        return Product.objects.create(name=name, description=description, type=type, path=path) 
+    def create_product(name, description, collection, type, path):
+        return Product.objects.create(name=name, description=description, collection=collection, type=type, path=path) 
 
     @staticmethod
     def update_product(id_product, name, description, type, path):
         try:
-            product = Product.objects.get(id=id_product)
+            product = ProductRepository.get_product_by_id(id=id_product)
             product.name = name
             product.description = description
             product.type = type
