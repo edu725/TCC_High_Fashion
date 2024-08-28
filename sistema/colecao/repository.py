@@ -1,5 +1,4 @@
 from .models import *
-from datetime import datetime
 
 class CollectionRepository:
     @staticmethod
@@ -11,40 +10,37 @@ class CollectionRepository:
         return Collection.objects.get(id=id)
     
     @staticmethod
-    def create_collection(name, description, id_user):
-        return Collection.objects.create(name=name, description=description, id_user=id_user)
+    def create_collection(name, description, image):
+        return Collection.objects.create(name=name, description=description, image=image)
     
     @staticmethod
-    def update_collection(id_collection, name, description):
-        try:
-            collection = Collection.objects.get(id=id_collection)
+    def update_collection(id_collection, name, description, image):
+        collection = CollectionRepository.get_collection_by_id(id=id_collection)
+        if collection:
             collection.name = name
             collection.description = description
+            collection.image = image
             collection.save()
             return True
-        except Collection.DoesNotExist:
+        else:
             return False
     
     @staticmethod
     def delete_collection(id_collection):
         try:
-            collection = Collection.objects.get(id=id_collection)
+            collection = CollectionRepository.get_collection_by_id(id=id_collection)
             collection.delete()
             return True
         except Collection.DoesNotExist:
             return False
         
-    @staticmethod
-    def search_collection(search_query):
-        collections = Collection.objects.all()
+    # @staticmethod
+    # def search_collection(search_query):
 
-        # Verifica se o valor é numérico e busca por ID
-        if search_query.isdigit():
-            collections = collections.filter(id=search_query)
+    #     # Verifica se o valor é numérico e busca por ID
+    #     if search_query.isdigit():
+    #         return Collection.objects.filter(id=search_query)
 
-        else:
-            # Se não for uma data, considera como nome da sala
-            collections = collections.filter(collection__name__icontains=search_query.upper())
-
-        return collections
-        
+    #     else:
+    #         # Se não for uma data, considera como nome da sala
+    #         return Collection.objects.filter(collection_name__icontains=search_query.upper())

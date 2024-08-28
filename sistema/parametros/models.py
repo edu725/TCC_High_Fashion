@@ -14,5 +14,6 @@ class Parameters(models.Model):
         return self.divisor
     
     def get_divisor(self):
-        pass
+        total = (self.impostos + self.retirada + self.frete + self.comissao + self.despesas_financeiras + self.despesas_comerciais + self.lucro)
+        return (100 - total)/100
 
