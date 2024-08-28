@@ -10,6 +10,12 @@
       *{
         font-family: 'Open Sans';
       }
+
+      @media (max-width: 600px) {
+        .icontec{
+          padding: 10px;
+        }
+      }
     </style>
 </head>
 <body>   
@@ -32,6 +38,7 @@
   </header>
   <!-- conteúdo principal -->
   <main class="mt-5">
+    <!-- sobre -->
     <div class="container pt-5">
       <div class="row">
         <div class="col-lg-4">
@@ -40,8 +47,8 @@
               <img src="assets/img/logo_P.png" alt="LOGO"
                 class="rounded-circle img-fluid" style="width: 150px;">
               <h5 class="my-3">ChronoLAB</h5>
-              <p class="text-muted mb-1">Senai</p>
-              <p class="text-muted mb-4">São João Nepomuceno</p>
+              <p class="text-muted mb-1">SENAI</p>
+              <p class="text-muted mb-4">São João Nepomuceno/MG</p>
             </div>
           </div>
         </div>
@@ -65,7 +72,9 @@
           </div>  
         </div>
       </div>
-    </div>  
+    </div>
+    <!-- fim do sobre  -->
+    <!-- equipe -->
     <div class="container-fluid bg-dark pt-5 mt-5">    
       <div class="container border" style="margin-top: 60px; background-color: rgba(255, 255, 255, 0.932);"> 
         <div>
@@ -588,6 +597,8 @@
     </div>
     <div class="bg-dark" style="padding: 80px;">
     </div>
+    <!-- fim da equipe -->
+    <!-- sobre equipe -->
     <div class="container">  
       <div class="m-5">  
         <div class="row featurette">
@@ -604,7 +615,43 @@
           </div>
         </div>
       </div>
-    </div>  
+    </div>
+    <!-- fim do sobre a equipe   -->
+    <!-- tecnologia usadas -->
+    <div class="container pt-5 pb-5 text-center">
+      <div class="pb-3">
+        <h1> Tecnologias </h1>
+      </div>
+      <div class="row pt-3 border border-2 rounded-2 p-2">
+        <div class="col-lg-3"> 
+          <img src="assets/img/html.png" class="img-fluid icontec" width="150px" height="150px" alt=""> 
+        </div>
+        <div class="col-lg-3"> 
+          <img src="assets/img/css.png" class="img-fluid icontec" width="110px" height="110px" alt="">
+        </div>
+        <div class="col-lg-3"> 
+          <img src="assets/img/js.png" class="img-fluid icontec" width="110px" height="110px" alt="">
+        </div>
+        <div class="col-lg-3"> 
+          <img src="assets/img/python.png" class="img-fluid icontec" width="150px" height="150px" alt="">
+        </div>
+      </div>
+      <div class="row mt-5 pt-5 border border-2 rounded-2">
+        <div class="col-lg-3"> 
+          <img src="assets/img/bootstrap.png" class="img-fluid icontec" width="150px" height="150px" alt="">
+        </div>
+        <div class="col-lg-3"> 
+          <img src="assets/img/django.png" class="img-fluid icontec" width="120px" height="120px" alt="">
+        </div>
+        <div class="col-lg-3"> 
+          <img src="assets/img/mysql.png" class="img-fluid icontec" width="150px" height="150px" alt="">
+        </div>
+        <div class="col-lg-3"> 
+          <img src="assets/img/vscode.png" class="img-fluid icontec" width="110px" height="110px" alt="">
+        </div>
+      </div>
+    </div>
+    <!-- contate-nos -->
     <section class="container-fluid border bg-dark" style="background-image: url('assets/img/mapa.jpg'); background-size: cover; padding-bottom: 80px; padding-top: 50px; background-position: center;">    
       <div class="container" style="background-image: url('assets/img/mapa2.jpg'); padding: 80px; background-position: center;">  
         <div class="text-center pt-3">
@@ -643,7 +690,9 @@
         </div>
       </div>  
     </section>
+    <!-- fim do contate -->
   </main>
+    <!-- fim do conteudo principal -->
     <!-- FOOTER -->
     <footer class="">
       <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
@@ -652,5 +701,6 @@
         ChronoLAB © 2024 All rights reserved
       </div>  
     </footer>
+    <!-- fim do footer -->
 </body>
 </html>
