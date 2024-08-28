@@ -3,11 +3,11 @@ from .models import *
 class ParametersRepository:
 
     @staticmethod
-    def get_id_parameters():
+    def get_id_parameter():
         return Parameters.object.get(id=1)
 
     @staticmethod
-    def update_collection(impostos, retirada, frete, comissao, despesas_financeiras, despesas_comerciais, lucro):
+    def update_parameter(impostos, retirada, frete, comissao, despesas_financeiras, despesas_comerciais, lucro):
         parameter = Parameters.get_id_parameters()
         if parameter:
             parameter.impostos = impostos
