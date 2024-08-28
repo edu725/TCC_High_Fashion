@@ -4,23 +4,33 @@ class ProductRepository:
 
     @staticmethod
     def get_product_by_id(id):
+        """Retorna os produtos por id"""
         return Product.objects.get(id=id)
     
     @staticmethod
+    def get_last_product():
+        """Retorna o ultimo produto"""
+        return Product.objects.order_by('id').last
+        
+    @staticmethod
     def get_all_products():
+        """Retorna todos os produtos"""
         return Product.objects.all()
 
     @staticmethod
-    def create_product(name, description, collection, type, path):
-        return Product.objects.create(name=name, description=description, collection=collection, type=type, path=path) 
+    def create_product(name, description, type, collection, path):
+        """Cria um produto"""
+        return Product.objects.create(name=name, description=description, type=type, collection=collection, path=path) 
 
     @staticmethod
-    def update_product(id_product, name, description, type, path):
+    def update_product(id_product, name, description, type, collection, path):
+        """Atualizar um produto"""
         try:
             product = ProductRepository.get_product_by_id(id=id_product)
             product.name = name
             product.description = description
             product.type = type
+            product.collection = collection
             product.path = path
             product.save()
             return True
@@ -29,6 +39,7 @@ class ProductRepository:
 
     @staticmethod
     def delete_product(id_product):
+        """Deletar um produto"""
         try:
             product = Product.objects.get(id=id_product)
             product.delete()
@@ -36,23 +47,24 @@ class ProductRepository:
         except Product.DoesNotExist:
             return False
         
-    @staticmethod
-    def search_product(query):
-        try:
-            # Primeiro tenta buscar por ID
-            if query.isdigit():
-                return Product.objects.filter(id=query)
-        except ValueError:
-            pass
+    # @staticmethod
+    # def search_product(query):
+    #     try:
+    #         # Primeiro tenta buscar por ID
+    #         if query.isdigit():
+    #             return Product.objects.filter(id=query)
+    #     except ValueError:
+    #         pass
         
-        # Se não for um ID válido, busca por nome (convertendo para maiúsculas)
-        query_upper = query.upper()
-        return Product.objects.filter(name__icontains=query_upper)
+    #     # Se não for um ID válido, busca por nome (convertendo para maiúsculas)
+    #     query_upper = query.upper()
+    #     return Product.objects.filter(name__icontains=query_upper)
     
 
 class CommentProductRepository:
     @staticmethod
     def create_comment_product(id_product, id_user, comment):
+        """ um produto"""
         return CommentProduct.objects.create(id_product=id_product, id_user=id_user, comment=comment)
     
     @staticmethod

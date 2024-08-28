@@ -3,7 +3,6 @@ from django.urls import path
 
 
 urlpatterns = [
-
     path('produto/<int:id>',ProductDetailView.as_view() , name='product_list'), #ok
     path('listar/',ProductListView.as_view() , name='product_list'), #ok
     path('criar/',ProductCreateView.as_view() , name='product_create'), #ok
@@ -15,4 +14,5 @@ urlpatterns = [
     path('comentar_page/<int:id_user>',PageCommentListView.as_view() , name='page_comment_list'),
     path('comentar_page_create/<int:id_user>',PageCommentCreateView.as_view() , name='page_comment_create'), 
     path('comentar_page_delete/<int:id_comment>',PageCommentDeleteView.as_view() , name='page_comment_delete'),  
+
 ]

@@ -4,7 +4,7 @@ from django.db import models
 class User(AbstractUser):
     USER_TYPE_CHOICES = (
         ('manager', 'Gerente'),
-        ('common', 'Docente'),
+        ('common', 'Usuario'),
     )
     email = models.EmailField(unique=True)
     user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES, default='common')

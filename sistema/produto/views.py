@@ -9,6 +9,7 @@ from django.contrib import messages
 
 # Create your views here.
 
+
 def ProductDetailView(request):
     return render(request, 'produto/product_single.html')
     
@@ -52,6 +53,7 @@ class ProductUpdateView(UpdateView):
     form_class = ProductForm
     success_url = reverse_lazy('product_single')
 
+
     def get_object(self):
         product_id = self.kwargs['pk']
         return ProductService.get_product_by_id(product_id)
@@ -78,7 +80,6 @@ class ProductDeleteView(DeleteView):
         messages.success(request, "Produto excluído com sucesso!")
         return super().delete(request, *args, **kwargs)
     
-# class ProductCommentListView(ListView):
 
 class ProductCommentCreateView(CreateView):
     template_name = 'produto/product_register.html'
@@ -109,3 +110,4 @@ class ProductCommentDeleteView(DeleteView):
         CommentProductService.delete_comment_product(comment.id)
         messages.success(request, "Comentario excluído com sucesso!")
         return super().delete(request, *args, **kwargs)
+
