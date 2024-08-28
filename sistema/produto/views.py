@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from produto.service import ProductService
+from produto.service import *
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.views import View
 from produto.forms import*
@@ -9,10 +9,13 @@ from django.contrib import messages
 
 # Create your views here.
 
-# class ProductDetailView(View):
+
+def ProductDetailView(request):
+    return render(request, 'produto/product_single.html')
+    
 
 class ProductListView(ListView): 
-    template_name = 'produto/product_list.html'
+    template_name = 'produto/product_single.html'
     context_object_name = 'produto'
     paginate_by = 10
 
@@ -30,7 +33,7 @@ class ProductListView(ListView):
 class ProductCreateView(CreateView):
     template_name = 'produto/product_register.html'
     form_class = ProductForm
-    success_url = reverse_lazy('product_list')
+    success_url = reverse_lazy('product_single')
 
     def form_valid(self, form):
         name=form.cleaned_data['name']
@@ -48,7 +51,8 @@ class ProductCreateView(CreateView):
 class ProductUpdateView(UpdateView):
     template_name = 'produto/product_register.html'
     form_class = ProductForm
-    success_url = reverse_lazy('product_list')
+    success_url = reverse_lazy('product_single')
+
 
     def get_object(self):
         product_id = self.kwargs['pk']
@@ -64,7 +68,7 @@ class ProductUpdateView(UpdateView):
         return super().form_invalid(form)
     
 class ProductDeleteView(DeleteView):
-    success_url = reverse_lazy('product_list')  
+    success_url = reverse_lazy('product_single')  
 
     def get_object(self):
         product_id = self.kwargs['pk']
@@ -77,4 +81,33 @@ class ProductDeleteView(DeleteView):
         return super().delete(request, *args, **kwargs)
     
 
-    
+class ProductCommentCreateView(CreateView):
+    template_name = 'produto/product_register.html'
+    form_class = ProductForm
+    success_url = reverse_lazy('product_single')
+
+    def form_valid(self, form):
+        product_id = self.kwargs['pk']
+        user_id = self.kwargs['pk']
+        comment=form.cleaned_data['comment']
+        CommentProductService.create_product(product_id, user_id, comment)
+        messages.success(self.request, "Comentário adicionado com sucesso!")
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, "Ocorreu um erro na criação do comentario.")
+        return super().form_invalid(form)
+
+class ProductCommentDeleteView(DeleteView):
+    success_url = reverse_lazy('product_single')  
+
+    def get_object(self):
+        comment_id = self.kwargs['pk']
+        return CommentProductService.get_product_by_id(comment_id)
+
+    def delete(self, request, *args, **kwargs):
+        comment = self.get_object()
+        CommentProductService.delete_comment_product(comment.id)
+        messages.success(request, "Comentario excluído com sucesso!")
+        return super().delete(request, *args, **kwargs)
+
