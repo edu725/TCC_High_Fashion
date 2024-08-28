@@ -17,6 +17,9 @@ class ProductService():
 
         return products
     
+    @staticmethod
+    def get_last_product():
+        return ProductRepository.get_last_product()
 
     @staticmethod
     def get_product_by_id(id):
@@ -34,9 +37,9 @@ class ProductService():
     def delete_product(id_product):
         return ProductRepository.delete_product(id_product)
 
-    @staticmethod
-    def search_product(query):
-        return ProductRepository.search_product(query)
+    # @staticmethod
+    # def search_product(query):
+    #     return ProductRepository.search_product(query)
     
 
 class CommentProductService():
