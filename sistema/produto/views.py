@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from produto.service import ProductService
+from produto.service import *
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.views import View
 from produto.forms import*
@@ -9,72 +9,75 @@ from django.contrib import messages
 
 # Create your views here.
 
-# class ProductDetailView(View):
-
-class ProductListView(ListView): 
-    template_name = 'produto/product_list.html'
-    context_object_name = 'produto'
+class ProductList(View):
+    template_name = 'produto/tela_tcc.html'
     paginate_by = 10
+    def get(self, request, *args, **kwargs):
+        page = request.GET.get('page', 1)
+        per_page = self.paginate_by
+        products = ProductService.list_all_products(page=page, per_page=per_page)
+        form = ProductForm()
+        return render(request, self.template_name, {'products':products,'form':form})
+    
+class Product_Single(View):
+    template_name = 'produto/product_single.html'
 
-    def get_queryset(self):
-        search_query = self.request.GET.get('search', '')
-        page = self.request.GET.get('page', 1)
-        
-        if search_query:
-            produto = ProductService.search_product(search_query, page=page, per_page=self.paginate_by)
+    def get(self, product_id, request, *args, **kwargs):
+        product = ProductService.get_product_by_id(product_id)
+        return render(request, self.template_name, {'product':product})
+    
+class CreateProduct(View):
+    template_name = 'produto/create.html'
+    def post(self, request, *args, **kwargs):
+        form = ProductForm(request.POST)
+        if form.is_valid():
+                ProductService.create_product(form.cleaned_data['name', 'description', 'type', 'path'])
+                messages.success(request, "Produto criado com sucesso!")
+                return redirect('all_products')
         else:
-            produto = ProductService.list_all_products(page=page, per_page=self.paginate_by)
-        
-        return produto
-
-class ProductCreateView(CreateView):
-    template_name = 'produto/product_register.html'
-    form_class = ProductForm
-    success_url = reverse_lazy('product_list')
-
-    def form_valid(self, form):
-        name=form.cleaned_data['name']
-        description=form.cleaned_data['description']
-        type=form.cleaned_data['type']
-        path=form.cleaned_data['path']
-        ProductService.create_product(name, description, type, path)
-        messages.success(self.request, "Produto criado com sucesso!")
-        return super().form_valid(form)
-
-    def form_invalid(self, form):
-        messages.error(self.request, "Ocorreu um erro na criação do produto.")
-        return super().form_invalid(form)
-
-class ProductUpdateView(UpdateView):
-    template_name = 'produto/product_register.html'
-    form_class = ProductForm
-    success_url = reverse_lazy('product_list')
-
-    def get_object(self):
-        product_id = self.kwargs['pk']
-        return ProductService.get_product_by_id(product_id)
-
-    def form_valid(self, form):
-        ProductService.update_product(self.object.id, **form.cleaned_data)
-        messages.success(self.request, "Produto atualizado com sucesso!")
-        return super().form_valid(form)
-
-    def form_invalid(self, form):
-        messages.error(self.request, "Ocorreu um erro na atualização do produto.")
-        return super().form_invalid(form)
+            messages.error(request, "Erro ao criar produto.")
+        return render(request, self.template_name, {'form':form})
     
-class ProductDeleteView(DeleteView):
-    success_url = reverse_lazy('product_list')  
+class UpdateProduct(View):
+    def post(self, request, product_id, *args, **kwargs):
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            ProductService.update_product(product_id, form.cleaned_data['name', 'description', 'type', 'path'])
+            messages.success(request, 'Produto editado com sucesso!')
+        else:
+            messages.error(request,'Erro ao editar produto.')
+        return redirect('all_products')
 
-    def get_object(self):
-        product_id = self.kwargs['pk']
-        return ProductService.get_product_by_id(product_id)
-
-    def delete(self, request, *args, **kwargs):
-        product = self.get_object()
-        ProductService.delete_product(product.id)
-        messages.success(request, "Produto excluído com sucesso!")
-        return super().delete(request, *args, **kwargs)
+class DeleteProduct(View):
+    def get(self, product_id, request, *args, **kwargs):
+        ProductService.delete_product(product_id)
+        messages.success(request, "Produto deletado com sucesso!")
+        return redirect('all_products')
     
-
+class CommentProductList(View):
+    def get(self, product_id, request, *args, **kwargs):
+        CommentProductService.list_all_comments(product_id)
+        form = CommentProductForm()
+        return redirect('product_single', {'form':form})
     
+class CreateCommentProduct(View):
+    def post(self, product_id, request, *args, **kwargs):
+        form = CommentProductForm(request.POST)
+        if form.is_valid():
+            CommentProductService.create_comment_product(product_id, form.cleaned_data['comment'])
+
+class DeleteCommentProduct(View):
+    def get(self, comment_id, request, *args, **kwargs):
+        CommentProductService.delete_comment_product(comment_id)
+        messages.success(request, "Comentário deletado com sucesso!")
+        return redirect('product_single')
+    
+class CommentPageList(View):
+    template_name = 'produto/mural_comments.html'
+    paginate_by = 5
+    def get(self, request, *args, **kwargs):
+        page = request.GET.get('page', 1)
+        per_page = self.paginate_by
+        comments = CommentPageService.list_all_comments(page=page, per_page=per_page)
+        form = CommentPageForm()
+        return render(request, self.template_name, {'comments':comments,'form':form})

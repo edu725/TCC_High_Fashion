@@ -27,7 +27,7 @@ urlpatterns = [
     path('tipos/', include('tipo.urls')),
     path('colecao/', include('colecao.urls')),
     path('paramertros/', include('parametros.urls')),
-    
+  
 ]
 
 # Configuração para servir arquivos de mídia durante o desenvolvimento

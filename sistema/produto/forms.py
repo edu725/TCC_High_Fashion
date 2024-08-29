@@ -6,12 +6,12 @@ class ProductForm(forms.ModelForm):
     class Meta:
 
         model = Product
-        fields = ['name','description', 'type', 'colection', 'path']
+        fields = ['name','description', 'type', 'collection', 'path']
         labels = {
             "name": "Nome",
             "description": "Descrição",
             "type": "Tipo",
-            "colection": "Coleção",
+            "collection": "Coleção",
             "path": "Fotografia",
         }
         widgets = {
@@ -32,7 +32,7 @@ class ProductForm(forms.ModelForm):
                     'class': 'form-control'
                 }
             ),
-            'colection': forms.Select(
+            'collection': forms.Select(
                 attrs={
                     'class': 'form-control'
                 }
@@ -50,10 +50,10 @@ class CommentProductForm(forms.ModelForm):
         model = CommentProduct
         fields = ['comment']
         labels = {
-            'comment': "Comentário:",
+            'comment': "Comentário",
         }
         widgets = {
-            'comment': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Write your comment here...'}),
+            'comment': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Escreva seu comentário aqui...'}),
         }
 
 
@@ -62,8 +62,23 @@ class CommentPageForm(forms.ModelForm):
         model = CommentPage
         fields = ['comment']
         labels = {
-            'comment': "Comentário:",
+            'comment': "Comentário",
         }
         widgets = {
-            'comment': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Write your comment here...'}),
+            'comment': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Escreva seu comentário aqui...'}),
+        }
+
+class ProductCostForm(forms.ModelForm):
+    class Meta:
+        model = ProductCost
+        fields = ['raw_materials','labor','indirect']
+        labels = {
+            'raw_materials': "Preço da matéria-prima",
+            'labor': "Preço da mão de obra",
+            'indirect': "Preço indireto"
+        }
+        widgets = {
+            'raw_materials': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Valor da Matéria-Prima'}),
+            'labor': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Valor da Mão de obra'}),
+            'indirect': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Preço indireto'}),
         }
