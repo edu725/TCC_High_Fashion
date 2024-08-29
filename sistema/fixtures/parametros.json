@@ -1,0 +1,16 @@
+[
+    {
+        "model": "parametros.", 
+
+        "pk": 1,
+        "fields":{
+            "impostos": 6,
+            "retirada": 4,
+            "frete": 2.5,
+            "comissao": 10,
+            "despesas_financeiras": 6,
+            "despesas_comercias": 7,
+            "lucro": 14.5
+        }
+    }
+]
