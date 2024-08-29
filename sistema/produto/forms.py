@@ -11,7 +11,7 @@ class ProductForm(forms.ModelForm):
             "name": "Nome",
             "description": "Descrição",
             "type": "Tipo",
-            "colection": "Coleção",
+            "collection": "Coleção",
             "path": "Fotografia",
         }
         widgets = {
