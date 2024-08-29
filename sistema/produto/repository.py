@@ -3,9 +3,9 @@ from .models import *
 class ProductRepository:
 
     @staticmethod
-    def get_product_by_id(id):
+    def get_product_by_id(product_id):
         """Retorna os produtos por id"""
-        return Product.objects.get(id=id)
+        return Product.objects.get(id=product_id)
     
     @staticmethod
     def get_last_product():
