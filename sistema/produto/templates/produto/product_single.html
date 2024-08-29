@@ -84,11 +84,13 @@
                     <p>Muito foda essa roupa</p>
                 </div>
             </div>
-            <form action="">
-                <div class="form-floating">
+            <form method="post" enctype="multipart/form-data">
+                <!-- <div class="form-floating">
                     <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
                     <label for="floatingTextarea2">Adicionar Comentário</label>
-                </div>
+                </div> -->
+                {% csrf_token %}
+                {{ form.as_p }}
                 <div class="text-center py-2">
                     <button type="button" class="btn btn-primary">Comentar</button>
                 </div>
