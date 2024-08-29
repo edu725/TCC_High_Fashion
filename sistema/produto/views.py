@@ -53,3 +53,31 @@ class DeleteProduct(View):
         ProductService.delete_product(product_id)
         messages.success(request, "Produto deletado com sucesso!")
         return redirect('all_products')
+    
+class CommentProductList(View):
+    def get(self, product_id, request, *args, **kwargs):
+        CommentProductService.list_all_comments(product_id)
+        form = CommentProductForm()
+        return redirect('product_single', {'form':form})
+    
+class CreateCommentProduct(View):
+    def post(self, product_id, request, *args, **kwargs):
+        form = CommentProductForm(request.POST)
+        if form.is_valid():
+            CommentProductService.create_comment_product(product_id, form.cleaned_data['comment'])
+
+class DeleteCommentProduct(View):
+    def get(self, comment_id, request, *args, **kwargs):
+        CommentProductService.delete_comment_product(comment_id)
+        messages.success(request, "Comentário deletado com sucesso!")
+        return redirect('product_single')
+    
+class CommentPageList(View):
+    template_name = 'produto/mural_comments.html'
+    paginate_by = 5
+    def get(self, request, *args, **kwargs):
+        page = request.GET.get('page', 1)
+        per_page = self.paginate_by
+        comments = CommentPageService.list_all_comments(page=page, per_page=per_page)
+        form = CommentPageForm()
+        return render(request, self.template_name, {'comments':comments,'form':form})
