@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from produto.service import *
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.views import View
-from produto.forms import*
+from produto.forms import *
 from django.urls import reverse_lazy
 from django.contrib import messages
 
@@ -22,9 +22,11 @@ class ProductList(View):
 class Product_Single(View):
     template_name = 'produto/product_single.html'
 
-    def get(self, product_id, request, *args, **kwargs):
-        product = ProductService.get_product_by_id(product_id)
-        return render(request, self.template_name, {'product':product})
+    def get(self, request):
+        product = ProductService.get_product_by_id(1)
+        comment = CommentPageService.list_all_comments()
+        form_comment = CommentProductForm()
+        return render(request, self.template_name, {'product':product, 'form':form_comment, 'comment':comment})
     
 class CreateProduct(View):
     template_name = 'produto/create.html'
@@ -53,12 +55,6 @@ class DeleteProduct(View):
         ProductService.delete_product(product_id)
         messages.success(request, "Produto deletado com sucesso!")
         return redirect('all_products')
-    
-class CommentProductList(View):
-    def get(self, product_id, request, *args, **kwargs):
-        CommentProductService.list_all_comments(product_id)
-        form = CommentProductForm()
-        return redirect('product_single', {'form':form})
     
 class CreateCommentProduct(View):
     def post(self, product_id, request, *args, **kwargs):
