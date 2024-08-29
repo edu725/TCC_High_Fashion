@@ -57,13 +57,23 @@ class CommentProductService():
 class CommentPageService():
 
     @staticmethod
-    def list_all_comments(id_user):
-        return CommentPageRepository.get_all_comments_page(id_user)
-
-    @staticmethod
     def create_comment_page(id_user, comment):
         return CommentPageRepository.create_comment_page(id_user, comment)
 
     @staticmethod
     def delete_comment_page(id_comment):
         return CommentPageRepository.delete_comment_page(id_comment)
+    
+    @staticmethod
+    def list_all_comments(page=1, per_page=10):
+        all_comments = CommentPageRepository.get_all_comments_page()
+        paginator = Paginator(all_comments, per_page)
+
+        try:
+            products = paginator.page(page)
+        except PageNotAnInteger:
+            products = paginator.page(1)
+        except EmptyPage:
+            products = paginator.page(paginator.num_pages)
+
+        return products
