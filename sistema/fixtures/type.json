@@ -1,0 +1,42 @@
+[
+    {
+        "model": "tipo.type", 
+
+        "pk": 1,
+        "fields":{
+            "name": "Sobretudo"
+        }
+    },
+    {
+        "model": "tipo.type", 
+
+        "pk": 2,
+        "fields":{
+            "name": "Jaqueta"
+        }
+    },
+    {
+        "model": "tipo.type", 
+
+        "pk": 3,
+        "fields":{
+            "name": "Camisa"
+        }
+    },
+    {
+        "model": "tipo.type", 
+
+        "pk": 4,
+        "fields":{
+            "name": "Vestido"
+        }
+    },
+    {
+        "model": "tipo.type", 
+
+        "pk": 5,
+        "fields":{
+            "name": "Saia"
+        }
+    }
+]
