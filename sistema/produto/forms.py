@@ -73,8 +73,8 @@ class ProductCostForm(forms.ModelForm):
         model = ProductCost
         fields = ['raw_materials','labor','indirect']
         labels = {
-            'raw_materials': "Matéria-prima",
-            'labor': "Mão de obra",
+            'raw_materials': "Preço da matéria-prima",
+            'labor': "Preço da mão de obra",
             'indirect': "Preço indireto"
         }
         widgets = {
