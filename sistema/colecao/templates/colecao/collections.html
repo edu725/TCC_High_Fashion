@@ -28,56 +28,48 @@
 
 {% block content %}
 <section>
+
+  <div class="d-flex justify-content-center">
+    <div >
+      <h1 class="title">Coleção</h1>
+    </div>
+    <div class="position-absolute end-0">
+      <button type="button"  class="btn" >
+        <a href="{% url 'collection_list' %}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="blue" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
+          <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0"/>
+        </svg>
+        </a>
+      </button>
+    </div>
+  </div>
+
   <div class="container">
-    <h1 class="title">Coleção de Inverno</h1>
     <div class="row">
+      {% for collection in collections %}
       <div class="col-12 col-sm-6 col-md-4 col-lg-3">
         <div class="card">
-          <img src="image1.jpg" alt="Image 1" class="card-img-top">
           <div class="card-body">
-            <h5 class="card-title">Produto 1</h5>
-            <p class="card-text">Descrição do produto 1</p>
+            <h5 class="card-title">{{collection.name}}</h5>
+            <p class="card-text">{{collection.description}}</p>
           </div>
         </div>
       </div>
-      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-        <div class="card">
-          <img src="image2.jpg" alt="Image 2" class="card-img-top">
-          <div class="card-body">
-            <h5 class="card-title">Produto 2</h5>
-            <p class="card-text">Descrição do produto 2</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-        <div class="card">
-          <img src="image3.jpg" alt="Image 3" class="card-img-top">
-          <div class="card-body">
-            <h5 class="card-title">Produto 3</h5>
-            <p class="card-text">Descrição do produto 3</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-        <div class="card">
-          <img src="image4.jpg" alt="Image 4" class="card-img-top">
-          <div class="card-body">
-            <h5 class="card-title">Produto 4</h5>
-            <p class="card-text">Descrição do produto 4</p>
-          </div>
-        </div>
-      </div>
+      {% endfor %}
     </div>
-    <div class="d-flex justify-content-center">
-      <div class="btn-group">
-        <button class="btn btn-primary"
-          style="margin: 15px; border-radius: 10px; color: black; background-color: white; border-color: black;">1</button>
-        <button class="btn btn-primary"
-          style="margin: 15px; border-radius: 10px; color: black; background-color: white; border-color: black;">2</button>
-        <button class="btn btn-primary"
-          style="margin: 15px; border-radius: 10px; color: black; background-color: white; border-color: black;">3</button>
-      </div>
-    </div>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination d-flex justify-content-center">
+          {% if collections.has_previous %}
+              <li class="page-item"><a class="page-link" href="?page={{ collections.previous_page_number }}">Anterior</a></li>
+              <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+          {% endif %}
+          <li class="page-item active"><a class="page-link" href="#">{{ collections.number }}</a></li>
+          {% if collections.has_next %}
+              <li class="page-item"><a class="page-link" href="?page={{ collections.paginator.num_pages }}">{{ collections.paginator.num_pages }}</a></li>
+              <li class="page-item"><a class="page-link" href="?page={{ collections.next_page_number }}">Próxima</a></li>
+          {% endif %}
+      </ul>
+  </nav>  
   </div>
 </section>
 {% endblock %}

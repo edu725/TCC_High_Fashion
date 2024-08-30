@@ -33,6 +33,6 @@ class CollectionService:
     def delete_collection(id_collection):
         return CollectionRepository.delete_collection(id_collection)
 
-    # @staticmethod
-    # def search_collection(search_query):
-    #     return CollectionRepository.search_collection(search_query)
+    @staticmethod
+    def search_collection(search_query):
+        return CollectionRepository.search_collection(search_query)
