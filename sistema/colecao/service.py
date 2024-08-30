@@ -18,6 +18,10 @@ class CollectionService:
         return collections
     
     @staticmethod
+    def get_all_collections():
+        return CollectionRepository.get_all_collections()
+
+    @staticmethod
     def get_collection_by_id(id):
         return CollectionRepository.get_collection_by_id(id)
 
