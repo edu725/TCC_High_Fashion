@@ -1,17 +1,30 @@
 from django import forms
 from .models import *
+from tipo.service import TypeService
+from colecao.service import CollectionService
 
 
 class ProductForm(forms.ModelForm):
+    type_name=forms.ModelChoiceField(
+        queryset=None,
+        required=True,
+        empty_label="",
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+    collection_name=forms.ModelChoiceField(
+        queryset=None,
+        required=True,
+        empty_label="",
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+
     class Meta:
 
         model = Product
-        fields = ['name','description', 'type', 'collection', 'path']
+        fields = ['name','description', 'path']
         labels = {
             "name": "Nome",
             "description": "Descrição",
-            "type": "Tipo",
-            "collection": "Coleção",
             "path": "Fotografia",
         }
         widgets = {
@@ -27,16 +40,6 @@ class ProductForm(forms.ModelForm):
                     'placeholder': "Descrição do Produto"
                 }
             ),
-            'type': forms.Select(
-                attrs={
-                    'class': 'form-control'
-                }
-            ),
-            'collection': forms.Select(
-                attrs={
-                    'class': 'form-control'
-                }
-            ),
             'path': forms.ClearableFileInput(
                 attrs={
                     'class': 'form-control',
@@ -44,6 +47,10 @@ class ProductForm(forms.ModelForm):
             ),
         }
 
+    def __init__(self ,*args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['type_name'].queryset = TypeService.get_all_types()
+        self.fields['collection_name'].queryset = CollectionService.get_all_collections()
 
 class CommentProductForm(forms.ModelForm):
     class Meta:
