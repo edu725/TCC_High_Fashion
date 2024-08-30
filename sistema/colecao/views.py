@@ -39,12 +39,15 @@ class CollectionCreateView(View):
 
     def post(self, request, *args, **kwargs):
         form = CollectionForm(request.POST)
+        print("ok")
         if form.is_valid():
-            CollectionService.create_collection(form.cleaned_data['name'])
+            print("forms")
+            CollectionService.create_collection(form.cleaned_data['name', 'description', 'image'])
             messages.success(request, "Sala criada com sucesso!")
             return redirect('collection_list')
         else:
             messages.error(request, "Erro ao criar a sala.")
+            print("errei")
         return redirect('collection_list')
 
 
