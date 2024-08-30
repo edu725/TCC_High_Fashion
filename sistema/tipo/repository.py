@@ -12,7 +12,7 @@ class TypeRepository:
     @staticmethod
     def delete_type(type_id):
         try:
-            type = TypeRepository.get_id_type(id = type_id)
+            type = TypeRepository.get_id_type(type_id)
             type.delete()
             return True
         except Type.DoesNotExist:

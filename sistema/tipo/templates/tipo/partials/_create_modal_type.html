@@ -1,0 +1,22 @@
+<div class="modal fade" id="create_classroom" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="fs-5 text-center" style="font-family: Modestic;" id="exampleModalLabel">Criar Tipo</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container" style="width: 80%;">
+            <div class="py-2">
+                <form method="post" action="{% url 'type_create' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+            </div>
+        </div>
+        <div class="text-center py-3">
+            <button type="submit" style="border-radius: 7px; background-color: #045CAC; color: white;" class="btn">Cadastrar</button>
+          </form>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        </div>
+    </div>
+</div>

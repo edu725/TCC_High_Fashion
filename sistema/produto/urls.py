@@ -8,4 +8,5 @@ urlpatterns = [
     path('criar/', CreateProduct.as_view(), name='create_product'),
     path('editar/<int:product_id>', UpdateProduct.as_view(), name='update_product'),
     path('deletar/<int:product_id>', DeleteProduct.as_view(), name='delete_product'),
+    path('mural/', CommentPageList.as_view(), name='mural_comment')
 ]
