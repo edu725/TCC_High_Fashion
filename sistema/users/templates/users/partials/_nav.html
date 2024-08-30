@@ -15,9 +15,15 @@
                             </svg>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li>
-                                <a class="dropdown-item" href="">Configurações</a>
-                            </li>
+                            {% if request.user.is_authenticated %}
+                                <li>
+                                    <a class="dropdown-item" href="">Configurações</a>
+                                </li>
+                            {% else %}
+                                <li>
+                                    <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#login" href="">Login</a>
+                                </li>
+                            {% endif %}
                             <li>
                                 <form action="" method="">
                                     <button type="submit" class="dropdown-item" style="color: red ;">Sair</button>
