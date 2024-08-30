@@ -13,7 +13,7 @@ from .forms import *
 
 class CustomLoginView(View):
     form_class = EmailLoginForm
-    template_name = 'users/login.html'
+    template_name = 'users/home.html'
 
     def get(self, request, *args, **kwargs):
         form = self.form_class()
@@ -104,7 +104,7 @@ class UserDeleteView(DeleteView):
 
 @method_decorator(user_is_manager, name='dispatch')
 class DashboardManagerPage(View):
-    template_name = 'users/manager/dashboard.html'
+    template_name = 'users/dashboard.html'
 
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name)

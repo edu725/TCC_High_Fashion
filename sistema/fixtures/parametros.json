@@ -1,6 +1,6 @@
 [
     {
-        "model": "parametros.", 
+        "model": "parametros.parameters", 
 
         "pk": 1,
         "fields":{
