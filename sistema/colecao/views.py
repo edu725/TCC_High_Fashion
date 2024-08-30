@@ -6,51 +6,49 @@ from .forms import CollectionForm
 from django.contrib.auth.decorators import login_required
 from .service import CollectionService
 
-class TypeListView(View):
+class CollectionListView(View):
     template_name = 'colecao/collections.html'
     paginate_by = 10
 
-    @login_required
+ 
     def get(self, request, *args, **kwargs):
-        # search_query = request.GET.get('search', '')
+        search_query = request.GET.get('search', '')
         page = request.GET.get('page', 1)
         per_page = self.paginate_by
         
-        # if search_query:
-        #     collections = CollectionService.search_collections(search_query, page=page, per_page=per_page)
-        # else:
-        #     collections = CollectionService.list_all_collections(page=page, per_page=per_page)
+        if search_query:
+            collections = CollectionService.search_collection(search_query, page=page, per_page=per_page)
+        else:
+            collections = CollectionService.list_all_collections(page=page, per_page=per_page)
         
         form = CollectionForm()
-        #return render(request, self.template_name, {'collections': collections, 'form': form, 'search_query': search_query})
-        return render(request, self.template_name, {'form': form})
-
-class TypeDetailView(View):
+        return render(request, self.template_name, {'collections': collections, 'form': form, 'search_query': search_query})
+       
+    
+class CollectionDetailView(View):
     @login_required
     def get(self, request, id):
         collection = CollectionRepository.get_collection_by_id(id)
         return render(request, 'colecao/collections.html', {'collection': collection})
 
-class TypeCreateView(View):
-    @login_required
+class CollectionCreateView(View):
+
     def get(self, request):
         form = CollectionForm()
-        return render(request, 'colecao/collections.html', {'form': form})
+        return render(request, 'colecao/criar_colecao.html', {'form': form})
 
-    @login_required
-    def post(self, request):
-        form = CollectionForm(request.POST, request.FILES)
+    def post(self, request, *args, **kwargs):
+        form = CollectionForm(request.POST)
         if form.is_valid():
-            collection = form.save(commit=False)
-            collection.id_user = request.user.id  
-            collection.save()
-            messages.success(request, 'Sua coleção foi criada com sucesso!')
+            CollectionService.create_collection(form.cleaned_data['name'])
+            messages.success(request, "Sala criada com sucesso!")
             return redirect('collection_list')
         else:
-            messages.error(request, 'Erro ao criar a coleção. Verifique os dados informados.')
-            return render(request, 'colecao/collections.html', {'form': form})
+            messages.error(request, "Erro ao criar a sala.")
+        return redirect('collection_list')
 
-class TypeDeleteView(View):
+
+class CollectionDeleteView(View):
     @login_required
     def post(self, request, id):
         success = CollectionRepository.delete_collection(id)
@@ -60,7 +58,7 @@ class TypeDeleteView(View):
             messages.error(request, 'Erro ao deletar a coleção.')
         return redirect('collection_list')
 
-class TypeUpdateView(View):
+class CollectionUpdateView(View):
     @login_required
     def post(self, request, id):
         name = request.POST.get('name')

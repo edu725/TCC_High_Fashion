@@ -33,14 +33,14 @@ class CollectionRepository:
             return True
         except Collection.DoesNotExist:
             return False
-        
-    # @staticmethod
-    # def search_collection(search_query):
+      
+    @staticmethod
+    def search_collection(search_query):
 
-    #     # Verifica se o valor é numérico e busca por ID
-    #     if search_query.isdigit():
-    #         return Collection.objects.filter(id=search_query)
+        # Verifica se o valor é numérico e busca por ID
+        if search_query.isdigit():
+            return Collection.objects.filter(id=search_query)
 
-    #     else:
-    #         # Se não for uma data, considera como nome da sala
-    #         return Collection.objects.filter(collection_name__icontains=search_query.upper())
+        else:
+            # Se não for uma data, considera como nome da sala
+            return Collection.objects.filter(collection_name__icontains=search_query.upper())
