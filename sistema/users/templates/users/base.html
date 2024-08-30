@@ -11,6 +11,15 @@
     {% endblock %}
 
     {% block style %}
+        .mapBox{
+            width: 450px;
+            height: 350px;
+            background-color: #ffffff;
+    }
+        .mapBox iframe{
+            width: 100%;
+            height: 100%;
+    }
     {% endblock %}
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -19,6 +28,7 @@
 
     {% block content %}
     {% endblock %}
+    {% include 'users/partials/_footer.html' %}
 
     {% block scripts %}
     {% endblock %}
@@ -26,6 +36,7 @@
     {% include 'users/partials/_register.html' %}
     {% include 'users/partials/_login.html' %}
 
+   
     <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'assets/js/main.js' %}"></script>
 
