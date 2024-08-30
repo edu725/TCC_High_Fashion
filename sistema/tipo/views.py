@@ -24,39 +24,21 @@ class TypeCreateView(View):
         if form.is_valid():
             TypeService.create_new_type(form.cleaned_data['name'])
             messages.success(request, 'Tipo de roupa criado com sucesso!')
+            return redirect('type_list')
         else:
             messages.error(request, 'Erro ao cadastrar tipo de roupa.')
         return redirect('type_list')
 
-    # @login_required
-    # def post(self, request, *args, **kwargs):
-    #     form = TypeForm(request.POST)
-    #     if form.is_valid():
-    #         form.save()
-    #         messages.success(request, 'Tipo criado com sucesso!')
-    #         return redirect('type_list')
-    #     else:
-    #         messages.error(request, 'Erro ao criar o tipo. Verifique os dados informados.')
-    #         return render(request, 'tipos/types.html', {'form': form})
-
 class TypeUpdateView(View):
-    @login_required
-    def get(self, request, pk, *args, **kwargs):
-        type_instance = get_object_or_404(Type, pk=pk)
-        form = TypeForm(instance=type_instance)
-        return render(request, 'tipos/types.html', {'form': form})
-
-    @login_required
-    def post(self, request, pk, *args, **kwargs):
-        type_instance = get_object_or_404(Type, pk=pk)
-        form = TypeForm(request.POST, instance=type_instance)
+    def post(self, request):
+        id = request.POST['type_id']
+        form = TypeForm(request.POST)
         if form.is_valid():
-            form.save()
-            messages.success(request, 'Tipo atualizado com sucesso!')
-            return redirect('type_list')
+            TypeService.update_existing_type(id, form.cleaned_data['name'])
+            messages.success(request, "Tipo de roupa atualizado com sucesso!")
         else:
-            messages.error(request, 'Erro ao atualizar o tipo. Verifique os dados informados.')
-            return render(request, 'tipos/types.html', {'form': form})
+            messages.error(request, "Erro ao atualizar o tipo.")
+        return redirect('type_list')
 
 class TypeDeleteView(View):  
     def post(self, request):

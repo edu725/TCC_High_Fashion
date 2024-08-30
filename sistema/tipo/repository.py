@@ -20,12 +20,12 @@ class TypeRepository:
         
     @staticmethod
     def create_type(name):
-        return Type.objects.create(name)
+        return Type.objects.create(name=name)
     
     @staticmethod
     def update_type(type_id, name):
         try:
-            type = TypeRepository.get_id_type(id = type_id)
+            type = TypeRepository.get_id_type(type_id)
             type.name = name
             type.save()
             return True
