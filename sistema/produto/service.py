@@ -18,6 +18,9 @@ class ProductService():
         return products
     
     @staticmethod
+    def get_all_products():
+        return ProductRepository.get_all_products()
+    @staticmethod
     def get_last_product():
         return ProductRepository.get_last_product()
 
@@ -80,10 +83,11 @@ class CommentPageService():
         paginator = Paginator(all_comments, per_page)
 
         try:
-            products = paginator.page(page)
+            comments = paginator.page(page)
         except PageNotAnInteger:
-            products = paginator.page(1)
+            comments = paginator.page(1)
         except EmptyPage:
-            products = paginator.page(paginator.num_pages)
+            comments = paginator.page(paginator.num_pages)
 
-        return products
+        return comments
+    

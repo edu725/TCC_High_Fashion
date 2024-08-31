@@ -106,5 +106,5 @@ class CommentPageRepository:
             return False
         
     @staticmethod
-    def get_all_comments_page(id_user):
-        return CommentPage.objects.filter(id_user=id_user)
+    def get_all_comments_page():
+        return CommentPage.objects.all()

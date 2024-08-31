@@ -3,9 +3,11 @@ from produto.service import *
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.views import View
 from produto.forms import *
+from colecao.service import CollectionService
 from users.forms import *
 from django.urls import reverse_lazy
 from django.contrib import messages
+from django.shortcuts import get_object_or_404
 
 
 # Create your views here.
@@ -14,10 +16,13 @@ class ProductIndex(View):
     template_name = 'produto/index.html'
     form_class = EmailLoginForm
     vorm_class = UserForm
+    
     def get(self, request, *args, **kwargs):
+        collections = CollectionService.get_all_collections()
+        product = ProductService.get_all_products()
         form = self.form_class
         vorm = self.vorm_class
-        return render(request, self.template_name,{'form':form, 'vorm':vorm} )
+        return render(request, self.template_name,{'form':form, 'vorm':vorm, 'collections':collections, 'products':product})
 
 class ProductList(View):
     template_name = 'produto/tela_tcc.html'
@@ -78,15 +83,31 @@ class DeleteCommentProduct(View):
         messages.success(request, "Comentário deletado com sucesso!")
         return redirect('product_single')
     
+class CreateCommentPage(View):
+    def post(self, request, user_id, *args, **kwargs):
+        form = CommentPageForm(request.POST)
+        if form.is_valid():
+            user = get_object_or_404(User, id=user_id)
+            CommentPageService.create_comment_page(user, form.cleaned_data['comment'])
+            messages.success(request, "Comentário criado com sucesso!")
+            return redirect('mural_comment')
+        else:
+            messages.error(request, "Erro ao criar comentário.")
+            return redirect('mural_comment')
+    
+
+
 class CommentPageList(View):
     template_name = 'produto/mural_comments.html'
     paginate_by = 5
     def get(self, request, *args, **kwargs):
+        form = CommentPageForm()
         page = request.GET.get('page', 1)
+        user = request.user
         per_page = self.paginate_by
         comments = CommentPageService.list_all_comments(page=page, per_page=per_page)
         form = CommentPageForm()
-        return render(request, self.template_name, {'comments':comments,'form':form})
+        return render(request, self.template_name, {'form':form,'comments':comments, 'user':user})
     
 class HomeView(View):
     template_name = 'produto/home.html'
