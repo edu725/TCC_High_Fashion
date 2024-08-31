@@ -47,6 +47,10 @@ class ProductRepository:
         except Product.DoesNotExist:
             return False
         
+    @staticmethod
+    def most_comment():
+        return Product.most_commented()
+        
     # @staticmethod
     # def search_product(query):
     #     try:
@@ -60,6 +64,12 @@ class ProductRepository:
     #     query_upper = query.upper()
     #     return Product.objects.filter(name__icontains=query_upper)
     
+
+class ProductCostRepository:
+    
+    @staticmethod
+    def get_price_sell():
+        return ProductCost.get_price_sell()
 
 class CommentProductRepository:
     @staticmethod

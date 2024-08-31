@@ -106,5 +106,13 @@ class CommentPageList(View):
         user = request.user
         per_page = self.paginate_by
         comments = CommentPageService.list_all_comments(page=page, per_page=per_page)
-     
+        form = CommentPageForm()
         return render(request, self.template_name, {'form':form,'comments':comments, 'user':user})
+    
+class HomeView(View):
+    template_name = 'produto/home.html'
+
+    def get(self, request):
+        products = ProductService.list_all_products()
+        price = ProductCostService.get_price_sell()
+        return render(request, self.template_name, {'products':products, 'price':price})
