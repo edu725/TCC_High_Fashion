@@ -9,16 +9,10 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from .service import UserService
 from .forms import *
 
-
+    
 
 class CustomLoginView(View):
     form_class = EmailLoginForm
-    template_name = 'users/home.html'
-
-    def get(self, request, *args, **kwargs):
-        form = self.form_class()
-        return render(request, self.template_name, {'form': form})
-
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
@@ -32,7 +26,55 @@ class CustomLoginView(View):
             else:
                 messages.error(request, "Email ou senha incorretos")
         return render(request, self.template_name, {'form': form})
+    
 
+class CustomRegisterView(View):
+
+    vorm_class = UserForm
+    def post(self, request, *args, **kwargs):
+        form = self.vorm_class(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Conta criada com sucesso!")
+            return redirect('index')
+        else:
+            messages.error(request, "Ocorreu um erro ao criar a conta.")
+            return render(request, self.template_name, {'form': form})
+
+
+@method_decorator(user_is_manager, name='dispatch')
+class UserCreateView(CreateView):
+    template_name = 'produto/index2.html'
+    form_class = UserForm
+
+    def get(self, request, *args, **kwargs):
+        vorm = self.form_class()
+        return render(request, self.template_name, {'vorm': vorm})
+
+    def post(self, request, *args, **kwargs):
+        vorm = self.form_class(request.POST)
+        if vorm.is_valid():
+            name = vorm.cleaned_data.get('name')
+            email = vorm.cleaned_data.get('email')
+            password = vorm.cleaned_data.get('password')
+            user = authenticate(request, email=email, password=password)
+            if user is not None:
+                login(request, user)
+                messages.success(request, "Login realizado com sucesso!")
+                return redirect('index')  
+            else:
+                messages.error(request, "Email ou senha incorretos")
+        return render(request, self.template_name, {'vorm': vorm})
+
+    def form_valid(self, form):
+        messages.success(self.request, "Usuário criado com sucesso!")
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, "Ocorreu um erro ao criar o usuário.")
+        return super().form_invalid(form)
+
+   
 
 @method_decorator(user_is_manager, name='dispatch')
 class UserListView(ListView):
@@ -51,20 +93,6 @@ class UserListView(ListView):
         
         return users
 
-
-@method_decorator(user_is_manager, name='dispatch')
-class UserCreateView(CreateView):
-    template_name = 'users/manager/user_register.html'
-    form_class = UserForm
-    success_url = reverse_lazy('user_list')
-
-    def form_valid(self, form):
-        messages.success(self.request, "Usuário criado com sucesso!")
-        return super().form_valid(form)
-
-    def form_invalid(self, form):
-        messages.error(self.request, "Ocorreu um erro ao criar o usuário.")
-        return super().form_invalid(form)
 
 
 @method_decorator(user_is_manager, name='dispatch')
@@ -128,26 +156,7 @@ class UserProfileView(View):
         else:
             messages.error(request, "Ocorreu um erro ao atualizar o perfil.")
             return render(request, self.template_name, {'form': form})
-    
-class CustomRegisterView(View):
-    form_class = UserForm
-    template_name = 'produto/product_single.html'
-
-    def get(self, request, *args, **kwargs):
-        form = self.form_class()
-        return render(request, self.template_name, {'form': form})
-
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Conta criada com sucesso!")
-            return redirect('index')
-        else:
-            messages.error(request, "Ocorreu um erro ao criar a conta.")
-            return render(request, self.template_name, {'form': form})
-
-
+ 
 
 
 

@@ -3,11 +3,21 @@ from produto.service import *
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.views import View
 from produto.forms import *
+from users.forms import *
 from django.urls import reverse_lazy
 from django.contrib import messages
 
 
 # Create your views here.
+
+class ProductIndex(View):
+    template_name = 'produto/index.html'
+    form_class = EmailLoginForm
+    vorm_class = UserForm
+    def get(self, request, *args, **kwargs):
+        form = self.form_class
+        vorm = self.vorm_class
+        return render(request, self.template_name,{'form':form, 'vorm':vorm} )
 
 class ProductList(View):
     template_name = 'produto/tela_tcc.html'
