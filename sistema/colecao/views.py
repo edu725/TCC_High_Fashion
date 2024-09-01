@@ -38,14 +38,19 @@ class CollectionCreateView(View):
         return render(request, 'colecao/criar_colecao.html', {'form': form})
 
     def post(self, request, *args, **kwargs):
-        form = CollectionForm(request.POST)
+        form = CollectionForm(request.POST, request.FILES)
         if form.is_valid():
-            CollectionService.create_collection(form.cleaned_data['name'])
-            messages.success(request, "Sala criada com sucesso!")
+            # Chamando o serviço com os dados corretos
+            CollectionService.create_collection(
+                name=form.cleaned_data['name'],
+                description=form.cleaned_data['description'],
+                image=form.cleaned_data['image']
+            )
+            messages.success(request, "Coleção criada com sucesso!")
             return redirect('collection_list')
         else:
-            messages.error(request, "Erro ao criar a sala.")
-        return redirect('collection_list')
+            messages.error(request, "Erro ao criar a coleção.")
+            return redirect('collection_list')
 
 
 class CollectionDeleteView(View):
