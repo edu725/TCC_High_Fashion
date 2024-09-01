@@ -28,7 +28,7 @@ class ProductIndex(View):
 
 
 class ProductList(View):
-    template_name = 'produto/tela_tcc.html'
+    template_name = 'produto/product_list.html'
     paginate_by = 10
     def get(self, request, *args, **kwargs):
         page = request.GET.get('page', 1)
