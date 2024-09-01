@@ -78,7 +78,7 @@ class UserCreateView(CreateView):
 
 @method_decorator(user_is_manager, name='dispatch')
 class UserListView(ListView):
-    template_name = 'users/manager/user_list.html'
+    template_name = 'users/user.html'
     context_object_name = 'users'
     paginate_by = 10
 
