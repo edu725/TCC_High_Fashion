@@ -1,0 +1,74 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Home</title>
+{% endblock %}
+
+{% block style %}
+    <style>
+        @media only screen and (max-width: 770px) {
+            .media{
+                flex-direction: column;
+                text-align: center;
+            }
+            img{
+                margin: 20px !important;
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <!-- Coleções -->
+    <section class="py-5">
+        <h1 class="text-center">Tela inicial</h1>
+        <div class="container">
+            <h1>Coleção</h1>
+            <div class="row">
+                {% for collection in collections %}
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3  py-2">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">{{collection.name}}</h5>
+                      <p class="card-text">{{collection.description}}</p>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- TextoFoda -->
+    <section class="py-5">
+        <h1 class="text-center">Card</h1>
+        <div class="container">
+            <div class="row">
+                {% for product in products %}
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="d-flex">
+                        <div class="card" style="width: 18rem;">
+                            <img src="{{ product.path.url }}" class="card-img-top" alt="{{ product.name }}">
+                            <div class="card-body">
+                              <h5 class="card-title">{{product.name}}</h5>
+                              <p class="card-text">{{product.description}}</p>
+                              <a href="{% url 'product_single' product.id %}" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+     <section>
+      
+     </section>
+
+    <!-- Comments -->
+    <section>
+    
+    </section>
+
+
+{% endblock %}

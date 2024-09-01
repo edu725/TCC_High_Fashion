@@ -26,12 +26,12 @@ class CollectionService:
         return CollectionRepository.get_collection_by_id(id)
 
     @staticmethod
-    def create_collection(name, description, id_user):
-        return CollectionRepository.create_collection(name, description, id_user)
+    def create_collection(name, description, image):
+        return CollectionRepository.create_collection(name, description, image)
 
     @staticmethod
-    def update_collection(id_collection, name, description):
-        return CollectionRepository.update_collection(id_collection, name, description)
+    def update_collection(id_collection, name, description, image):
+        return CollectionRepository.update_collection(id_collection, name, description, image)
 
     @staticmethod
     def delete_collection(id_collection):

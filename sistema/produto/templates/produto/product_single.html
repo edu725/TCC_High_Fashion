@@ -26,14 +26,14 @@
             <div class="row">
                 <div class="col-lg-5 mt-5">
                     <div class="card mb-3">
-                        <img class="card-img img-fluid" src="{% static 'assets/img/Ultra realistic full body photo of an fashionable.webp' %}" alt="Card image cap" id="product-detail">
+                        <img class="card-img img-fluid" src="{{product.path.url}}" alt="Card image cap" id="product-detail">
                     </div>
                 </div>
                 <!-- col end -->
                 <div class="col-lg-7 mt-5">
                     <div class="card">
                         <div class="card-body">
-                            <h1 class="h2">Active Wear</h1>
+                            <h1 class="h2">{{product.name}}</h1>
                             <p class="h3 py-2">R$25.00</p>
                             <a style="text-decoration: none;" href="#comments">
                                 <p class="py-2">
@@ -42,17 +42,17 @@
                                     <i class="fa fa-star text-warning"></i>
                                     <i class="fa fa-star text-warning"></i>
                                     <i class="fa fa-star text-secondary"></i>
-                                    <span class="list-inline-item text-dark">Rating 4.8 | 36 Comentários</span>
+                                    <span class="list-inline-item text-dark">Rating 4.8 | {{total_comments}} Comentários</span>
                                 </p>
                             </a>
                             
 
                             <h6>Descrição:</h6>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse. Donec condimentum elementum convallis. Nunc sed orci a diam ultrices aliquet interdum quis nulla.</p>
+                            <p>{{product.description}}</p>
 
                             <h6>Coleção:</h6>
                             <a style="text-decoration: none;" href="">
-                                <p>Inverno 2024</p>
+                                <p>{{product.collection.name}}</p>
                             </a>
                         </div>
                     </div>
@@ -68,6 +68,7 @@
             <h2 class="h2">
                 Comentários
             </h2>
+            {% for comment in comments %}
             <div class="container p-2">
                 <div class="d-flex">
                     <div>
@@ -77,22 +78,19 @@
                         </svg>
                     </div>
                     <div class="p-1">
-                        <p>Hadson</p>
+                        <p>{{comment.id_user.username}}</p>
                     </div>
                 </div>
                 <div>
-                    <p>Muito foda essa roupa</p>
+                    <p>{{comment.comment}}</p>
                 </div>
             </div>
-            <form method="post" enctype="multipart/form-data">
-                <!-- <div class="form-floating">
-                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
-                    <label for="floatingTextarea2">Adicionar Comentário</label>
-                </div> -->
+            {% endfor %}
+            <form method="post" action="{% url 'comment_product' product.id user.id %}" >
                 {% csrf_token %}
                 {{ form.as_p }}
                 <div class="text-center py-2">
-                    <button type="button" class="btn btn-primary">Comentar</button>
+                    <button type="submit" class="btn btn-primary">Comentar</button>
                 </div>
             </form>
         </div>

@@ -18,6 +18,9 @@ class ProductService():
         return products
     
     @staticmethod
+    def get_all_products():
+        return ProductRepository.get_all_products()
+    @staticmethod
     def get_last_product():
         return ProductRepository.get_last_product()
 
@@ -36,11 +39,21 @@ class ProductService():
     @staticmethod
     def delete_product(id_product):
         return ProductRepository.delete_product(id_product)
+    
+    @staticmethod
+    def most_comment():
+        return ProductRepository.most_comment()
 
     # @staticmethod
     # def search_product(query):
     #     return ProductRepository.search_product(query)
+
+
+class ProductCostService():
     
+    @staticmethod
+    def get_price_sell():
+        return ProductCostRepository.get_price_sell()
 
 class CommentProductService():
 
@@ -70,10 +83,11 @@ class CommentPageService():
         paginator = Paginator(all_comments, per_page)
 
         try:
-            products = paginator.page(page)
+            comments = paginator.page(page)
         except PageNotAnInteger:
-            products = paginator.page(1)
+            comments = paginator.page(1)
         except EmptyPage:
-            products = paginator.page(paginator.num_pages)
+            comments = paginator.page(paginator.num_pages)
 
-        return products
+        return comments
+    
