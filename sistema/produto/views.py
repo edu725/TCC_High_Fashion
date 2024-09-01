@@ -7,6 +7,7 @@ from colecao.service import CollectionService
 from users.forms import *
 from django.urls import reverse_lazy
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 
 
@@ -24,6 +25,8 @@ class ProductIndex(View):
         vorm = self.vorm_class
         return render(request, self.template_name,{'form':form, 'vorm':vorm, 'collections':collections, 'products':product})
 
+
+
 class ProductList(View):
     template_name = 'produto/tela_tcc.html'
     paginate_by = 10
@@ -33,15 +36,18 @@ class ProductList(View):
         products = ProductService.list_all_products(page=page, per_page=per_page)
         form = ProductForm()
         return render(request, self.template_name, {'products':products,'form':form})
-    
+
+
 class Product_Single(View):
     template_name = 'produto/product_single.html'
 
-    def get(self, request):
-        product = ProductService.get_product_by_id(1)
-        comment = CommentPageService.list_all_comments()
+    def get(self, request, product_id, *args, **kwargs):
+        product = ProductService.get_product_by_id(product_id)
+        comment = CommentProductService.list_all_comments(product_id)
         form_comment = CommentProductForm()
-        return render(request, self.template_name, {'product':product, 'form':form_comment, 'comment':comment})
+        total_comments = len(comment)
+        user = request.user
+        return render(request, self.template_name, {'product':product, 'form':form_comment, 'comments':comment, 'total_comments':total_comments, 'user':user})
     
 class CreateProduct(View):
     template_name = 'produto/create.html'
@@ -67,15 +73,19 @@ class UpdateProduct(View):
 
 class DeleteProduct(View):
     def get(self, product_id, request, *args, **kwargs):
-        ProductService.delete_product(product_id)
+        product = get_object_or_404(Product, id=product_id)
+        ProductService.delete_product(product)
         messages.success(request, "Produto deletado com sucesso!")
         return redirect('all_products')
     
 class CreateCommentProduct(View):
-    def post(self, product_id, request, *args, **kwargs):
+    def post(self, request, product_id, user_id ,*args, **kwargs):
+        product = get_object_or_404(Product, id=product_id)
+        user = get_object_or_404(User, id=user_id)
         form = CommentProductForm(request.POST)
         if form.is_valid():
-            CommentProductService.create_comment_product(product_id, form.cleaned_data['comment'])
+            CommentProductService.create_comment_product(product,user, form.cleaned_data['comment'])
+        return redirect('index')
 
 class DeleteCommentProduct(View):
     def get(self, comment_id, request, *args, **kwargs):

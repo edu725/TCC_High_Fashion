@@ -46,13 +46,16 @@
             <div class="row">
                 {% for product in products %}
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                  <div class="card">
-                    <img src="{{ product.path.url }}" class="card-img-top" alt="{{ product.name }}">
-                    <div class="card-body">
-                      <h5 class="card-title">{{product.name}}</h5>
-                      <p class="card-text">{{product.description}}</p>
+                    <div class="d-flex">
+                        <div class="card" style="width: 18rem;">
+                            <img src="{{ product.path.url }}" class="card-img-top" alt="{{ product.name }}">
+                            <div class="card-body">
+                              <h5 class="card-title">{{product.name}}</h5>
+                              <p class="card-text">{{product.description}}</p>
+                              <a href="{% url 'product_single' product.id %}" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div> 
                     </div>
-                  </div>
                 </div>
                 {% endfor %}
             </div>
