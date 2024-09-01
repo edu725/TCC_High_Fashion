@@ -66,22 +66,21 @@ class CollectionDeleteView(View):
         return redirect('collection_dash')
     
 
-
-
 class CollectionUpdateView(View):
-    @login_required
-    def post(self, request, id):
+
+    def post(self, request, id, *args, **kwargs):
         name = request.POST.get('name')
         description = request.POST.get('description')
-        success = CollectionRepository.update_collection(id, name, description)
+        success = CollectionRepository.update_collection(id, name, description, request.FILES.get('image'))
         if success:
             messages.success(request, 'Coleção atualizada com sucesso!')
         else:
             messages.error(request, 'Erro ao atualizar a coleção.')
-        return redirect('collection_detail', id=id)
+        return redirect('collection_dash')
     
 class CollectionListDashView(View):
 
     def get(self, request):
+        form_class = CollectionForm
         collections = CollectionService.list_all_collections()
-        return render(request, 'colecao/collections_dash.html', {'collections': collections})
+        return render(request, 'colecao/collections_dash.html', {'collections': collections, 'form': form_class})
