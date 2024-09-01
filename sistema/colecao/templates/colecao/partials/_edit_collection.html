@@ -1,0 +1,18 @@
+<div class="modal fade" id="edit_classroom" tabindex="-1" aria-labelledby="editClassroomLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editClassroomLabel">Editar Coleção</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="edit-room-form" method="post" action="{% url 'collection_update' collection.id %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
