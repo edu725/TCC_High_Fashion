@@ -39,7 +39,7 @@
             <li class="page-item"><a class="page-link" href="?page={{ comments.next_page_number }}">Próxima</a></li>
         {% endif %}
     </ul>
-<div>
+<div class="px-4">
     <form method="post" action="{% url 'create_comment_page' user.id %}">
         {% csrf_token %}
         {{ form.as_p }}
