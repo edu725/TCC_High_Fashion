@@ -1,9 +1,8 @@
-{% load static %}
-<div class="modal fade" id="type{{ type.id }}" tabindex="-1" aria-labelledby="editTypeLabel" aria-hidden="true">
+<div class="modal fade" id="type-{{ type.id }}" tabindex="-1" aria-labelledby="editTypeLabel{{ type.id }}" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Editar Tipo</h5>
+                <h5 class="modal-title" id="editTypeLabel{{ type.id }}">Editar Tipo: {{ type.name }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form method="post" action="{% url 'type_update' %}">

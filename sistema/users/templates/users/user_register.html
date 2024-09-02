@@ -1,0 +1,44 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>High Fashion</title>
+{% endblock %}
+
+{% block style %}
+    <style>
+        .media{
+            display: flex;
+            justify-content: center;
+            padding-bottom: 50px;
+        }
+        @media only screen and (max-width: 770px) {
+            .row{
+                flex-direction: column;
+            }
+        }
+        .btn-green{
+        background-color: #045CAC;
+        
+      }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <section>
+        <!-- Solicitações -->
+        <h1 style="font-family: Modestic;" class="text-center py-5">{% if object %}Editar{% else %}Adicionar{% endif %} Usuário</h1>
+        <div style="background-color: #045CAC; color:white; border-radius: 10px;" class="container p-5">
+            <div class="py-2">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="text-center py-3">
+                        <button type="submit" style="border-radius: 7px;" class="btn btn-light">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

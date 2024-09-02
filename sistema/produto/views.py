@@ -115,9 +115,11 @@ class CommentPageList(View):
         page = request.GET.get('page', 1)
         user = request.user
         per_page = self.paginate_by
-        comments = CommentPageService.list_all_comments(page=page, per_page=per_page)
+        comment = CommentPageService.list_all_comments_page(page=page, per_page=per_page)
         form = CommentPageForm()
-        return render(request, self.template_name, {'form':form,'comments':comments, 'user':user})
+        x = CommentPage.objects.all()
+        return render(request, self.template_name, {'form':form,'comments':comment, 'user':user})
+    
     
 class HomeView(View):
     template_name = 'produto/home.html'

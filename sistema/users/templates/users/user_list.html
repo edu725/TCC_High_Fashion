@@ -22,30 +22,19 @@
         
       }
     </style>
-{% endlbock %}
+{% endblock %}
 
 {% block content %}
     <section class="py-5">
         <div class="header position-relative mb-5">
             <h1 class="position-absolute top-0 start-50 translate-middle-x" style="font-family: Modestic;">USUÁRIOS</h1>
             <div class="position-absolute top-0 end-0">
-                <a href="{% url 'user_add' %}" class="btn"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="blue" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
-                    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0"/>
-                </svg></a>
+                <a href="#"  data-bs-toggle="modal" data-bs-target="#register" class="btn"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="blue" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
+                        <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0"/>
+                    </svg>
+                </a>
             </div>
         </div>    
-        <div class="d-flex justify-content-center">
-            <div style="width: 50%;">
-                <form class="d-flex" method="get" action="{% url 'user_list' %}" role="search">
-                    <input class="form-control me-2" type="search" name="search" placeholder="Pesquisar" aria-label="Search">
-                    <button style="border-color: #045CAC;" class="btn btn-green btn-outline-success" type="submit">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-search" viewBox="0 0 16 18">
-                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-                        </svg>
-                    </button>
-                </form>
-            </div>  
-        </div>
         <div class="container mt-4">
             <div class="">
                 <div class="row align-items-center">
@@ -91,11 +80,9 @@
             </ul>
         </nav>
     </section>
-    {% block script %}
-        <script>
-            function confirmDelete() {
-                return confirm("Tem certeza que deseja excluir este usuário?");
-            }
-        </script>
-    {% endblock %}
+    <script>
+        function confirmDelete() {
+            return confirm("Tem certeza que deseja excluir este usuário?");
+        }
+    </script>
 {% endblock %}
