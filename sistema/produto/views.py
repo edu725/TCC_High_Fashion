@@ -42,6 +42,9 @@ class Product_Single(View):
     template_name = 'produto/product_single.html'
 
     def get(self, request, product_id, *args, **kwargs):
+        if not request.user.is_authenticated:
+            messages.error(request, "Erro: Usuario não estar logado.")
+            return redirect('index')
         product = ProductService.get_product_by_id(product_id)
         comment = CommentProductService.list_all_comments(product_id)
         form_comment = CommentProductForm()
