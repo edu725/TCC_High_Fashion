@@ -124,5 +124,5 @@ class HomeView(View):
 
     def get(self, request):
         products = ProductService.list_all_products()
-        price = ProductCostService.get_price_sell()
-        return render(request, self.template_name, {'products':products, 'price':price})
+        # price = ProductCostService.get_price_sell()
+        return render(request, self.template_name, {'products':products})

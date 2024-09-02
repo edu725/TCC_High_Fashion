@@ -40,7 +40,7 @@ class ProductCost(models.Model):
     
     @classmethod
     def get_price_sell(cls):
-        return cls.get_price_cost() / Parameters.get_divisor()
+        return cls.get_price_cost() / cls.parameters
 
 class CommentProduct(models.Model):
     id_product = models.ForeignKey(Product, on_delete=models.CASCADE)
