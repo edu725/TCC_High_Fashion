@@ -20,6 +20,7 @@ class ProductService():
     @staticmethod
     def get_all_products():
         return ProductRepository.get_all_products()
+    
     @staticmethod
     def get_last_product():
         return ProductRepository.get_last_product()
