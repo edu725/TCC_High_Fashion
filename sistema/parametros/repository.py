@@ -4,11 +4,11 @@ class ParametersRepository:
 
     @staticmethod
     def get_id_parameter():
-        return Parameters.object.get(id=1)
+        return Parameters.objects.get(id=1)
 
     @staticmethod
     def update_parameter(impostos, retirada, frete, comissao, despesas_financeiras, despesas_comerciais, lucro):
-        parameter = Parameters.get_id_parameters()
+        parameter = ParametersRepository.get_id_parameter()
         if parameter:
             parameter.impostos = impostos
             parameter.retirada = retirada
