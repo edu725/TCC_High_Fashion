@@ -1,10 +1,12 @@
 from django.views import View
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages  
 from .repository import CollectionRepository
 from .forms import CollectionForm
 from django.contrib.auth.decorators import login_required
 from .service import CollectionService
+from .models import Collection
+
 
 class CollectionListView(View):
     template_name = 'colecao/collections.html'
@@ -54,23 +56,31 @@ class CollectionCreateView(View):
 
 
 class CollectionDeleteView(View):
-    @login_required
-    def post(self, request, id):
-        success = CollectionRepository.delete_collection(id)
+   
+    def post(self, request, id, *args, **kwargs):
+        success = CollectionService.delete_collection(id)
         if success:
             messages.success(request, 'Coleção deletada com sucesso!')
         else:
             messages.error(request, 'Erro ao deletar a coleção.')
-        return redirect('collection_list')
+        return redirect('collection_dash')
+    
 
 class CollectionUpdateView(View):
-    @login_required
-    def post(self, request, id):
+
+    def post(self, request, id, *args, **kwargs):
         name = request.POST.get('name')
         description = request.POST.get('description')
-        success = CollectionRepository.update_collection(id, name, description)
+        success = CollectionRepository.update_collection(id, name, description, request.FILES.get('image'))
         if success:
             messages.success(request, 'Coleção atualizada com sucesso!')
         else:
             messages.error(request, 'Erro ao atualizar a coleção.')
-        return redirect('collection_detail', id=id)
+        return redirect('collection_dash')
+    
+class CollectionListDashView(View):
+
+    def get(self, request):
+        form_class = CollectionForm
+        collections = CollectionService.list_all_collections()
+        return render(request, 'colecao/collections_dash.html', {'collections': collections, 'form': form_class})

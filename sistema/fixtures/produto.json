@@ -20,7 +20,7 @@
             "description": "Sobretudo Verão",
             "type": 1,
             "collection": 2,
-            "path": "\\media\\img\\2024\\08\\29\\07.png"
+            "path": "\\img\\2024\\08\\29\\07.png"
         }
     },
     {
@@ -32,7 +32,7 @@
             "description": "Vestido Primavera",
             "type": 4,
             "collection": 4,
-            "path": "\\media\\img\\2024\\08\\29\\05.png"
+            "path": "\\img\\2024\\08\\29\\05.png"
         }
     },
     {
@@ -44,7 +44,7 @@
             "description": "Sobretudo Outono",
             "type": 1,
             "collection": 3,
-            "path": "\\media\\img\\2024\\08\\29\\09.png"
+            "path": "\\img\\2024\\08\\29\\09.png"
         }
     }
 ]

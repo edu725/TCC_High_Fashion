@@ -39,21 +39,11 @@ class ProductService():
     @staticmethod
     def delete_product(id_product):
         return ProductRepository.delete_product(id_product)
-    
-    @staticmethod
-    def most_comment():
-        return ProductRepository.most_comment()
 
     # @staticmethod
     # def search_product(query):
     #     return ProductRepository.search_product(query)
-
-
-class ProductCostService():
     
-    @staticmethod
-    def get_price_sell():
-        return ProductCostRepository.get_price_sell()
 
 class CommentProductService():
 
@@ -78,7 +68,7 @@ class CommentPageService():
         return CommentPageRepository.delete_comment_page(id_comment)
     
     @staticmethod
-    def list_all_comments(page=1, per_page=5):
+    def list_all_comments_page(page=1, per_page=5):
         all_comments = CommentPageRepository.get_all_comments_page()
         paginator = Paginator(all_comments, per_page)
 
@@ -90,4 +80,3 @@ class CommentPageService():
             comments = paginator.page(paginator.num_pages)
 
         return comments
-    

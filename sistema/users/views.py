@@ -13,6 +13,7 @@ from .forms import *
 
 class CustomLoginView(View):
     form_class = EmailLoginForm
+    template_name = 'produto/index.html'
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
@@ -78,7 +79,7 @@ class UserCreateView(CreateView):
 
 @method_decorator(user_is_manager, name='dispatch')
 class UserListView(ListView):
-    template_name = 'users/manager/user_list.html'
+    template_name = 'users/user.html'
     context_object_name = 'users'
     paginate_by = 10
 
@@ -97,7 +98,7 @@ class UserListView(ListView):
 
 @method_decorator(user_is_manager, name='dispatch')
 class UserUpdateView(UpdateView):
-    template_name = 'users/manager/user_register.html'
+    template_name = 'users/user_register.html'
     form_class = UserForm
     success_url = reverse_lazy('user_list')
 
@@ -117,7 +118,7 @@ class UserUpdateView(UpdateView):
 
 @method_decorator(user_is_manager, name='dispatch')    
 class UserDeleteView(DeleteView):
-    success_url = reverse_lazy('user_list')  # Redirecionar após exclusão
+    success_url = reverse_lazy('dashboard_user')  # Redirecionar após exclusão
 
     def get_object(self):
         user_id = self.kwargs['pk']
@@ -128,6 +129,7 @@ class UserDeleteView(DeleteView):
         UserService.delete_user(user.id)
         messages.success(request, "Usuário excluído com sucesso!")
         return super().delete(request, *args, **kwargs)
+    
 
 
 @method_decorator(user_is_manager, name='dispatch')
@@ -158,3 +160,15 @@ class UserProfileView(View):
             return render(request, self.template_name, {'form': form})
  
 
+@method_decorator(user_is_manager, name='dispatch')
+class UserDashView(View):
+    template_name = 'users/user_list.html'
+    paginate_by = 10
+    form_class = UserForm
+
+    def get(self, request, *args, **kwargs):
+        page = request.GET.get('page', 1)
+        users = UserService.list_all_users(page=page, per_page=self.paginate_by)
+        vorm = self.form_class()
+
+        return render(request, self.template_name, {'users': users, 'vorm': vorm})
