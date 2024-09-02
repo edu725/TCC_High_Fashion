@@ -55,9 +55,6 @@
         </div>
     </section>
     <!-- TextoFoda -->
-
-
-    <!-- Cards -->
     <section data-bs-version="5.1" class="header14 cid-umeacIuPjy mbr-parallax-background" id="call-to-action-9-umeacIuPjy" style="z-index: 0; background-image: none; position: relative;">
         <div class="container">
           <div class="row justify-content-center">
@@ -76,6 +73,32 @@
           <div style="background-position: 50% 50%; background-size: cover; background-repeat: no-repeat; background-image: url(&quot;https://r.mobirisesite.com/664523/assets/images/mbr-1920x1358.jpg?v=1SKPo0&quot;); position: absolute; top: 0px; left: 0px; width: 1866px; height: 744.462px; overflow: hidden; pointer-events: none; transform-style: preserve-3d; backface-visibility: hidden; will-change: transform, opacity; margin-top: 83.2687px; transform: translate3d(0px, -83.2687px, 0px);"></div>
         </div>
     </section>
+
+    <!-- Cards -->
+    <section class="py-5">
+        <h1 class="text-center">Nossos Produtos</h1>
+        <div class="container">
+            <div class="row justify-content-center">
+                {% for product in products %}
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="d-flex">
+                        <a href="{% url 'product_single' product.id %}" style="text-decoration: none;">
+                            <div class="card" style="width: 18rem;">
+                                <img src="{{ product.path.url }}" class="card-img-top" alt="{{ product.name }}">
+                                <div class="card-body">
+                                <h5 class="card-title">{{product.name}}</h5>
+                                <p class="card-text">{{product.description}}</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+
     <!-- Comments -->
     <section>
     
