@@ -83,6 +83,11 @@ class CommentProductRepository:
     
     
 class CommentPageRepository:
+
+    @staticmethod
+    def get_all_comments_page():
+        return CommentPage.objects.all()
+    
     @staticmethod
     def create_comment_page(id_user, comment):
         return CommentPage.objects.create(id_user=id_user, comment=comment)
@@ -96,6 +101,4 @@ class CommentPageRepository:
         except CommentPage.DoesNotExist:
             return False
         
-    @staticmethod
-    def get_all_comments_page():
-        return CommentPage.objects.all()
+    

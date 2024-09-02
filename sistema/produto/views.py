@@ -112,16 +112,16 @@ class CreateCommentPage(View):
 
 class CommentPageList(View):
     template_name = 'produto/mural_comments.html'
-    paginate_by = 5
+    paginate_by = 10
+
     def get(self, request, *args, **kwargs):
-        form = CommentPageForm()
+    
         page = request.GET.get('page', 1)
-        user = request.user
         per_page = self.paginate_by
+        user = request.user
         comment = CommentPageService.list_all_comments_page(page=page, per_page=per_page)
         form = CommentPageForm()
-        x = CommentPage.objects.all()
-        return render(request, self.template_name, {'form':form,'comments':comment, 'user':user})
+        return render(request, self.template_name, {'comments':comment,'form':form, 'user':user})
     
     
 class HomeView(View):
