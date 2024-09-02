@@ -36,8 +36,7 @@ class ProductCost(models.Model):
     def get_price_cost(self):
         return (self.raw_materials + self.labor + self.indirect)
     
-    def get_price_sell(self):
-        return self.get_price_cost() / self.parameters.get_divisor()
+
 
 class CommentProduct(models.Model):
     id_product = models.ForeignKey(Product, on_delete=models.CASCADE)

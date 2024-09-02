@@ -1,4 +1,6 @@
 from .models import *
+from parametros.models import *
+
 
 class ProductRepository:
 
@@ -87,4 +89,8 @@ class CommentPageRepository:
         except CommentPage.DoesNotExist:
             return False
         
+class ProductCostRepository:
     
+    @staticmethod
+    def get_price_sell():
+        return ProductCost.get_price_cost() / Parameters.get_divisor()
