@@ -115,11 +115,9 @@ class CommentPageList(View):
     paginate_by = 10
 
     def get(self, request, *args, **kwargs):
-    
         page = request.GET.get('page', 1)
-        per_page = self.paginate_by
         user = request.user
-        comment = CommentPageService.list_all_comments_page(page=page, per_page=per_page)
+        comment = CommentPageService.list_all_comments_page(page=page, per_page=self.paginate_by)
         form = CommentPageForm()
         return render(request, self.template_name, {'comments':comment,'form':form, 'user':user})
     

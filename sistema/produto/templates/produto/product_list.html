@@ -55,10 +55,13 @@
         <div class="d-flex">
           <div class="card" style="width: 18rem;">
               <img src="{{ product.path.url }}" class="card-img-top" alt="{{ product.name }}">
-              <div class="card-body">
+              <div class="card-body text-center">
                 <h5 class="card-title">{{product.name}}</h5>
+                <hr style="margin: 2px 0px 2px 0px;">
                 <p class="card-text">{{product.description}}</p>
+                {% if request.user.is_authenticated %}
                 <a href="{% url 'product_single' product.id %}" class="btn btn-primary">Go somewhere</a>
+                {% endif %}
               </div>
           </div> 
       </div>
