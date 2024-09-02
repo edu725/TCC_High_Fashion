@@ -19,6 +19,10 @@ class TypeService:
     @staticmethod
     def create_new_type(name):
         return TypeRepository.create_type(name)
+    
+    @staticmethod
+    def get_id_type(type_id):
+        return TypeRepository.get_id_type(type_id)
 
     @staticmethod
     def update_existing_type(type_id, name):

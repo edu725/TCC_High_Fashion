@@ -28,13 +28,11 @@ class UserForm(forms.ModelForm):
         labels = {
             'first_name': 'Nome de Usuário',
             'email': 'Email',
-            'user_type': 'Tipo de Usuário',
             'password': 'Senha',
         }
         widgets = {
             'first_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome de Usuário', }),
             'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email', }),
-            'user_type': forms.Select(attrs={'class': 'form-control', }),
             'password': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Senha', }),
         }
 

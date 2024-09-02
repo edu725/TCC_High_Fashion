@@ -4,7 +4,7 @@ class ParametersService:
 
     @staticmethod
     def get_id_parameter():
-        return ParametersRepository.get_id_parameters()
+        return ParametersRepository.get_id_parameter()
 
     @staticmethod
     def update_parameter(impostos, retirada, frete, comissao, despesas_financeiras, despesas_comerciais, lucro):

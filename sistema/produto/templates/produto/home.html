@@ -1,0 +1,107 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Home</title>
+{% endblock %}
+
+{% block style %}
+    <style>
+        @media only screen and (max-width: 770px) {
+            .media{
+                flex-direction: column;
+                text-align: center;
+            }
+            img{
+                margin: 20px !important;
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <!-- Coleções -->
+    {% include 'users/partials/_carousel.html' %}
+
+    <section class="py-5">
+        <h1 class="text-center">Últimas Coleções</h1>
+        <div class="container">
+            <div class="d-flex py-5 media" style="justify-content: space-evenly">
+                <div>
+                    <img style="border-radius: 100%; border: 0;" src="{% static 'assets/img/frio.jpg' %}" alt="..." width="150px" height="150px">
+                    <div class="text-center py-2">
+                        <h5>Coleção1</h5>
+                    </div>
+                </div>
+                <div>
+                    <img style="border-radius: 100%; border: 0;" src="{% static 'assets/img/frio.jpg' %}" alt="..." width="150px" height="150px">
+                    <div class="text-center py-2">
+                        <h5>Coleção1</h5>
+                    </div>
+                </div>
+                <div>
+                    <img style="border-radius: 100%; border: 0;" src="{% static 'assets/img/frio.jpg' %}" alt="..." width="150px" height="150px">
+                    <div class="text-center py-2">
+                        <h5>Coleção1</h5>
+                    </div>
+                </div>
+                <div>
+                    <img style="border-radius: 100%; border: 0;" src="{% static 'assets/img/frio.jpg' %}" alt="..." width="150px" height="150px">
+                    <div class="text-center py-2">
+                        <h5>Coleção1</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- TextoFoda -->
+    <section data-bs-version="5.1" class="header14 cid-umeacIuPjy mbr-parallax-background" id="call-to-action-9-umeacIuPjy" style="z-index: 0; background-image: none; position: relative;">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="card col-12 col-md-12 col-lg-10">
+              <div class="card-wrapper">
+                <div class="card-box align-center">
+                  <h1 class="card-title mbr-fonts-style mb-4 display-1"><strong>Encontre O Estilo Que Destaca A Sua Essência</strong></h1>
+                  <p class="mbr-text mbr-fonts-style mb-4 display-7">Explore nosso catálogo:</p>
+                  <div class="mbr-section-btn mt-4"><a class="btn btn-primary display-7" href="https://mobiri.se/">Ir Para Catálogo</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="jarallax-container-0" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; z-index: -100;">
+          <div style="background-position: 50% 50%; background-size: cover; background-repeat: no-repeat; background-image: url(&quot;https://r.mobirisesite.com/664523/assets/images/mbr-1920x1358.jpg?v=1SKPo0&quot;); position: absolute; top: 0px; left: 0px; width: 1866px; height: 744.462px; overflow: hidden; pointer-events: none; transform-style: preserve-3d; backface-visibility: hidden; will-change: transform, opacity; margin-top: 83.2687px; transform: translate3d(0px, -83.2687px, 0px);"></div>
+        </div>
+    </section>
+
+    <!-- Cards -->
+    <section class="py-5">
+        <h1 class="text-center">Nossos Produtos</h1>
+        <div class="container">
+            <div class="row justify-content-center">
+                {% for product in products %}
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="d-flex">
+                        <a href="{% url 'product_single' product.id %}" style="text-decoration: none;">
+                            <div class="card" style="width: 18rem;">
+                                <img src="{{ product.path.url }}" class="card-img-top" alt="{{ product.name }}">
+                                <div class="card-body">
+                                <h5 class="card-title">{{product.name}}</h5>
+                                <p class="card-text">{{product.description}}</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Comments -->
+    <h1>Produtos Mais Comentados</h1>
+    <section>
+        
+    </section>
+{% endblock %}

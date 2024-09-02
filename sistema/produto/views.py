@@ -2,15 +2,33 @@ from django.shortcuts import render,redirect
 from produto.service import *
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.views import View
-from produto.forms import*
+from produto.forms import *
+from colecao.service import CollectionService
+from users.forms import *
 from django.urls import reverse_lazy
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
 
 
 # Create your views here.
 
+class ProductIndex(View):
+    template_name = 'produto/index.html'
+    form_class = EmailLoginForm
+    vorm_class = UserForm
+    
+    def get(self, request, *args, **kwargs):
+        collections = CollectionService.get_all_collections()
+        product = ProductService.get_all_products()
+        form = self.form_class
+        vorm = self.vorm_class
+        return render(request, self.template_name,{'form':form, 'vorm':vorm, 'collections':collections, 'products':product})
+
+
+
 class ProductList(View):
-    template_name = 'produto/tela_tcc.html'
+    template_name = 'produto/product_list.html'
     paginate_by = 10
     def get(self, request, *args, **kwargs):
         page = request.GET.get('page', 1)
@@ -18,13 +36,21 @@ class ProductList(View):
         products = ProductService.list_all_products(page=page, per_page=per_page)
         form = ProductForm()
         return render(request, self.template_name, {'products':products,'form':form})
-    
+
+
 class Product_Single(View):
     template_name = 'produto/product_single.html'
 
-    def get(self, product_id, request, *args, **kwargs):
+    def get(self, request, product_id, *args, **kwargs):
+        if not request.user.is_authenticated:
+            messages.error(request, "Erro: Usuario não estar logado.")
+            return redirect('index')
         product = ProductService.get_product_by_id(product_id)
-        return render(request, self.template_name, {'product':product})
+        comment = CommentProductService.list_all_comments(product_id)
+        form_comment = CommentProductForm()
+        total_comments = len(comment)
+        user = request.user
+        return render(request, self.template_name, {'product':product, 'form':form_comment, 'comments':comment, 'total_comments':total_comments, 'user':user})
     
 class CreateProduct(View):
     template_name = 'produto/create.html'
@@ -50,21 +76,19 @@ class UpdateProduct(View):
 
 class DeleteProduct(View):
     def get(self, product_id, request, *args, **kwargs):
-        ProductService.delete_product(product_id)
+        product = get_object_or_404(Product, id=product_id)
+        ProductService.delete_product(product)
         messages.success(request, "Produto deletado com sucesso!")
         return redirect('all_products')
     
-class CommentProductList(View):
-    def get(self, product_id, request, *args, **kwargs):
-        CommentProductService.list_all_comments(product_id)
-        form = CommentProductForm()
-        return redirect('product_single', {'form':form})
-    
 class CreateCommentProduct(View):
-    def post(self, product_id, request, *args, **kwargs):
+    def post(self, request, product_id, user_id ,*args, **kwargs):
+        product = get_object_or_404(Product, id=product_id)
+        user = get_object_or_404(User, id=user_id)
         form = CommentProductForm(request.POST)
         if form.is_valid():
-            CommentProductService.create_comment_product(product_id, form.cleaned_data['comment'])
+            CommentProductService.create_comment_product(product,user, form.cleaned_data['comment'])
+        return redirect('index')
 
 class DeleteCommentProduct(View):
     def get(self, comment_id, request, *args, **kwargs):
@@ -72,12 +96,38 @@ class DeleteCommentProduct(View):
         messages.success(request, "Comentário deletado com sucesso!")
         return redirect('product_single')
     
+class CreateCommentPage(View):
+    def post(self, request, user_id, *args, **kwargs):
+        form = CommentPageForm(request.POST)
+        if form.is_valid():
+            user = get_object_or_404(User, id=user_id)
+            CommentPageService.create_comment_page(user, form.cleaned_data['comment'])
+            messages.success(request, "Comentário criado com sucesso!")
+            return redirect('mural_comment')
+        else:
+            messages.error(request, "Erro ao criar comentário.")
+            return redirect('mural_comment')
+    
+
+
 class CommentPageList(View):
     template_name = 'produto/mural_comments.html'
-    paginate_by = 5
+    paginate_by = 10
+
     def get(self, request, *args, **kwargs):
+    
         page = request.GET.get('page', 1)
         per_page = self.paginate_by
-        comments = CommentPageService.list_all_comments(page=page, per_page=per_page)
+        user = request.user
+        comment = CommentPageService.list_all_comments_page(page=page, per_page=per_page)
         form = CommentPageForm()
-        return render(request, self.template_name, {'comments':comments,'form':form})
+        return render(request, self.template_name, {'comments':comment,'form':form, 'user':user})
+    
+    
+class HomeView(View):
+    template_name = 'produto/home.html'
+
+    def get(self, request):
+        products = ProductService.list_all_products()
+        # price = ProductCostService.get_price_sell()
+        return render(request, self.template_name, {'products':products})

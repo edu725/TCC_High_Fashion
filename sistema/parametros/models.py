@@ -13,7 +13,8 @@ class Parameters(models.Model):
     def __str__(self):
         return self.divisor
     
-    def get_divisor(self):
-        total = (self.impostos + self.retirada + self.frete + self.comissao + self.despesas_financeiras + self.despesas_comerciais + self.lucro)
+    @classmethod
+    def get_divisor(cls):
+        total = (cls.impostos + cls.retirada + cls.frete + cls.comissao + cls.despesas_financeiras + cls.despesas_comerciais + cls.lucro)
         return (100 - total)/100
 

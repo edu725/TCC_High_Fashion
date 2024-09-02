@@ -3,6 +3,7 @@ from users.models import User
 from tipo.models import Type
 from colecao.models import Collection
 from parametros.models import Parameters
+from django.db.models import Count
 
 # Create your models here.
 
@@ -20,6 +21,10 @@ class Product(models.Model):
     def user_commented(self, user):
         return CommentPage.objects.filter(id_user=user).exists()
     
+    @classmethod
+    def most_commented(cls):
+       return cls.objects.annotate(comment_count=Count('comment')).order_by('-comment_count')[:10]
+    
     def product_commented(self, user):
         return CommentProduct.objects.filter(id_product=self, id_user=user).exists()
 
@@ -29,11 +34,13 @@ class ProductCost(models.Model):
     labor = models.DecimalField(max_digits=8, decimal_places=2)
     indirect = models.DecimalField(max_digits=8, decimal_places=2)
 
-    def get_price_cost(self):
-        return (self.materials + self.work + self.indirect)
-
-    def get_price_sell(self):
-        return self.get_price_cost / self.parameters.get_divisor
+    @classmethod
+    def get_price_cost(cls):
+        return (cls.raw_materials + cls.labor + cls.indirect)
+    
+    @classmethod
+    def get_price_sell(cls):
+        return cls.get_price_cost() / cls.parameters
 
 class CommentProduct(models.Model):
     id_product = models.ForeignKey(Product, on_delete=models.CASCADE)

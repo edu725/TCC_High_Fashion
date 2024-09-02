@@ -1,0 +1,126 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Mural de comentários</title>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Mural dos Comentários</h1>
+    <div class="row mt-5">
+        <!-- {% for user in users %} -->
+        {% for comment in comments %}
+        <div class="col-md-4">
+            <div class="card p-3 mb-4">
+                <div class="d-flex flex-row mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="grey" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                    </svg>
+                    <div class="d-flex flex-column ml-2">
+                        <span class="pl-4" style="padding-left: 20px;">{{comment.id_user.username}}</span>
+                    </div>
+                </div>
+                <p>{{ comment.comment }}</p>
+            </div>
+        </div>
+        {{comment.id}}
+        {% endfor %}
+        <!-- {% endfor %} -->
+        <!-- <div class="col-md-4">
+            <div class="card p-3 mb-4">
+                <div class="d-flex flex-row mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="grey" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                    </svg>
+                    <div class="d-flex flex-column ml-2">
+                        <span class="pl-4" style="padding-left: 20px;">Usuário</span>
+                    </div>
+                </div>
+                <p>Get more context on your users with stripe data inside our platform.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3 mb-4">
+                <div class="d-flex flex-row mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="grey" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                    </svg>
+                    <div class="d-flex flex-column ml-2">
+                        <span class="pl-4" style="padding-left: 20px;">Usuário</span>
+                    </div>
+                </div>
+                <p>Get more context on your users with stripe data inside our platform.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3 mb-4">
+                <div class="d-flex flex-row mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="grey" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                    </svg>
+                    <div class="d-flex flex-column ml-2">
+                        <span class="pl-4" style="padding-left: 20px;">Usuário</span>
+                    </div>
+                </div>
+                <p>Get more context on your users with stripe data inside our platform.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3 mb-4">
+                <div class="d-flex flex-row mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="grey" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                    </svg>
+                    <div class="d-flex flex-column ml-2">
+                        <span class="pl-4" style="padding-left: 20px;">Usuário</span>
+                    </div>
+                </div>
+                <p>Get more context on your users with stripe data inside our platform.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3 mb-4">
+                <div class="d-flex flex-row mb-4 ">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="grey" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                    </svg>
+                    <div class="d-flex flex-column ml-2">
+                        <span class="" style="padding-left: 20px;">Usuário</span>
+                    </div>
+                </div>
+                <p>Get more context on your users with stripe data inside our platform.</p>
+            </div>
+        </div>  -->
+    </div>
+</div>
+<nav aria-label="Page navigation example">
+    <ul class="pagination d-flex justify-content-center">
+        {% if comments.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page={{ comments.previous_page_number }}">Anterior</a></li>
+            <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+        {% endif %}
+        <li class="page-item active"><a class="page-link" href="#">{{ comments.number }}</a></li>
+        {% if comments.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ comments.paginator.num_pages }}">{{ comments.paginator.num_pages }}</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ comments.next_page_number }}">Próxima</a></li>
+        {% endif %}
+    </ul>
+<div>
+    <form method="post" action="{% url 'create_comment_page' user.id %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+    
+    <div class="" style="justify-content: space-between;"> 
+      <button type="submit" class="btn btn-primary">Salvar</button>
+    </div>
+    </form>
+</div>
+
+{% endblock %}

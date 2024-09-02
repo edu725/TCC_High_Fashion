@@ -9,66 +9,40 @@ from tipo.service import TypeRepository
 from tipo.service import TypeService
 
 class TypeListView(View):
-    template_name = 'tipos/types.html'
+    template_name = 'tipo/types.html'
     paginate_by = 10
-
-    @login_required
     def get(self, request, *args, **kwargs):
-        # search_query = request.GET.get('search', '')
         page = request.GET.get('page', 1)
         per_page = self.paginate_by
-        
-        # if search_query:
-        #     types = TypeService.search_types(search_query, page=page, per_page=per_page)
-        # else:
-        #     types = TypeService.list_all_types(page=page, per_page=per_page)
-        
         form = TypeForm()
-        #return render(request, self.template_name, {'types': types, 'form': form, 'search_query': search_query})
-        return render(request, self.template_name, { 'form': form  })
+        types = TypeService.list_all_types(page=page, per_page=per_page)
+        return render(request, self.template_name, {'form': form, 'types':types})
 
 class TypeCreateView(View):
-    @login_required
-    def get(self, request, *args, **kwargs):
-        form = TypeForm()
-        return render(request, 'tipos/types.html', {'form': form})
-
-    @login_required
     def post(self, request, *args, **kwargs):
         form = TypeForm(request.POST)
         if form.is_valid():
-            form.save()
-            messages.success(request, 'Tipo criado com sucesso!')
+            TypeService.create_new_type(form.cleaned_data['name'])
+            messages.success(request, 'Tipo de roupa criado com sucesso!')
             return redirect('type_list')
         else:
-            messages.error(request, 'Erro ao criar o tipo. Verifique os dados informados.')
-            return render(request, 'tipos/types.html', {'form': form})
+            messages.error(request, 'Erro ao cadastrar tipo de roupa.')
+        return redirect('type_list')
 
 class TypeUpdateView(View):
-    @login_required
-    def get(self, request, pk, *args, **kwargs):
-        type_instance = get_object_or_404(Type, pk=pk)
-        form = TypeForm(instance=type_instance)
-        return render(request, 'tipos/types.html', {'form': form})
-
-    @login_required
-    def post(self, request, pk, *args, **kwargs):
-        type_instance = get_object_or_404(Type, pk=pk)
-        form = TypeForm(request.POST, instance=type_instance)
+    def post(self, request):
+        id = request.POST['type_id']
+        form = TypeForm(request.POST)
         if form.is_valid():
-            form.save()
-            messages.success(request, 'Tipo atualizado com sucesso!')
-            return redirect('type_list')
+            TypeService.update_existing_type(id, form.cleaned_data['name'])
+            messages.success(request, "Tipo de roupa atualizado com sucesso!")
         else:
-            messages.error(request, 'Erro ao atualizar o tipo. Verifique os dados informados.')
-            return render(request, 'tipos/types.html', {'form': form})
+            messages.error(request, "Erro ao atualizar o tipo.")
+        return redirect('type_list')
 
-class TypeDeleteView(View):
-    @login_required
-    def post(self, request, pk, *args, **kwargs):
-        success = TypeRepository.delete_type(pk)
-        if success:
-            messages.success(request, 'Tipo deletado com sucesso!')
-        else:
-            messages.error(request, 'Erro ao deletar o tipo.')
+class TypeDeleteView(View):  
+    def post(self, request):
+        id = request.POST['type_id']
+        TypeService.delete_type(id)
+        messages.success(request, 'Tipo de roupa deletado com sucesso!')
         return redirect('type_list')

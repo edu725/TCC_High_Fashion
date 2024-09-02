@@ -3,9 +3,9 @@ from .models import *
 class ProductRepository:
 
     @staticmethod
-    def get_product_by_id(id):
+    def get_product_by_id(product_id):
         """Retorna os produtos por id"""
-        return Product.objects.get(id=id)
+        return Product.objects.get(id=product_id)
     
     @staticmethod
     def get_last_product():
@@ -47,6 +47,7 @@ class ProductRepository:
         except Product.DoesNotExist:
             return False
         
+        
     # @staticmethod
     # def search_product(query):
     #     try:
@@ -82,6 +83,11 @@ class CommentProductRepository:
     
     
 class CommentPageRepository:
+
+    @staticmethod
+    def get_all_comments_page():
+        return CommentPage.objects.all()
+    
     @staticmethod
     def create_comment_page(id_user, comment):
         return CommentPage.objects.create(id_user=id_user, comment=comment)
@@ -95,6 +101,4 @@ class CommentPageRepository:
         except CommentPage.DoesNotExist:
             return False
         
-    @staticmethod
-    def get_all_comments_page(id_user):
-        return CommentPage.objects.filter(id_user=id_user)
+    
