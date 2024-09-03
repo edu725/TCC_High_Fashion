@@ -16,3 +16,14 @@ class ParameterView(View):
         parameters = ParametersService.get_id_parameter()
         form = ParametersForm()
         return render(request, self.template_name, {'form':form, 'parameters':parameters})
+    
+class ParameterUpdateView(View):
+    def post(self, request):
+        id = request.POST['parameter_id']
+        form = ParameterView(request.POST)
+        if form.is_valid():
+            ParametersService.update_parameter(id, form.cleaned_data['name'])
+            messages.success(request, "Parametros atualizados com sucesso!")
+        else:
+            messages.error(request, "Erro ao atualizar o Parametro.")
+        return redirect('parameters_view')
