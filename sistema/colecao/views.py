@@ -12,8 +12,8 @@ from users.forms import *
 class CollectionListView(View):
     template_name = 'colecao/collections.html'
     paginate_by = 10
-    form_class = EmailLoginForm
-    vorm_class = UserForm
+    form_login = EmailLoginForm
+    form_register = UserForm
 
  
     def get(self, request, *args, **kwargs):
@@ -22,24 +22,26 @@ class CollectionListView(View):
         
         collections = CollectionService.list_all_collections(page=page, per_page=per_page)
         
-        return render(request, self.template_name, {'collections': collections, 'form': self.form_class, 'vorm': self.vorm_class})
+        return render(request, self.template_name, {'collections': collections, 'form_login': self.form_login, 'form_register': self.form_register})
        
     
 class CollectionDetailView(View):
     template_name = 'colecao/collection_single.html'
+    form_login = EmailLoginForm
+    form_register = UserForm
 
     def get(self, request, id, *args, **kwargs):
     
         collection = CollectionService.get_collection_by_id(id)
         products = ProductService.get_products_by_collection(id_collection=id)
-        return render(request, self.template_name, {'collection':collection, 'products':products})
+        return render(request, self.template_name, {'collection':collection, 'products':products, 'form_login': self.form_login, 'form_register': self.form_register})
 
 
 class CollectionCreateView(View):
 
     def get(self, request):
-        form = CollectionForm()
-        return render(request, 'colecao/criar_colecao.html', {'form': form})
+        form_collection = CollectionForm()
+        return render(request, 'colecao/criar_colecao.html', {'form_collection': form_collection})
 
     def post(self, request, *args, **kwargs):
         form = CollectionForm(request.POST, request.FILES)
@@ -83,6 +85,6 @@ class CollectionUpdateView(View):
 class CollectionListDashView(View):
 
     def get(self, request):
-        form_class = CollectionForm
+        form_collection = CollectionForm
         collections = CollectionService.list_all_collections()
-        return render(request, 'colecao/collections_dash.html', {'collections': collections, 'form': form_class})
+        return render(request, 'colecao/collections_dash.html', {'collections': collections, 'form_collection': form_collection})

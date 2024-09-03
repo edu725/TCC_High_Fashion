@@ -9,7 +9,7 @@
         <div class="modal-body">
             <form method="post" action="{% url 'login' %}">
                 {% csrf_token %}
-                {{ form.as_p }}
+                {{ form_login.as_p }}
         </div>
         <div class="modal-footer" style="justify-content: space-between;"> 
               <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#register">Register</button>

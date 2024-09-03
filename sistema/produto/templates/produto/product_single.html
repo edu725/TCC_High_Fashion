@@ -88,7 +88,7 @@
             {% endfor %}
             <form method="post" action="{% url 'comment_product' product.id user.id %}" >
                 {% csrf_token %}
-                {{ form.as_p }}
+                {{ form_comment_product.as_p }}
                 <div class="text-center py-2">
                     <button type="submit" class="btn btn-primary">Comentar</button>
                 </div>
