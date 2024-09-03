@@ -13,9 +13,9 @@ from django.contrib import messages
 class ParameterView(View):
     template_name = 'parametros/parametros.html'
     def get(self, request, *args, **kwargs):
-        parameters = ParametersService.get_id_parameter()
+        parameter = ParametersService.get_id_parameter()
         form = ParametersForm()
-        return render(request, self.template_name, {'form':form, 'parameters':parameters})
+        return render(request, self.template_name, {'form':form, 'parameter':parameter})
     
 class ParameterUpdateView(View):
     def post(self, request):
