@@ -14,16 +14,16 @@ from notifications.service import EmailService
 # Create your views here.
 
 class ProductIndex(View):
-    template_name = 'produto/index.html'
-    form_class = EmailLoginForm
-    vorm_class = UserForm
+    template_name = 'produto/index2.html'
+    form_login = EmailLoginForm
+    form_register = UserForm
     
     def get(self, request, *args, **kwargs):
         collections = CollectionService.get_all_collections()
         product = ProductService.get_all_products()
-        form = self.form_class
-        vorm = self.vorm_class
-        return render(request, self.template_name,{'form':form, 'vorm':vorm, 'collections':collections, 'products':product})
+        form_login = self.form_login
+        form_register = self.form_register
+        return render(request, self.template_name,{'form_login':form_login, 'form_register':form_register, 'collections':collections, 'products':product})
 
 class ProductListDash(View):
     template_name = 'produto/product_list_dash.html'
@@ -32,19 +32,19 @@ class ProductListDash(View):
         page = request.GET.get('page', 1)
         per_page = self.paginate_by
         products = ProductService.list_all_products(page=page, per_page=per_page)
-        form = ProductForm
-        return render(request, self.template_name, {'products':products,'form':form})
+        form_product = ProductForm
+        return render(request, self.template_name, {'products':products,'form_product':form_product})
 
 class ProductList(View):
     template_name = 'produto/product_list.html'
     paginate_by = 10
-    form_class = EmailLoginForm
-    vorm_class = UserForm
+    form_login = EmailLoginForm
+    form_register = UserForm
     def get(self, request, *args, **kwargs):
         page = request.GET.get('page', 1)
         per_page = self.paginate_by
         products = ProductService.list_all_products(page=page, per_page=per_page)
-        return render(request, self.template_name, {'products':products,'form':self.form_class, 'vorm':self.vorm_class})
+        return render(request, self.template_name, {'products':products,'form_login':self.form_login, 'form_register':self.form_register})
 
 
 class Product_Single(View):
@@ -56,16 +56,16 @@ class Product_Single(View):
             return redirect('index')
         product = ProductService.get_product_by_id(product_id)
         comment = CommentProductService.list_all_comments(product_id)
-        form_comment = CommentProductForm()
+        form_comment_product = CommentProductForm()
         total_comments = len(comment)
         user = request.user
-        return render(request, self.template_name, {'product':product, 'form':form_comment, 'comments':comment, 'total_comments':total_comments, 'user':user})
+        return render(request, self.template_name, {'product':product, 'form_comment_product':form_comment_product, 'comments':comment, 'total_comments':total_comments, 'user':user})
     
 class CreateProduct(View):
     template_name = 'produto/create.html'
     def get(self, request):
-        form = ProductForm()
-        return render(request, self.template_name, {'form':form})
+        form_product = ProductForm()
+        return render(request, self.template_name, {'form_product':form_product})
 
     def post(self, request, *args, **kwargs):
         form = ProductForm(request.POST, request.FILES)
@@ -157,8 +157,8 @@ class CommentPageList(View):
         page = request.GET.get('page', 1)
         user = request.user
         comment = CommentPageService.list_all_comments_page(page=page, per_page=self.paginate_by)
-        form = CommentPageForm()
-        return render(request, self.template_name, {'comments':comment,'form':form, 'user':user})
+        form_comment_page = CommentPageForm()
+        return render(request, self.template_name, {'comments':comment,'form_comment_page':form_comment_page, 'user':user})
     
     
 class HomeView(View):

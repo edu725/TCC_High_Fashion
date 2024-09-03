@@ -11,7 +11,7 @@
             <h2 class="text-center">Criar Produto</h2>
             <form method="post"  enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ form.as_p }}
+                {{ form_product.as_p }}
                 <button type="submit" class="btn btn-success">Criar</button>
             </form>
         </div>
