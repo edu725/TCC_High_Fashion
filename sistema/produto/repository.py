@@ -11,6 +11,11 @@ class ProductRepository:
     def get_last_product():
         """Retorna o ultimo produto"""
         return Product.objects.order_by('id').last
+    
+    @staticmethod
+    def get_product_by_collection(id_collection):
+        """Retorna o ultimo produto"""
+        return Product.objects.filter(collection=id_collection)
         
     @staticmethod
     def get_all_products():
