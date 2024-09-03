@@ -30,8 +30,8 @@ class ProductService():
         return ProductRepository.get_product_by_id(id)
     
     @staticmethod
-    def create_product(name, description, type, path):
-        return ProductRepository.create_product(name, description, type, path)
+    def create_product(name, description, type, path, collection):
+        return ProductRepository.create_product(name, description, type, collection, path)
 
     @staticmethod
     def update_product(id_product, name, description, type, path):
@@ -40,10 +40,6 @@ class ProductService():
     @staticmethod
     def delete_product(id_product):
         return ProductRepository.delete_product(id_product)
-
-    # @staticmethod
-    # def search_product(query):
-    #     return ProductRepository.search_product(query)
     
 
 class CommentProductService():
