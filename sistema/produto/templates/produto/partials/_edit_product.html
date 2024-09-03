@@ -1,15 +1,14 @@
 <div class="modal fade" id="product-{{ product.id }}" tabindex="-1" aria-labelledby="editproductLabel{{ product.id }}" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content px-4">
             <div class="modal-header">
-                <h5 class="modal-title" id="editproductLabel{{ product.id }}">Editar Tipo: {{ product.name }}</h5>
+                <h5 class="modal-title" id="editproductLabel{{ product.id }}">Editar Produto: {{ product.name }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="post" action="{% url 'update_product' %}">
+            <form method="post" action="{% url 'update_product' product.id  %}">
                 {% csrf_token %}
-                <input type="hidden" name="product_id" value="{{ product.id }}">
-                <input type="text" name="name" value="{{product.name}}" class="form-control">
-                <div class="modal-footer">
+                {{ form_product.as_p }}
+                <div class="modal-footer d-flex justify-content-center">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                     
                     <button type="submit" class="btn btn-primary">Salvar</button>

@@ -7,7 +7,7 @@
             </div>
             <form id="edit-room-form" method="post" action="{% url 'collection_update' collection.id %}">
                 {% csrf_token %}
-                {{ form.as_p }}
+                {{ form_collection.as_p }}
                 <div class="modal-footer d-flex justify-content-center">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-primary">Salvar</button>

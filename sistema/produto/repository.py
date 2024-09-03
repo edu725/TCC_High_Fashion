@@ -32,8 +32,8 @@ class ProductRepository:
     @staticmethod
     def update_product(id_product, name, description, type, collection, path):
         """Atualizar um produto"""
-        try:
-            product = ProductRepository.get_product_by_id(id=id_product)
+        product = ProductRepository.get_product_by_id(id=id_product)
+        if product:
             product.name = name
             product.description = description
             product.type = type
@@ -41,14 +41,14 @@ class ProductRepository:
             product.path = path
             product.save()
             return True
-        except Product.DoesNotExist:
+        else:
             return False
 
     @staticmethod
-    def delete_product(id_product):
+    def delete_product(product_id):
         """Deletar um produto"""
         try:
-            product = Product.objects.get(id=id_product)
+            product = ProductRepository.get_product_by_id(product_id)
             product.delete()
             return True
         except Product.DoesNotExist:
