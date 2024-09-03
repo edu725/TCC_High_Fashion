@@ -25,17 +25,26 @@ class ProductIndex(View):
         vorm = self.vorm_class
         return render(request, self.template_name,{'form':form, 'vorm':vorm, 'collections':collections, 'products':product})
 
-
-
-class ProductList(View):
-    template_name = 'produto/product_list.html'
+class ProductListDash(View):
+    template_name = 'produto/product_list_dash.html'
     paginate_by = 10
     def get(self, request, *args, **kwargs):
         page = request.GET.get('page', 1)
         per_page = self.paginate_by
         products = ProductService.list_all_products(page=page, per_page=per_page)
-        form = ProductForm()
+        form = ProductForm
         return render(request, self.template_name, {'products':products,'form':form})
+
+class ProductList(View):
+    template_name = 'produto/product_list.html'
+    paginate_by = 10
+    form_class = EmailLoginForm
+    vorm_class = UserForm
+    def get(self, request, *args, **kwargs):
+        page = request.GET.get('page', 1)
+        per_page = self.paginate_by
+        products = ProductService.list_all_products(page=page, per_page=per_page)
+        return render(request, self.template_name, {'products':products,'form':self.form_class, 'vorm':self.vorm_class})
 
 
 class Product_Single(View):

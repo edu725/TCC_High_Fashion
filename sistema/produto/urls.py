@@ -5,6 +5,7 @@ from django.urls import path
 urlpatterns = [
     path('', ProductIndex.as_view(), name='index'),
     path('produto/listar/', ProductList.as_view(), name='all_products'),
+    path('produto/listar/dash', ProductListDash.as_view(), name='dash_products'),
     path('produto/<int:product_id>', Product_Single.as_view(), name='product_single'),
     path('produto/criar/', CreateProduct.as_view(), name='create_product'),
     path('produto/editar/<int:product_id>', UpdateProduct.as_view(), name='update_product'),
