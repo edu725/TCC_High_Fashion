@@ -19,11 +19,19 @@ class ParameterView(View):
     
 class ParameterUpdateView(View):
     def post(self, request):
-        id = request.POST['parameter_id']
-        form = ParameterView(request.POST)
+        form = ParametersForm(request.POST)
         if form.is_valid():
-            ParametersService.update_parameter(id, form.cleaned_data['name'])
+            ParametersService.update_parameter(
+                impostos=form.cleaned_data['impostos'],
+                retirada=form.cleaned_data['retirada'],
+                frete=form.cleaned_data['frete'],
+                comissao=form.cleaned_data['comissao'],
+                despesas_financeiras=form.cleaned_data['despesas_financeiras'],
+                despesas_comerciais=form.cleaned_data['despesas_comerciais'],
+                lucro=form.cleaned_data['lucro']
+                )
             messages.success(request, "Parametros atualizados com sucesso!")
+            return redirect('parameters_view')
         else:
             messages.error(request, "Erro ao atualizar o Parametro.")
         return redirect('parameters_view')
