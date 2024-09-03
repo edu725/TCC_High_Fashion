@@ -24,4 +24,5 @@ class ParametersRepository:
 
     @staticmethod
     def get_divisor():
-        return Parameters.get_divisor()
+        divisor = Parameters.get_divisor()
+        return divisor

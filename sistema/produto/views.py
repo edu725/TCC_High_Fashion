@@ -54,19 +54,29 @@ class Product_Single(View):
     
 class CreateProduct(View):
     template_name = 'produto/create.html'
+    def get(self, request):
+        form = ProductForm()
+        return render(request, self.template_name, {'form':form})
+
     def post(self, request, *args, **kwargs):
-        form = ProductForm(request.POST)
+        form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
-                ProductService.create_product(form.cleaned_data['name', 'description', 'type', 'path'])
-                messages.success(request, "Produto criado com sucesso!")
-                produto = ProductService.get_last_product()
-                EmailService.send_email_with_attachment(
-                    subject="Novo produto adicionado",
-                    message=f"Confira as Novidades do nosso site como o novo lançamento da/o {produto.name}",
-                    recipient_list=EmailService.list_all_email_users,
-                    attachment_path=produto.path,
-                )
-                return redirect('all_products')
+            ProductService.create_product(
+                name=form.cleaned_data['name'],
+                description=form.cleaned_data['description'],
+                path=form.cleaned_data['path'],
+                type=form.cleaned_data['type_name'],
+                collection=form.cleaned_data['collection_name']
+            )
+            messages.success(request, "Produto criado com sucesso!")
+            produto = ProductService.get_last_product()
+            EmailService.send_email_with_attachment(
+                subject="Novo produto adicionado",
+                message=f"Confira as Novidades do nosso site como o novo lançamento da/o {produto.name}",
+                recipient_list=EmailService.list_all_email_users,
+                attachment_path=produto.path,
+            )
+            return redirect('all_products')
         else:
             messages.error(request, "Erro ao criar produto.")
         return render(request, self.template_name, {'form':form})
