@@ -17,6 +17,11 @@ class ProductService():
 
         return products
     
+    
+    @staticmethod
+    def get_products_by_collection(id_collection):
+        return ProductRepository.get_product_by_collection(id_collection)
+    
     @staticmethod
     def get_all_products():
         return ProductRepository.get_all_products()
