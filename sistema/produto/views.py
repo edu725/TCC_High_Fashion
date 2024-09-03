@@ -69,34 +69,37 @@ class CreateProduct(View):
                 collection=form.cleaned_data['collection_name']
             )
             messages.success(request, "Produto criado com sucesso!")
-            produto = ProductService.get_last_product()
-            EmailService.send_email_with_attachment(
-                subject="Novo produto adicionado",
-                message=f"Confira as Novidades do nosso site como o novo lançamento da/o {produto.name}",
-                recipient_list=EmailService.list_all_email_users,
-                attachment_path=produto.path,
-            )
+            # produto = ProductService.get_last_product()
+            # EmailService.send_email_with_attachment(
+            #     subject="Novo produto adicionado",
+            #     message=f"Confira as Novidades do nosso site como o novo lançamento da/o {produto.name}",
+            #     recipient_list=EmailService.list_all_email_users,
+            #     attachment_path=produto.path,
+            # )
             return redirect('all_products')
         else:
             messages.error(request, "Erro ao criar produto.")
         return render(request, self.template_name, {'form':form})
     
 class UpdateProduct(View):
-    def post(self, request, product_id, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
+        id = request.POST['product_id']
         form = ProductForm(request.POST)
         if form.is_valid():
-            ProductService.update_product(product_id, form.cleaned_data['name', 'description', 'type', 'path'])
-            messages.success(request, 'Produto editado com sucesso!')
+            ProductService.update_product(id, form.cleaned_data['name', 'description', 'type', 'path'])
+            messages.success(request, 'Produto atualizado com sucesso!')
         else:
-            messages.error(request,'Erro ao editar produto.')
+            messages.error(request,'Erro ao atualizar produto.')
         return redirect('all_products')
 
+
 class DeleteProduct(View):
-    def get(self, product_id, request, *args, **kwargs):
-        product = get_object_or_404(Product, id=product_id)
-        ProductService.delete_product(product)
+    def post(self, request):
+        id = request.POST['product_id']
+        ProductService.delete_product(id)
         messages.success(request, "Produto deletado com sucesso!")
         return redirect('all_products')
+
     
 class CreateCommentProduct(View):
     def post(self, request, product_id, user_id ,*args, **kwargs):
@@ -124,8 +127,6 @@ class CreateCommentPage(View):
         else:
             messages.error(request, "Erro ao criar comentário.")
             return redirect('mural_comment')
-    
-
 
 class CommentPageList(View):
     template_name = 'produto/mural_comments.html'
