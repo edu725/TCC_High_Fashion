@@ -12,8 +12,8 @@ class ParametersForm(forms.ModelForm):
             "retirada": "Retirada",
             "frete": "Frete",
             "comissao": "Comissao",
-            "despesas_financeiras": "Despesas",
-            "despesas_comercias": "Despesas",
+            "despesas_financeiras": "Despesas Financeiras",
+            "despesas_comerciais": "Despesas Comerciais",
             "lucro": "Lucro",
         }
         widgets = {
@@ -22,6 +22,6 @@ class ParametersForm(forms.ModelForm):
             'frete': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Frete'}),
             'comissao': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Comissao'}),
             'despesas_financeiras': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Desp. financeira'}),
-            'despesas_comercias': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Desp. comercias'}),
+            'despesas_comerciais': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Desp. comercias'}),
             'lucro': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Lucro'}),
         }
