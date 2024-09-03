@@ -29,6 +29,19 @@
                 margin: 20px !important;
             }
         }
+        .parallax-1 {
+            width: 100%;
+            background: url("{% static 'assets/img/fundo.jpg' %}");
+            background-size: 100% 100%;
+            background-attachment: fixed;
+        }
+
+        .parallax-1 .para {
+            position: relative;
+            padding: 10px;
+            text-align: center;
+        }
+
     </style>
 {% endblock %}
 
@@ -104,7 +117,6 @@
             </div>
         </div>
     </section>
-    
     <section data-bs-version="5.1" class="pricing02 cid-umeacIuSzu" id="product-list-9-umeacIuSzu">
         
         
@@ -191,8 +203,8 @@
                 <p class="mbr-text mbr-fonts-style mb-3 display-7">Celebrate the season in style at our glamorous holiday gala! Dress to impress!</p>
                 <div class="mbr-section-btn item-footer">
                   <a href="" class="btn item-btn btn-primary display-7">Ver</a>
+
                 </div>
-              </div>
             </div>
           </div>
         </div>
@@ -200,7 +212,6 @@
     </section>
     
     <section data-bs-version="5.1" class="people04 cid-umeacIwUSn pad" id="testimonials-4-umeacIwUSn">
-        
         
         <div class="container">
             <div class="row mb-5 justify-content-center">
@@ -245,11 +256,7 @@
             </div>
         </div>
         <br>
-    </section>
-        
-    
-        
-    
+    </section> 
        
     <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'assets/parallax/jarallax.js' %}"></script>

@@ -17,32 +17,34 @@ class ProductService():
 
         return products
     
+    
+    @staticmethod
+    def get_products_by_collection(id_collection):
+        return ProductRepository.get_product_by_collection(id_collection)
+    
     @staticmethod
     def get_all_products():
         return ProductRepository.get_all_products()
+    
     @staticmethod
     def get_last_product():
         return ProductRepository.get_last_product()
 
     @staticmethod
-    def get_product_by_id(id):
-        return ProductRepository.get_product_by_id(id)
+    def get_product_by_id(product_id):
+        return ProductRepository.get_product_by_id(product_id)
     
     @staticmethod
-    def create_product(name, description, type, path):
-        return ProductRepository.create_product(name, description, type, path)
+    def create_product(name, description, type, path, collection):
+        return ProductRepository.create_product(name, description, type, collection, path)
 
     @staticmethod
-    def update_product(id_product, name, description, type, path):
-        return ProductRepository.update_product(id_product, name, description, type, path)
+    def update_product(id_product, name, description, type, collection, path):
+        return ProductRepository.update_product(id_product, name, description, type, collection, path)
 
     @staticmethod
     def delete_product(id_product):
         return ProductRepository.delete_product(id_product)
-
-    # @staticmethod
-    # def search_product(query):
-    #     return ProductRepository.search_product(query)
     
 
 class CommentProductService():

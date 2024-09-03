@@ -78,7 +78,7 @@
         <div class="py-2">
             <form method="post" action="{% url 'collection_create' %}" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ form.as_p }}
+                {{ form_collection.as_p }}
         </div>
       </div>
       <div class="text-center py-3">

@@ -1,0 +1,69 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Coleção </title>
+{% endblock %}
+
+{% block style %}
+    <link rel="apple-touch-icon" href="{% static 'assets/img/apple-icon.png' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/templatemo.css' %}">
+
+    <!-- Load fonts style after rendering the layout styles -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap'">
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.min.css' %}">
+
+    <!-- Slick -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/slick.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/slick-theme.css' %}">
+{% endblock %}    
+
+{% block content %}
+    <!-- Open Content -->
+    <section>
+        <div class="container pb-5">
+            <div class="row">
+                <div class="col-lg-5 mt-5">
+                    <div class="card mb-3">
+                        <img class="card-img img-fluid" src="{{collection.image.url}}" alt="Card image cap" id="collection-detail">
+                    </div>
+                </div>
+                <!-- col end -->
+                <div class="col-lg-7 mt-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <h1 class="h2">{{collection.name}}</h1>
+                            <h6>Descrição:</h6>
+                            <p>{{collection.description}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="text-center">
+            <h3>Produtos Relacionados</h3>
+        </div>
+        
+        <div class="d-flex justify-content-center">
+            {% for product in products %}
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="d-flex">
+                    <div class="card" style="width: 18rem;">
+                        <img src="{{ product.path.url }}" class="card-img-top" alt="{{ product.name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{product.name}}</h5>
+                            <p class="card-text">{{product.description}}</p>
+                            <a href="{% url 'product_single' product.id %}" class="btn btn-primary">Produto</a>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+        
+    </section>
+   
+{% endblock %}

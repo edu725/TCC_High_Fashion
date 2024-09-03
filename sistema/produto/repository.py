@@ -1,4 +1,6 @@
 from .models import *
+from parametros.models import *
+
 
 class ProductRepository:
 
@@ -11,6 +13,11 @@ class ProductRepository:
     def get_last_product():
         """Retorna o ultimo produto"""
         return Product.objects.order_by('id').last
+    
+    @staticmethod
+    def get_product_by_collection(id_collection):
+        """Retorna o ultimo produto"""
+        return Product.objects.filter(collection=id_collection)
         
     @staticmethod
     def get_all_products():
@@ -25,8 +32,8 @@ class ProductRepository:
     @staticmethod
     def update_product(id_product, name, description, type, collection, path):
         """Atualizar um produto"""
-        try:
-            product = ProductRepository.get_product_by_id(id=id_product)
+        product = ProductRepository.get_product_by_id(id=id_product)
+        if product:
             product.name = name
             product.description = description
             product.type = type
@@ -34,32 +41,18 @@ class ProductRepository:
             product.path = path
             product.save()
             return True
-        except Product.DoesNotExist:
+        else:
             return False
 
     @staticmethod
-    def delete_product(id_product):
+    def delete_product(product_id):
         """Deletar um produto"""
         try:
-            product = Product.objects.get(id=id_product)
+            product = ProductRepository.get_product_by_id(product_id)
             product.delete()
             return True
         except Product.DoesNotExist:
             return False
-        
-        
-    # @staticmethod
-    # def search_product(query):
-    #     try:
-    #         # Primeiro tenta buscar por ID
-    #         if query.isdigit():
-    #             return Product.objects.filter(id=query)
-    #     except ValueError:
-    #         pass
-        
-    #     # Se não for um ID válido, busca por nome (convertendo para maiúsculas)
-    #     query_upper = query.upper()
-    #     return Product.objects.filter(name__icontains=query_upper)
     
 
 class CommentProductRepository:
@@ -101,4 +94,8 @@ class CommentPageRepository:
         except CommentPage.DoesNotExist:
             return False
         
+class ProductCostRepository:
     
+    @staticmethod
+    def get_price_sell():
+        return ProductCost.get_price_cost() / Parameters.get_divisor()

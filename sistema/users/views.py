@@ -31,26 +31,26 @@ class CustomLoginView(View):
 
 class CustomRegisterView(View):
 
-    vorm_class = UserForm
+    form_register = UserForm
     def post(self, request, *args, **kwargs):
-        form = self.vorm_class(request.POST)
+        form = self.form_register(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, "Conta criada com sucesso!")
             return redirect('index')
         else:
             messages.error(request, "Ocorreu um erro ao criar a conta.")
-            return render(request, self.template_name, {'form': form})
+            return render(request, self.template_name, {'form_register': form})
 
 
 @method_decorator(user_is_manager, name='dispatch')
 class UserCreateView(CreateView):
     template_name = 'produto/index2.html'
-    form_class = UserForm
+    form_login = UserForm
 
     def get(self, request, *args, **kwargs):
-        vorm = self.form_class()
-        return render(request, self.template_name, {'vorm': vorm})
+        form_login = self.form_class()
+        return render(request, self.template_name, {'form_login': form_login})
 
     def post(self, request, *args, **kwargs):
         vorm = self.form_class(request.POST)
@@ -164,11 +164,11 @@ class UserProfileView(View):
 class UserDashView(View):
     template_name = 'users/user_list.html'
     paginate_by = 10
-    form_class = UserForm
+    form_register = UserForm
 
     def get(self, request, *args, **kwargs):
         page = request.GET.get('page', 1)
         users = UserService.list_all_users(page=page, per_page=self.paginate_by)
-        vorm = self.form_class()
+        vorm = self.form_register()
 
-        return render(request, self.template_name, {'users': users, 'vorm': vorm})
+        return render(request, self.template_name, {'users': users, 'form_register': vorm})

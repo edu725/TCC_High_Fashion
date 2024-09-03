@@ -42,7 +42,7 @@
 <div class="px-4">
     <form method="post" action="{% url 'create_comment_page' user.id %}">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form_comment_page.as_p }}
     
     <div class="" style="justify-content: space-between;"> 
       <button type="submit" class="btn btn-primary">Salvar</button>

@@ -9,12 +9,14 @@ class ProductForm(forms.ModelForm):
         queryset=None,
         required=True,
         empty_label="",
+        label="Tipo de roupa",
         widget=forms.Select(attrs={'class': 'form-control'})
     )
     collection_name=forms.ModelChoiceField(
         queryset=None,
         required=True,
         empty_label="",
+        label="Coleção",
         widget=forms.Select(attrs={'class': 'form-control'})
     )
 

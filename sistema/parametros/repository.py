@@ -4,7 +4,7 @@ class ParametersRepository:
 
     @staticmethod
     def get_id_parameter():
-        return Parameters.objects.get(id=1)
+        return Parameters.objects.filter(id=1)
 
     @staticmethod
     def update_parameter(impostos, retirada, frete, comissao, despesas_financeiras, despesas_comerciais, lucro):
@@ -24,4 +24,5 @@ class ParametersRepository:
 
     @staticmethod
     def get_divisor():
-        return Parameters.get_divisor()
+        divisor = Parameters.get_divisor()
+        return divisor

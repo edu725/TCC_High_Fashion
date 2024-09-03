@@ -15,6 +15,11 @@
                             </svg>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
+                            {% if request.user.user_type == 'manager' %}
+                                <li>
+                                    <a class="dropdown-item" href="{% url 'manager_dashboard' %}">Dashboard</a>
+                                </li>
+                            {% endif %}
                             {% if request.user.is_authenticated %}
                                 <li>
                                     <a class="dropdown-item" href="">Configurações</a>

@@ -7,10 +7,11 @@
             </div>
             <form method="post" action="{% url 'type_update' %}">
                 {% csrf_token %}
-                {{ form.as_p }}
+                <input type="hidden" name="type_id" value="{{ type.id }}">
+                <input type="text" name="name" value="{{type.name}}" class="form-control">
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <input type="hidden" name="type_id" value="{{ type.id }}">
+                    
                     <button type="submit" class="btn btn-primary">Salvar</button>
                 </div>
             </form>
