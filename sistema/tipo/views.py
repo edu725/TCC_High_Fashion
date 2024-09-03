@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from tipo.service import TypeRepository
 from tipo.service import TypeService
 
+@method_decorator(user_is_manager_or_common, name='dispatch')
 class TypeListView(View):
     template_name = 'tipo/types.html'
     paginate_by = 10
@@ -32,6 +33,7 @@ class TypeCreateView(View):
             messages.error(request, 'Erro ao cadastrar tipo de roupa.')
         return redirect('type_list')
 
+@method_decorator(user_is_manager, name='dispatch')
 class TypeUpdateView(View):
     def post(self, request):
         id = request.POST['type_id']
@@ -43,6 +45,7 @@ class TypeUpdateView(View):
             messages.error(request, "Erro ao atualizar o tipo.")
         return redirect('type_list')
 
+@method_decorator(user_is_manager, name='dispatch')
 class TypeDeleteView(View):  
     def post(self, request):
         id = request.POST['type_id']

@@ -56,6 +56,10 @@
             <hr>
             <p class="f text-start mb-1" style="font-size: 12px; color: dimgray;">{{collection.description}}</p>
             <hr>
+            <div class="d-flex justify-content-center">
+              <img src="{{collection.image.url}}" height="60px" width="60px" alt="">
+            </div>
+            <hr>
             <p class="f text-start mb-1" style="font-size: 12px; color: dimgray;">Ações:</p>
             <a href="#" data-bs-toggle="modal" data-bs-target="#collection-{{collection.id}}" class="btn edit-collection-btn" data-collection-id="{{ collection.id }}" data-collection-name="{{ collection.name }}">
               <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="blue" class="bi bi-pencil-square" viewBox="0 0 16 16">

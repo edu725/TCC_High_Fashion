@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages  
 from .repository import CollectionRepository
 from .forms import CollectionForm
+from django.utils.decorators import method_decorator
+from users.decorators import *
 from django.contrib.auth.decorators import login_required
 from .service import CollectionService
 from produto.service import ProductService
@@ -24,7 +26,7 @@ class CollectionListView(View):
         
         return render(request, self.template_name, {'collections': collections, 'form_login': self.form_login, 'form_register': self.form_register})
        
-    
+@method_decorator(user_is_manager_or_common, name='dispatch')
 class CollectionDetailView(View):
     template_name = 'colecao/collection_single.html'
     form_login = EmailLoginForm
@@ -37,6 +39,7 @@ class CollectionDetailView(View):
         return render(request, self.template_name, {'collection':collection, 'products':products, 'form_login': self.form_login, 'form_register': self.form_register})
 
 
+@method_decorator(user_is_manager, name='dispatch')
 class CollectionCreateView(View):
 
     def get(self, request):
@@ -59,6 +62,7 @@ class CollectionCreateView(View):
             return redirect('collection_list')
 
 
+@method_decorator(user_is_manager, name='dispatch')
 class CollectionDeleteView(View):
    
     def post(self, request, id, *args, **kwargs):
@@ -70,6 +74,7 @@ class CollectionDeleteView(View):
         return redirect('collection_dash')
     
 
+@method_decorator(user_is_manager, name='dispatch')
 class CollectionUpdateView(View):
 
     def post(self, request, id, *args, **kwargs):
@@ -86,7 +91,8 @@ class CollectionUpdateView(View):
         collection = CollectionService.get_collection_by_id(id)
         form_collection = CollectionForm(collection)
         return
-    
+
+@method_decorator(user_is_manager, name='dispatch')
 class CollectionListDashView(View):
 
     def get(self, request):
