@@ -6,7 +6,7 @@
         "fields":{
             "name":"Inverno 2023/2024", 
             "description":"Coleção de inverno de 2023/2024 lembrando os tons claros e frios do inverno",
-            "image":"\\img\\2024\\08\\29\\02.png"
+            "image":"\\img\\imgfix\\invernoC.png"
         }
     },
     {
@@ -16,7 +16,7 @@
         "fields":{
             "name":"Verão 2023/2024", 
             "description":"Coleção de Verão de 2023/2024 lembrando os tons claros e quentes do Verão",
-            "image":"\\img\\2024\\08\\29\\04.png"
+            "image":"\\img\\imgfix\\veraoC.png"
         }
     },
     {
@@ -26,7 +26,7 @@
         "fields":{
             "name":"Outono 2023/2024", 
             "description":"Coleção de Outono de 2023/2024 com inspiração nas arvores mortas do Outono",
-            "image":"\\img\\2024\\08\\29\\07.png"
+            "image":"\\img\\imgfix\\outonoC.png"
         }
     },
     {
@@ -36,7 +36,7 @@
         "fields":{
             "name":"Primavera 2023/2024", 
             "description":"Coleção de Primavera de 2023/2024 com inspiração dos campos floridos e do calor da Primavera",
-            "image":"\\img\\2024\\08\\29\\05.png"
+            "image":"\\img\\imgfix\\primaveraC.png"
         }
     }
 ]
