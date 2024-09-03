@@ -43,7 +43,7 @@ class Product_Single(View):
 
     def get(self, request, product_id, *args, **kwargs):
         if not request.user.is_authenticated:
-            messages.error(request, "Erro: Usuario não estar logado.")
+            messages.error(request, "Usuario precisa estar logado.")
             return redirect('index')
         product = ProductService.get_product_by_id(product_id)
         comment = CommentProductService.list_all_comments(product_id)
@@ -115,11 +115,9 @@ class CommentPageList(View):
     paginate_by = 10
 
     def get(self, request, *args, **kwargs):
-    
         page = request.GET.get('page', 1)
-        per_page = self.paginate_by
         user = request.user
-        comment = CommentPageService.list_all_comments_page(page=page, per_page=per_page)
+        comment = CommentPageService.list_all_comments_page(page=page, per_page=self.paginate_by)
         form = CommentPageForm()
         return render(request, self.template_name, {'comments':comment,'form':form, 'user':user})
     
