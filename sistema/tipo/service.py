@@ -36,17 +36,17 @@ class TypeService:
     def get_all_types():
         return TypeRepository.get_all_types()
     
-    @staticmethod
-    def search_type(query, page=1, per_page=10):
-        types = TypeRepository.search_type(query)
-        paginator = Paginator(types, per_page)
+    # @staticmethod
+    # def search_type(query, page=1, per_page=10):
+    #     types = TypeRepository.search_type(query)
+    #     paginator = Paginator(types, per_page)
 
-        try:
-            paginated_types = paginator.page(page)
-        except PageNotAnInteger:
-            paginated_types = paginator.page(1)
-        except EmptyPage:
-            paginated_types = paginator.page(paginator.num_pages)
+    #     try:
+    #         paginated_types = paginator.page(page)
+    #     except PageNotAnInteger:
+    #         paginated_types = paginator.page(1)
+    #     except EmptyPage:
+    #         paginated_types = paginator.page(paginator.num_pages)
 
-        return paginated_types
+    #     return paginated_types
     

@@ -6,38 +6,32 @@ from .forms import CollectionForm
 from django.contrib.auth.decorators import login_required
 from .service import CollectionService
 from produto.service import ProductService
+from users.forms import *
 
 
 class CollectionListView(View):
     template_name = 'colecao/collections.html'
     paginate_by = 10
+    form_class = EmailLoginForm
+    vorm_class = UserForm
 
  
     def get(self, request, *args, **kwargs):
-        search_query = request.GET.get('search', '')
         page = request.GET.get('page', 1)
         per_page = self.paginate_by
         
-        if search_query:
-            collections = CollectionService.search_collection(search_query, page=page, per_page=per_page)
-        else:
-            collections = CollectionService.list_all_collections(page=page, per_page=per_page)
+        collections = CollectionService.list_all_collections(page=page, per_page=per_page)
         
-        form = CollectionForm()
-        return render(request, self.template_name, {'collections': collections, 'form': form, 'search_query': search_query})
+        return render(request, self.template_name, {'collections': collections, 'form': self.form_class, 'vorm': self.vorm_class})
        
     
 class CollectionDetailView(View):
     template_name = 'colecao/collection_single.html'
 
-    def get(self, request, collection_id, *args, **kwargs):
-        if not request.user.is_authenticated:
-            messages.error(request, "Usuario precisa estar logado.")
-            return redirect('index')
-        collection = CollectionService.get_collection_by_id(collection_id)
-        products = ProductService.get_products_by_collection(id_collection=collection_id)
-
- 
+    def get(self, request, id, *args, **kwargs):
+    
+        collection = CollectionService.get_collection_by_id(id)
+        products = ProductService.get_products_by_collection(id_collection=id)
         return render(request, self.template_name, {'collection':collection, 'products':products})
 
 
