@@ -31,16 +31,16 @@ class ProductService():
         return ProductRepository.get_last_product()
 
     @staticmethod
-    def get_product_by_id(id):
-        return ProductRepository.get_product_by_id(id)
+    def get_product_by_id(product_id):
+        return ProductRepository.get_product_by_id(product_id)
     
     @staticmethod
     def create_product(name, description, type, path, collection):
         return ProductRepository.create_product(name, description, type, collection, path)
 
     @staticmethod
-    def update_product(id_product, name, description, type, path):
-        return ProductRepository.update_product(id_product, name, description, type, path)
+    def update_product(id_product, name, description, type, collection, path):
+        return ProductRepository.update_product(id_product, name, description, type, collection, path)
 
     @staticmethod
     def delete_product(id_product):
