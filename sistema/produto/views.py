@@ -14,9 +14,9 @@ from notifications.service import EmailService
 # Create your views here.
 
 class ProductIndex(View):
-    template_name = 'produto/index.html'
-    form_class = EmailLoginForm
-    vorm_class = UserForm
+    template_name = 'produto/index2.html'
+    form_login = EmailLoginForm
+    form_class = UserForm
     
     def get(self, request, *args, **kwargs):
         collections = CollectionService.get_all_collections()
