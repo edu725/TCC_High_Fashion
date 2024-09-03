@@ -15,9 +15,5 @@ urlpatterns = [
     path('profile/', UserProfileView.as_view(), name='profile'),#ok
     path('listar/dash', UserDashView.as_view(), name='dashboard_user'),#ok
     path('register/', CustomRegisterView.as_view(), name='register'),#ok
-    path('register/', CustomRegisterView.as_view(), name='register_dash'),#ok
-    path('password_reset/', auth_views.PasswordResetView.as_view(template_name='users/password_reset_form.html'), name='password_reset'),#ok
-    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='users/password_reset_done.html'), name='password_reset_done'),#ok
-    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='users/password_reset_confirm.html'), name='password_reset_confirm'),#ok
-    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'), name='password_reset_complete'),#ok
+    path('register/dash', CustomRegisterView.as_view(), name='register_dash'),#ok
 ]

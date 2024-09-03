@@ -42,6 +42,8 @@ class CustomRegisterView(View):
             messages.error(request, "Ocorreu um erro ao criar a conta.")
             return render(request, self.template_name, {'form_register': form})
         
+        
+@method_decorator(user_is_manager, name='dispatch')
 class CustomRegisterDashView(View):
     template_name = 'produto/index.html'
     form_register = UserDashForm

@@ -82,6 +82,11 @@ class CollectionUpdateView(View):
             messages.error(request, 'Erro ao atualizar a coleção.')
         return redirect('collection_dash')
     
+    def get(self, request, id):
+        collection = CollectionService.get_collection_by_id(id)
+        form_collection = CollectionForm(collection)
+        return
+    
 class CollectionListDashView(View):
 
     def get(self, request):
