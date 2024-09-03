@@ -10,7 +10,7 @@
             <div class="py-2">
                 <form method="post" action="{% url 'type_create' %}">
                     {% csrf_token %}
-                    {{ form.as_p }}
+                    {{ form_type.as_p }}
             </div>
         </div>
         <div class="text-center py-3">

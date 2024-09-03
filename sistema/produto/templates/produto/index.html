@@ -6,85 +6,380 @@
 {% endblock %}
 
 {% block style %}
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap-grid.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap-reboot.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/parallax/jarallax.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/theme/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/mobirise/css/mbr-additional.css' %}" type="text/css">
+
     <style>
         @media only screen and (max-width: 770px) {
             .media{
                 flex-direction: column;
                 text-align: center;
             }
-      
+            img{
+                margin: 20px !important;
+            }
         }
+        .parallax-1 {
+            width: 100%;
+            background: url("{% static 'assets/img/fundo.jpg' %}");
+            background-size: 100% 100%;
+            background-attachment: fixed;
+        }
+
+        .parallax-1 .para {
+            position: relative;
+            padding: 10px;
+            text-align: center;
+        }
+
     </style>
 {% endblock %}
 
 {% block content %}
     <!-- Coleções -->
-    <section class="py-5">
-        <h1 class="text-center">Tela inicial</h1>
-        <div class="container">
-            <h1>Coleção</h1>
-            <div class="row">
-                {% for collection in collections %}
-                <a href="{% url 'collection_detail' collection.id %}" style="text-decoration:none;">
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3  py-2">
-                  <div class="card">
-                    <div class="card-body">
-                      <h5 class="card-title">{{collection.name}}</h5>
-                      <p class="card-text">{{collection.description}}</p>
-                    </div>
+    {% include 'users/partials/_carousel.html' %}
+    <section data-bs-version="5.1" class="article9 cid-umeacIuMz1" id="about-me-9-umeacIuMz1">
+      <br>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="card col-md-12 col-lg-10">
+            <div class="card-wrapper">
+              <div class="card-content-text">
+                <h3 class="card-title mbr-fonts-style mt-3 mb-4 display-2">
+                <strong>SOBRE</strong>
+              </h3>
+              <div class="row card-box align-left">
+                <div class="item features-without-image col-12">
+                  <div class="item-wrapper">
+                    
+                    <p class="mbr-text mbr-fonts-style display-7">
+                      A High Fashion é um site dedicado aos entusiastas da moda de alto padrão, 
+                      oferecendo uma experiência única 
+                      para quem busca as últimas tendências e inspirações no mundo da moda. 
+                      Com um design elegante e sofisticado, o site reflete a essência das 
+                      marcas de luxo que ele representa.
+                    </p>
                   </div>
                 </div>
-                </a>
-                {% endfor %}
+                <!-- <div class="item features-without-image col-12">
+                  <div class="item-wrapper">
+                    
+                    <p class="mbr-text mbr-fonts-style display-7">Our team of fashion enthusiasts is dedicated to bringing you the latest trends, timeless styles, and a sprinkle of sass. We’re not just about clothes; we’re about creating a lifestyle that makes you feel fabulous.</p>
+                  </div>
+                </div>
+                <div class="item features-without-image col-12">
+                  <div class="item-wrapper">
+                    
+                    <p class="mbr-text mbr-fonts-style display-7">Join us on this stylish journey, and let’s make the world a more fashionable place, one outfit at a time!</p>
+                  </div>
+                </div> -->
+              </div>
+              </div>
+              <div class="image-wrapper d-flex justify-content-center mt-3">
+                <img src="{% static 'assets/img/logoFundo.png' %}" alt="Mobirise Website Builder">
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </section>
-    <!-- TextoFoda -->
-    <section class="py-5">
-        <h1 class="text-center">Card</h1>
+    
+    <section data-bs-version="5.1" class="header14 cid-umeacIuPjy mbr-parallax-background" id="call-to-action-9-umeacIuPjy">
+        
+    
+        
+        
         <div class="container">
             <div class="row justify-content-center">
-                {% for product in products %}
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                    <div class="d-flex">
-                        <div class="card" style="width: 18rem;">
-                            <img src="{{ product.path.url }}" class="card-img-top" alt="{{ product.name }}">
-                            <div class="card-body">
-                              <h5 class="card-title">{{product.name}}</h5>
-                              <p class="card-text">{{product.description}}</p>
-                              <a href="{% url 'product_single' product.id %}" class="btn btn-primary">Go somewhere</a>
+                <div class="card col-12 col-md-12 col-lg-10">
+                    <div class="card-wrapper">
+                        <div class="card-box align-center">
+                            <h1 class="card-title mbr-fonts-style mb-4 display-1">
+                                <strong>Veja aqui nossas coleções</strong>
+                            </h1>
+                            <p class="mbr-text mbr-fonts-style mb-4 display-7">Explore the latest trends and styles that speak to you!</p>
+                            <div class="mbr-section-btn mt-4">
+                                <a class="btn btn-primary display-7" href="https://mobiri.se">Shop Now</a>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                 </div>
-                {% endfor %}
             </div>
         </div>
     </section>
-     <section>
-      
-     </section>
+    
+    <section data-bs-version="5.1" class="pricing02 cid-umeacIuSzu" id="product-list-9-umeacIuSzu">
+        
+        
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-12 content-head">
+                    <div class="mbr-section-head mb-5">
+                        <h4 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
+                            <strong>Trending Styles</strong>
+                        </h4> 
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="item features-image col-12 col-md-6 col-lg-4">
+                    <div class="item-wrapper">
+                        <div class="item-img">
+                            <img src="assets/images/photo-1524672353063-4f66ee1f385e.jpeg" alt="Mobirise Website Builder">
+                        </div>
+                        <div class="item-content">
+                            <h5 class="item-title mbr-fonts-style display-5">
+                                <strong>Pastel Paradise Dress</strong>
+                            </h5>
+                            <h6 class="item-subtitle mbr-fonts-style display-7">$49.99</h6>
+                            <p class="mbr-text mbr-fonts-style display-7">A dreamy dress that whispers elegance and screams style!</p>
+                            <div class="mbr-section-btn item-footer">
+                                <a href="" class="btn item-btn btn-primary display-7">Buy Now</a>
+                            </div>
+                        </div>
+    
+                    </div>
+                </div>
+                <div class="item features-image col-12 col-md-6 col-lg-4">
+                    <div class="item-wrapper">
+                        <div class="item-img">
+                            <img src="assets/images/photo-1483985988355-763728e1935b.jpeg" alt="Mobirise Website Builder">
+                        </div>
+                        <div class="item-content">
+                            <h5 class="item-title mbr-fonts-style display-5">
+                                <strong>Chic Denim Jacket</strong>
+                            </h5>
+                            <h6 class="item-subtitle mbr-fonts-style display-7">$59.99</h6>
+                            <p class="mbr-text mbr-fonts-style display-7">The perfect blend of comfort and cool for any occasion!</p>
+                            <div class="mbr-section-btn item-footer">
+                                <a href="" class="btn item-btn btn-primary display-7">Buy Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item features-image col-12 col-md-6 col-lg-4">
+                    <div class="item-wrapper">
+                        <div class="item-img">
+                            <img src="assets/images/photo-1450297166380-cabe503887e5.jpeg" alt="Mobirise Website Builder">
+                        </div>
+                        <div class="item-content">
+                            <h5 class="item-title mbr-fonts-style display-5">
+                                <strong>Floral Print Skirt</strong>
+                            </h5>
+                            <h6 class="item-subtitle mbr-fonts-style display-7">$39.99</h6>
+                            <p class="mbr-text mbr-fonts-style display-7">Twirl into spring with this vibrant floral delight!</p>
+                            <div class="mbr-section-btn item-footer">
+                                <a href="" class="btn item-btn btn-primary display-7">Buy Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item features-image col-12 col-md-6 col-lg-4">
+                    <div class="item-wrapper">
+                        <div class="item-img">
+                            <img src="assets/images/photo-1496747611176-843222e1e57c.jpeg">
+                        </div>
+                        <div class="item-content">
+                            <h5 class="item-title mbr-fonts-style display-5">
+                                <strong>Casual Chic Sneakers</strong>
+                            </h5>
+                            <h6 class="item-subtitle mbr-fonts-style display-7">$45.99</h6>
+                            <p class="mbr-text mbr-fonts-style display-7">Step up your game with these stylish and comfy kicks!</p>
+                            <div class="mbr-section-btn item-footer">
+                                <a href="" class="btn item-btn btn-primary display-7">Buy Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item features-image col-12 col-md-6 col-lg-4">
+                    <div class="item-wrapper">
+                        <div class="item-img">
+                            <img src="assets/images/photo-1505022610485-0249ba5b3675.jpeg">
+                        </div>
+                        <div class="item-content">
+                            <h5 class="item-title mbr-fonts-style display-5">
+                                <strong>Elegant Evening Top</strong>
+                            </h5>
+                            <h6 class="item-subtitle mbr-fonts-style display-7">34.99</h6>
+                            <p class="mbr-text mbr-fonts-style display-7">Shine bright like a diamond with this stunning top!</p>
+                            <div class="mbr-section-btn item-footer">
+                                <a href="" class="btn item-btn btn-primary display-7">Buy Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item features-image col-12 col-md-6 col-lg-4">
+                    <div class="item-wrapper">
+                        <div class="item-img">
+                            <img src="assets/images/photo-1507702553912-a15641e827c8.jpeg">
+                        </div>
+                        <div class="item-content">
+                            <h5 class="item-title mbr-fonts-style display-5">
+                                <strong>Trendy Tote Bag</strong>
+                            </h5>
+                            <h6 class="item-subtitle mbr-fonts-style display-7">$29.99</h6>
+                            <p class="mbr-text mbr-fonts-style display-7">Carry your essentials in style with this chic tote!</p>
+                            <div class="mbr-section-btn item-footer">
+                                <a href="" class="btn item-btn btn-primary display-7">Buy Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Comments -->
-    <section>
-	
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="card col-12 col-md-12 col-lg-10">
-				<div class="card-wrapper">
-					<div class="card-box align-center">
-						<h1 class="card-title mbr-fonts-style mb-4 display-1"><strong>Encontre O Estilo Que Destaca A Sua Essência</strong></h1>
-						<p class="mbr-text mbr-fonts-style mb-4 display-7">Explore nosso catálogo:</p>
-						<div class="mbr-section-btn mt-4"><a class="btn btn-primary display-7" href="https://mobiri.se">Ir Para Catálogo</a></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-<section class="display-7" style="padding: 0;align-items: center;justify-content: center;flex-wrap: wrap;    align-content: center;display: flex;position: relative;height: 4rem;"><a href="https://mobiri.se/3387809" style="flex: 1 1;height: 4rem;position: absolute;width: 100%;z-index: 1;"><img alt="" style="height: 4rem;" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="></a><p style="margin: 0;text-align: center;" class="display-7">&#8204;</p><a style="z-index:1" href="https://mobirise.com/builder/ai-website-creator.html">Free AI Website Creator</a></section><script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>  <script src="assets/parallax/jarallax.js"></script>  <script src="assets/smoothscroll/smooth-scroll.js"></script>  <script src="assets/ytplayer/index.js"></script>  <script src="assets/theme/js/script.js"></script>  
-  
-  
-</body>
+    
+    <section data-bs-version="5.1" class="features03 cid-umeacIw8pL" id="events-1-umeacIw8pL">
+      
+      
+      <div class="container-fluid">
+        <div class="row justify-content-center mb-5">
+          <div class="col-12 content-head">
+            <div class="mbr-section-head">
+              <h4 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
+                <strong>Upcoming Events</strong>
+              </h4>
+              
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="item features-image col-12 col-md-6 col-lg-3 active">
+            <div class="item-wrapper">
+              <div class="item-img mb-3">
+                <img src="{% static 'assets/img/inverno04.png' %}" alt="Mobirise Website Builder" title="">
+              </div>
+              <div class="item-content align-left">
+                <h5 class="item-title mbr-fonts-style mt-0 mb-2 display-5">
+                  <strong>Fashion Show Extravaganza</strong>
+                </h5>
+                <p class="mbr-text mbr-fonts-style mb-3 display-7">2024-09-15</p>
+                <p class="mbr-text mbr-fonts-style mb-3 display-7">Join us for a dazzling fashion show featuring our latest collection! Don't miss out!</p>
+                <div class="mbr-section-btn item-footer">
+                  <a href="" class="btn item-btn btn-primary display-7">Join</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item features-image col-12 col-md-6 col-lg-3">
+            <div class="item-wrapper">
+              <div class="item-img mb-3">
+                <img src="{% static 'assets/img/inverno04.png' %}" alt="Mobirise Website Builder" title="" data-slide-to="1" data-bs-slide-to="1">
+              </div>
+              <div class="item-content align-left">
+                <h5 class="item-title mbr-fonts-style mb-2 mt-0 display-5">
+                  <strong>Style Workshop</strong>
+                </h5>
+                <p class="mbr-text mbr-fonts-style mb-3 display-7">2024-10-05</p>
+                <p class="mbr-text mbr-fonts-style mb-3 display-7">Learn styling tips from industry experts and elevate your fashion game!</p>
+                <div class="mbr-section-btn item-footer">
+                  <a href="" class="btn item-btn btn-primary display-7">Join</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item features-image col-12 col-md-6 col-lg-3">
+            <div class="item-wrapper">
+              <div class="item-img mb-3">
+                <img src="{% static 'assets/img/inverno04.png' %}" alt="Mobirise Website Builder" title="" data-slide-to="2" data-bs-slide-to="2">
+              </div>
+              <div class="item-content align-left">
+                <h5 class="item-title mbr-fonts-style mb-2 mt-0 display-5">
+                  <strong>Pop-Up Shop</strong>
+                </h5>
+                <p class="mbr-text mbr-fonts-style mb-3 display-7">2024-11-20</p>
+                <p class="mbr-text mbr-fonts-style mb-3 display-7">Shop exclusive pieces at our pop-up event! Limited stock available, so hurry!</p>
+                <div class="mbr-section-btn item-footer">
+                  <a href="" class="btn item-btn btn-primary display-7">Join</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item features-image col-12 col-md-6 col-lg-3">
+            <div class="item-wrapper">
+              <div class="item-img mb-3">
+                <img src="{% static 'assets/img/inverno04.png' %}" alt="Mobirise Website Builder" title="" data-slide-to="2" data-bs-slide-to="2">
+              </div>
+              <div class="item-content align-left">
+                <h5 class="item-title mbr-fonts-style mb-2 mt-0 display-5">
+                  <strong>Holiday Fashion Gala</strong>
+                </h5>
+                <p class="mbr-text mbr-fonts-style mb-3 display-7">2024-12-15</p>
+                <p class="mbr-text mbr-fonts-style mb-3 display-7">Celebrate the season in style at our glamorous holiday gala! Dress to impress!</p>
+                <div class="mbr-section-btn item-footer">
+                  <a href="" class="btn item-btn btn-primary display-7">Join</a>
+
+                </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section data-bs-version="5.1" class="people04 cid-umeacIwUSn" id="testimonials-4-umeacIwUSn">
+        
+   
+        <div class="container">
+            <div class="row mb-5 justify-content-center">
+                <div class="col-12 mb-0 content-head">
+                    <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
+                        <strong>Buzz</strong>
+                    </h3>
+                    
+                </div>
+            </div>
+            <div class="row mbr-masonry" data-masonry="{&quot;percentPosition&quot;: true }">
+                <div class="item features-without-image col-12 col-md-6 col-lg-4 active">
+                    <div class="item-wrapper">
+                        <div class="card-box align-left">
+                            <p class="card-text mbr-fonts-style display-7">This site transformed my wardrobe! I feel like a fashion icon!</p>
+                            <h5 class="card-title mbr-fonts-style display-7">
+                                <strong>Sophia Turner</strong>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="item features-without-image col-12 col-md-6 col-lg-4">
+                    <div class="item-wrapper">
+                        <div class="card-box align-left">
+                            <p class="card-text mbr-fonts-style display-7">The styles are fresh and unique! I can't get enough!</p>
+                            <h5 class="card-title mbr-fonts-style display-7">
+                                <strong>Liam Johnson</strong>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="item features-without-image col-12 col-md-6 col-lg-4">
+                    <div class="item-wrapper">
+                        <div class="card-box align-left">
+                            <p class="card-text mbr-fonts-style display-7">Shopping here is a dream! My closet has never looked better!</p>
+                            <h5 class="card-title mbr-fonts-style display-7">
+                                <strong>Emma Watson</strong>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+    </section>
+
+    
+        
+    
+       
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/parallax/jarallax.js' %}"></script>
+    <script src="{% static 'assets/smoothscroll/smooth-scroll.js' %}"></script> 
+    <script src="{% static 'assets/ytplayer/index.js' %}"></script> 
+    <script src="{% static 'assets/masonry/masonry.pkgd.min.js' %}"></script>  
+    <script src="{% static 'assets/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>  
+    <script src="{% static 'assets/theme/js/script.js' %}"></script>  
+      
 
 {% endblock %}

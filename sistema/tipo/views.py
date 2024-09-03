@@ -16,7 +16,7 @@ class TypeListView(View):
         per_page = self.paginate_by
         form = TypeForm()
         types = TypeService.list_all_types(page=page, per_page=per_page)
-        return render(request, self.template_name, {'form': form, 'types':types})
+        return render(request, self.template_name, {'form_type': form, 'types':types})
 
 class TypeCreateView(View):
     def post(self, request, *args, **kwargs):
