@@ -9,7 +9,7 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
-
+from notifications.service import EmailService
 
 # Create your views here.
 
@@ -69,6 +69,13 @@ class CreateProduct(View):
                 collection=form.cleaned_data['collection_name']
             )
             messages.success(request, "Produto criado com sucesso!")
+            produto = ProductService.get_last_product()
+            EmailService.send_email_with_attachment(
+                subject="Novo produto adicionado",
+                message=f"Confira as Novidades do nosso site como o novo lançamento da/o {produto.name}",
+                recipient_list=EmailService.list_all_email_users,
+                attachment_path=produto.path,
+            )
             return redirect('all_products')
         else:
             messages.error(request, "Erro ao criar produto.")
