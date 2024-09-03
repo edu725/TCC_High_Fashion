@@ -32,7 +32,7 @@ class ProductRepository:
     @staticmethod
     def update_product(id_product, name, description, type, collection, path):
         """Atualizar um produto"""
-        product = ProductRepository.get_product_by_id(id=id_product)
+        product = ProductRepository.get_product_by_id(id_product)
         if product:
             product.name = name
             product.description = description
