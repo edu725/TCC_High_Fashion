@@ -73,8 +73,8 @@ class CreateProduct(View):
             ProductService.create_product(
                 name=form.cleaned_data['name'],
                 description=form.cleaned_data['description'],
-                path=form.cleaned_data['path'],
                 type=form.cleaned_data['type_name'],
+                path=form.cleaned_data['path'],
                 collection=form.cleaned_data['collection_name']
             )
             messages.success(request, "Produto criado com sucesso!")
@@ -92,27 +92,28 @@ class CreateProduct(View):
     
 class UpdateProduct(View):
     template_name = 'produto/edit_product.html'
+    
     def get(self, request, product_id, *args, **kwargs):
         product = ProductService.get_product_by_id(product_id)
-        form = ProductForm()
-        return render(request, self.template_name, {'product':product,'form':form})
+        form = ProductForm(instance=product)
+        return render(request, self.template_name, {'forms':form})
 
-    def post(self, request, product_id, *args, **kwargs):
-        form = ProductForm(request.POST)
+    def post(self, request, product_id,  *args, **kwargs):
+        form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
             ProductService.update_product(
-                product_id,
-                name=form.cleaned_data['name'],
-                description=form.cleaned_data['description'],
-                type=form.cleaned_data['type_name'],
-                collection=form.cleaned_data['collection_name'],
-                path=form.cleaned_data['path']
-            )
+                 product_id,
+                 name=form.cleaned_data['name'],
+                 description=form.cleaned_data['description'],
+                 type=form.cleaned_data['type_name'],
+                 collection=form.cleaned_data['collection_name'],
+                 path=form.cleaned_data['path']
+             )
             messages.success(request, 'Produto atualizado com sucesso!')
             return redirect('all_products')
         else:
             messages.error(request,'Erro ao atualizar produto.')
-        return render(request, self.template_name, {'form':form})
+            return render(request, self.template_name, {'form':form})
 
 class DeleteProduct(View):
     def post(self, request):
