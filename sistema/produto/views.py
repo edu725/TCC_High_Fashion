@@ -94,11 +94,12 @@ class UpdateProduct(View):
 
 
 class DeleteProduct(View):
-    def get(self, product_id, request, *args, **kwargs):
-        product = get_object_or_404(Product, id=product_id)
-        ProductService.delete_product(product)
+    def post(self, request):
+        id = request.POST['product_id']
+        ProductService.delete_product(id)
         messages.success(request, "Produto deletado com sucesso!")
         return redirect('all_products')
+
     
 class CreateCommentProduct(View):
     def post(self, request, product_id, user_id ,*args, **kwargs):

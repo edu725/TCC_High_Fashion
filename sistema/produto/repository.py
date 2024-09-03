@@ -45,10 +45,10 @@ class ProductRepository:
             return False
 
     @staticmethod
-    def delete_product(id_product):
+    def delete_product(product_id):
         """Deletar um produto"""
         try:
-            product = Product.objects.get(id=id_product)
+            product = ProductRepository.get_product_by_id(product_id)
             product.delete()
             return True
         except Product.DoesNotExist:
