@@ -82,16 +82,28 @@ class CreateProduct(View):
         return render(request, self.template_name, {'form':form})
     
 class UpdateProduct(View):
-    def post(self, request, *args, **kwargs):
-        id = request.POST['product_id']
+    template_name = 'produto/edit_product.html'
+    def get(self, request, product_id, *args, **kwargs):
+        product = ProductService.get_product_by_id(product_id)
+        form = ProductForm()
+        return render(request, self.template_name, {'product':product,'form':form})
+
+    def post(self, request, product_id, *args, **kwargs):
         form = ProductForm(request.POST)
         if form.is_valid():
-            ProductService.update_product(id, form.cleaned_data['name', 'description', 'type', 'path'])
+            ProductService.update_product(
+                product_id,
+                name=form.cleaned_data['name'],
+                description=form.cleaned_data['description'],
+                type=form.cleaned_data['type_name'],
+                collection=form.cleaned_data['collection_name'],
+                path=form.cleaned_data['path']
+            )
             messages.success(request, 'Produto atualizado com sucesso!')
+            return redirect('all_products')
         else:
             messages.error(request,'Erro ao atualizar produto.')
-        return redirect('all_products')
-
+        return render(request, self.template_name, {'form':form})
 
 class DeleteProduct(View):
     def post(self, request):
