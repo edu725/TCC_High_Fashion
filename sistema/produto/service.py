@@ -17,9 +17,15 @@ class ProductService():
 
         return products
     
+    
+    @staticmethod
+    def get_products_by_collection(id_collection):
+        return ProductRepository.get_product_by_collection(id_collection)
+    
     @staticmethod
     def get_all_products():
         return ProductRepository.get_all_products()
+    
     @staticmethod
     def get_last_product():
         return ProductRepository.get_last_product()
@@ -29,8 +35,8 @@ class ProductService():
         return ProductRepository.get_product_by_id(id)
     
     @staticmethod
-    def create_product(name, description, type, path):
-        return ProductRepository.create_product(name, description, type, path)
+    def create_product(name, description, type, path, collection):
+        return ProductRepository.create_product(name, description, type, collection, path)
 
     @staticmethod
     def update_product(id_product, name, description, type, path):
@@ -39,10 +45,6 @@ class ProductService():
     @staticmethod
     def delete_product(id_product):
         return ProductRepository.delete_product(id_product)
-
-    # @staticmethod
-    # def search_product(query):
-    #     return ProductRepository.search_product(query)
     
 
 class CommentProductService():
@@ -68,7 +70,7 @@ class CommentPageService():
         return CommentPageRepository.delete_comment_page(id_comment)
     
     @staticmethod
-    def list_all_comments_page(page=1, per_page=5):
+    def list_all_comments_page(page, per_page=10):
         all_comments = CommentPageRepository.get_all_comments_page()
         paginator = Paginator(all_comments, per_page)
 

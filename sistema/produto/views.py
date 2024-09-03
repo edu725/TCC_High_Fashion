@@ -9,7 +9,7 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
-
+from notifications.service import EmailService
 
 # Create your views here.
 
@@ -43,7 +43,7 @@ class Product_Single(View):
 
     def get(self, request, product_id, *args, **kwargs):
         if not request.user.is_authenticated:
-            messages.error(request, "Erro: Usuario não estar logado.")
+            messages.error(request, "Usuario precisa estar logado.")
             return redirect('index')
         product = ProductService.get_product_by_id(product_id)
         comment = CommentProductService.list_all_comments(product_id)
@@ -54,32 +54,52 @@ class Product_Single(View):
     
 class CreateProduct(View):
     template_name = 'produto/create.html'
+    def get(self, request):
+        form = ProductForm()
+        return render(request, self.template_name, {'form':form})
+
     def post(self, request, *args, **kwargs):
-        form = ProductForm(request.POST)
+        form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
-                ProductService.create_product(form.cleaned_data['name', 'description', 'type', 'path'])
-                messages.success(request, "Produto criado com sucesso!")
-                return redirect('all_products')
+            ProductService.create_product(
+                name=form.cleaned_data['name'],
+                description=form.cleaned_data['description'],
+                path=form.cleaned_data['path'],
+                type=form.cleaned_data['type_name'],
+                collection=form.cleaned_data['collection_name']
+            )
+            messages.success(request, "Produto criado com sucesso!")
+            # produto = ProductService.get_last_product()
+            # EmailService.send_email_with_attachment(
+            #     subject="Novo produto adicionado",
+            #     message=f"Confira as Novidades do nosso site como o novo lançamento da/o {produto.name}",
+            #     recipient_list=EmailService.list_all_email_users,
+            #     attachment_path=produto.path,
+            # )
+            return redirect('all_products')
         else:
             messages.error(request, "Erro ao criar produto.")
         return render(request, self.template_name, {'form':form})
     
 class UpdateProduct(View):
-    def post(self, request, product_id, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
+        id = request.POST['product_id']
         form = ProductForm(request.POST)
         if form.is_valid():
-            ProductService.update_product(product_id, form.cleaned_data['name', 'description', 'type', 'path'])
-            messages.success(request, 'Produto editado com sucesso!')
+            ProductService.update_product(id, form.cleaned_data['name', 'description', 'type', 'path'])
+            messages.success(request, 'Produto atualizado com sucesso!')
         else:
-            messages.error(request,'Erro ao editar produto.')
+            messages.error(request,'Erro ao atualizar produto.')
         return redirect('all_products')
 
+
 class DeleteProduct(View):
-    def get(self, product_id, request, *args, **kwargs):
-        product = get_object_or_404(Product, id=product_id)
-        ProductService.delete_product(product)
+    def post(self, request):
+        id = request.POST['product_id']
+        ProductService.delete_product(id)
         messages.success(request, "Produto deletado com sucesso!")
         return redirect('all_products')
+
     
 class CreateCommentProduct(View):
     def post(self, request, product_id, user_id ,*args, **kwargs):
@@ -107,21 +127,17 @@ class CreateCommentPage(View):
         else:
             messages.error(request, "Erro ao criar comentário.")
             return redirect('mural_comment')
-    
-
 
 class CommentPageList(View):
     template_name = 'produto/mural_comments.html'
-    paginate_by = 5
+    paginate_by = 10
+
     def get(self, request, *args, **kwargs):
-        form = CommentPageForm()
         page = request.GET.get('page', 1)
         user = request.user
-        per_page = self.paginate_by
-        comment = CommentPageService.list_all_comments_page(page=page, per_page=per_page)
+        comment = CommentPageService.list_all_comments_page(page=page, per_page=self.paginate_by)
         form = CommentPageForm()
-        x = CommentPage.objects.all()
-        return render(request, self.template_name, {'form':form,'comments':comment, 'user':user})
+        return render(request, self.template_name, {'comments':comment,'form':form, 'user':user})
     
     
 class HomeView(View):

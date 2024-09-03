@@ -31,16 +31,3 @@ class TypeRepository:
             return True
         except Type.DoesNotExist:
             return False
-        
-    # @staticmethod
-    # def search_type(query):
-    #     try:
-    #         # Primeiro tenta buscar por ID
-    #         if query.isdigit():
-    #             return Type.objects.filter(id=query)
-    #     except ValueError:
-    #         pass
-        
-    #     # Se não for um ID válido, busca por nome (convertendo para maiúsculas)
-    #     query_upper = query.upper()
-    #     return Type.objects.filter(name__icontains=query_upper)

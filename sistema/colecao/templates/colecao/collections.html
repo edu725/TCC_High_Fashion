@@ -33,6 +33,7 @@
     <div >
       <h1 class="title">Coleção</h1>
     </div>
+    {% if request.user.is_authenticated %}
     <div class="position-absolute end-0">
       <button type="button"  class="btn" >
         <a href="{% url 'collection_create' %}">
@@ -42,6 +43,7 @@
         </a>
       </button>
     </div>
+    {% endif %}
   </div>
 
   <div class="container">
