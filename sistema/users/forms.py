@@ -21,10 +21,35 @@ class EmailLoginForm(forms.Form):
         label='Password'
     )
 
-class UserForm(forms.ModelForm):
+class UserDashForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['first_name', 'email', 'user_type', 'password']
+        labels = {
+            'first_name': 'Nome de Usuário',
+            'email': 'Email',
+            'password': 'Senha',
+        }
+        widgets = {
+            'first_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome de Usuário', }),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email', }),
+            'user_type': forms.Select(attrs={'class': 'form-control', 'placeholder': 'Tipo', }),
+            'password': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Senha', }),
+        }
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.username = self.cleaned_data['first_name'].replace(' ', '_').lower()
+        user.set_password(self.cleaned_data['password'])
+        if commit:
+            user.save()
+        return user
+    
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'email', 'password']
         labels = {
             'first_name': 'Nome de Usuário',
             'email': 'Email',
@@ -39,10 +64,12 @@ class UserForm(forms.ModelForm):
     def save(self, commit=True):
         user = super().save(commit=False)
         user.username = self.cleaned_data['first_name'].replace(' ', '_').lower()
+        user.user_type ='common'
         user.set_password(self.cleaned_data['password'])
         if commit:
             user.save()
         return user
+
 
 
 class ProfileForm(forms.ModelForm):
