@@ -7,13 +7,26 @@
           </div>
           <form method="post" action="{% url 'update_parameters'  %}">
               {% csrf_token %}
-              {{ form.as_p }}
+              <label for="name">Impostos:</label>
+              <input type="text" name="impostos" value="{{parameter.impostos}}" class="form-control my-2">
+              <label for="name">Retirada:</label>
+              <input type="text" name="retirada" value="{{parameter.retirada}}" class="form-control my-2">
+              <label for="name">Frete:</label>
+              <input type="text" name="frete" value="{{parameter.frete}}" class="form-control my-2">
+              <label for="name">Comissao:</label>
+              <input type="text" name="comissao" value="{{parameter.comissao}}" class="form-control my-2">
+              <label for="name">Despesas Financeiras</label>
+              <input type="text" name="despesas_financeiras" value="{{parameter.despesas_financeiras}}" class="form-control my-2">
+              <label for="name">Despesas Comerciais:</label>
+              <input type="text" name="despesas_comerciais" value="{{parameter.despesas_comerciais}}" class="form-control my-2">
+              <label for="name">Lucro:</label>
+              <input type="text" name="lucro" value="{{parameter.lucro}}" class="form-control my-2">
               <div class="modal-footer d-flex justify-content-center">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                   
                   <button type="submit" class="btn btn-primary">Salvar</button>
               </div>
-          </form>
+          </form>   
       </div>
   </div>
 </div>

@@ -14,7 +14,6 @@
               <div class="card-body text-end">
                 <span class="badge text-bg-secondary"># 1</span>
                 <p class="f text-start mb-1" style="font-size: 12px; color: dimgray;">Parâmetros:</p>
-                {% for parameter in parameters %}
                 <div class="card-title text-start">
                     <p>Impostos: {{parameter.impostos}}%</p>
                     <p>Retirada: {{parameter.retirada}}%</p>
@@ -24,7 +23,6 @@
                     <p>Despesas Comerciais: {{parameter.despesas_comerciais}}%</p>
                     <p>Lucro: {{parameter.lucro}}%</p>
                 </div>
-                {% endfor %}
                 <hr>
                 <p class="f text-start mb-1" style="font-size: 12px; color: dimgray;">Ações:</p>
                 <div class="d-flex justify-content-end">
