@@ -1,4 +1,6 @@
 from .models import *
+from parametros.models import *
+
 
 class ProductRepository:
 
@@ -11,6 +13,11 @@ class ProductRepository:
     def get_last_product():
         """Retorna o ultimo produto"""
         return Product.objects.order_by('id').last
+    
+    @staticmethod
+    def get_product_by_collection(id_collection):
+        """Retorna o ultimo produto"""
+        return Product.objects.filter(collection=id_collection)
         
     @staticmethod
     def get_all_products():
@@ -46,20 +53,6 @@ class ProductRepository:
             return True
         except Product.DoesNotExist:
             return False
-        
-        
-    # @staticmethod
-    # def search_product(query):
-    #     try:
-    #         # Primeiro tenta buscar por ID
-    #         if query.isdigit():
-    #             return Product.objects.filter(id=query)
-    #     except ValueError:
-    #         pass
-        
-    #     # Se não for um ID válido, busca por nome (convertendo para maiúsculas)
-    #     query_upper = query.upper()
-    #     return Product.objects.filter(name__icontains=query_upper)
     
 
 class CommentProductRepository:
@@ -101,4 +94,8 @@ class CommentPageRepository:
         except CommentPage.DoesNotExist:
             return False
         
+class ProductCostRepository:
     
+    @staticmethod
+    def get_price_sell():
+        return ProductCost.get_price_cost() / Parameters.get_divisor()

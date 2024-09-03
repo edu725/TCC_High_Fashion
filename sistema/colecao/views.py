@@ -5,7 +5,7 @@ from .repository import CollectionRepository
 from .forms import CollectionForm
 from django.contrib.auth.decorators import login_required
 from .service import CollectionService
-from .models import Collection
+from produto.service import ProductService
 
 
 class CollectionListView(View):
@@ -28,10 +28,18 @@ class CollectionListView(View):
        
     
 class CollectionDetailView(View):
-    @login_required
-    def get(self, request, id):
-        collection = CollectionRepository.get_collection_by_id(id)
-        return render(request, 'colecao/collections.html', {'collection': collection})
+    template_name = 'colecao/collection_single.html'
+
+    def get(self, request, collection_id, *args, **kwargs):
+        if not request.user.is_authenticated:
+            messages.error(request, "Usuario precisa estar logado.")
+            return redirect('index')
+        collection = CollectionService.get_collection_by_id(collection_id)
+        products = ProductService.get_products_by_collection(id_collection=collection_id)
+
+ 
+        return render(request, self.template_name, {'collection':collection, 'products':products})
+
 
 class CollectionCreateView(View):
 
