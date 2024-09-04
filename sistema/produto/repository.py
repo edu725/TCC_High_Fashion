@@ -107,6 +107,10 @@ class CommentPageRepository:
             return False
         
 class ProductCostRepository:
+
+    @staticmethod
+    def create_product_cost(product, parameters, raw_materials, labor, indirect):
+        return ProductCost.objects.create(product=product, parameters=parameters, raw_materials=raw_materials, labor=labor, indirect=indirect)
     
     @staticmethod
     def get_price_sell():
