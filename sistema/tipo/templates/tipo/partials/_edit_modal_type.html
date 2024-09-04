@@ -1,6 +1,6 @@
 <div class="modal fade" id="type-{{ type.id }}" tabindex="-1" aria-labelledby="editTypeLabel{{ type.id }}" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content px-4">
             <div class="modal-header">
                 <h5 class="modal-title" id="editTypeLabel{{ type.id }}">Editar Tipo: {{ type.name }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -8,6 +8,7 @@
             <form method="post" action="{% url 'type_update' %}">
                 {% csrf_token %}
                 <input type="hidden" name="type_id" value="{{ type.id }}">
+                <label for="type" class="py-2">Nome:</label>
                 <input type="text" name="name" value="{{type.name}}" class="form-control">
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>

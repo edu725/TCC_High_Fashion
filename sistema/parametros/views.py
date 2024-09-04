@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.shortcuts import render,redirect
 from parametros.service import *
+from django.utils.decorators import method_decorator
+from users.decorators import *
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.views import View
 from parametros.forms import *
@@ -9,7 +11,7 @@ from django.contrib import messages
 
 
 # Create your views here.
-
+@method_decorator(user_is_manager, name='dispatch')
 class ParameterView(View):
     template_name = 'parametros/parametros.html'
     def get(self, request, *args, **kwargs):

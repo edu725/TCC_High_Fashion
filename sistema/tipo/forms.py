@@ -13,7 +13,7 @@ class TypeForm(forms.ModelForm):
         widgets = {
             'name': forms.TextInput(
                 attrs={
-                    'class': 'form-control',
+                    'class': 'form-control py-1',
                     'placeholder': "Nome do Tipo de Roupa"
                 }
             )
