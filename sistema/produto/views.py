@@ -4,6 +4,7 @@ from django.views import View
 from produto.forms import *
 from colecao.service import CollectionService
 from users.forms import *
+from users.service import *
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.utils.decorators import method_decorator
@@ -175,5 +176,8 @@ class HomeView(View):
 
     def get(self, request):
         products = ProductService.list_all_products()
+        user = UserService.get_all_users()
+        comment = CommentPageService.get_all_comments()
+        collections = CollectionService.get_all_collections()
         # price = ProductCostService.get_price_sell()
-        return render(request, self.template_name, {'products':products})
+        return render(request, self.template_name, {'products':products, 'collections':collections, 'comments':comment, 'user':user})
