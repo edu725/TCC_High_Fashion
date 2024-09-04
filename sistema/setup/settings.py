@@ -131,6 +131,7 @@ DATE_INPUT_FORMATS = ['%d/%m/%Y']
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = '/static/'
 
 # Media files
 MEDIA_URL = '/media/'
