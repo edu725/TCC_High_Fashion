@@ -27,6 +27,22 @@
             font-family: LTSuperior;
             src: url("{% static 'assets/fonts/lt_superior/LTSuperior-Medium.otf' %}") format(opentype);
         }
+        @media screen and (min-width: 600px) {
+            #id1nav{
+                display: block;
+            }
+            #id2nav{
+                display: none;
+            }
+        }
+        @media screen and (max-width: 600px) {
+            #id1nav{
+                display: none;
+            }
+            #id2nav{
+                display: flex;
+            }
+        }
         h1{
             font-family: Monda;
             font-size: 60px !important;
@@ -40,6 +56,7 @@
         h5{
             font-size: 25px;
         }
+
     </style>
     {% block style %}
     {% endblock %}
@@ -51,7 +68,7 @@
     
     {% block content %}
     {% endblock %}
-    {% include 'users/partials/_footer.html' %}
+    <!-- {% include 'users/partials/_footer.html' %} -->
 
     {% block scripts %}
     {% endblock %}
