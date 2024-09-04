@@ -56,8 +56,11 @@ class CommentProductService():
     def create_comment_product(id_product, id_user, comment):
         return CommentProductRepository.create_comment_product(id_product, id_user, comment)
 
-    def delete_comment_product(id_comment):
-        return CommentProductRepository.delete_comment_product(id_comment)  
+    def delete_comment_product( id_comment):
+        return CommentProductRepository.delete_comment_product( id_comment)  
+
+    def update_comment_product(id_comment, id_product, id_user,comment):
+        return CommentProductRepository.update_comment_product(id_comment, id_product, id_user, comment)
     
 class CommentPageService():
 

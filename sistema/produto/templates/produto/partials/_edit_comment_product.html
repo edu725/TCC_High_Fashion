@@ -1,0 +1,27 @@
+<div class="modal fade" id="comment-product-{{ comment.id }}" tabindex="-1" aria-labelledby="editcommentproduct{{comment.id}}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content px-4">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editcommentproduct{{comment.id}}">Editar Comentario do Produto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="post" action="{% url 'update_comment_product'  %}">
+                {% csrf_token %}
+                <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                <input type="hidden" name="product_id" value="{{ product.id }}">
+                <input type="hidden" name="user_id" value="{{ request.user.id }}">
+                
+                <div class="mb-3">
+                    <label for="id_comment" class="form-label">Comentário</label>
+                    <textarea name="comment" class="form-control" id="id_comment" required>{{ comment.comment }}</textarea>
+                </div>
+                
+                <div class="modal-footer d-flex justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
