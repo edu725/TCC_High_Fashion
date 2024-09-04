@@ -5,7 +5,7 @@
             <a class="navbar-brand" href="{% url 'index' %}">
                 <img src="{% static 'assets/img/Logo.png' %}" alt=".." width="110px" height="110px">
             </a>
-            <div class="text-center" style="background-color: #EEF7FF;">
+            <div id="id1nav" class="justify-content-center" style="background-color: #EEF7FF;">
                 <ul style="padding: 0%; font-size: large;">
                     <a style="text-decoration: none; color: black;" href="{% url 'all_products' %}">| Produtos |</a>
                     <a style="text-decoration: none; color: black;" href="{% url 'collection_list' %}">| Coleções |</a>
@@ -50,3 +50,12 @@
             </div>
         </div>
     </nav>
+    <div id="id2nav" class="justify-content-center" style="background-color: #EEF7FF;">
+        <ul style="padding: 0%; font-size: large;">
+            <a style="text-decoration: none; color: black;" href="{% url 'all_products' %}">| Produtos |</a>
+            <a style="text-decoration: none; color: black;" href="{% url 'collection_list' %}">| Coleções |</a>
+            {% if request.user.is_authenticated %}
+            <a style="text-decoration: none; color: black;" href="{% url 'mural_comment' %}">| Comentarios |</a>
+            {% endif %}
+        </ul>
+    </div>
