@@ -64,7 +64,7 @@ class CommentProductRepository:
     @staticmethod
     def delete_comment_product(id_comment):
         try:
-            comment = CommentProduct.objects.get(id=id_comment)
+            comment = CommentProduct.objects.get( id=id_comment )
             comment.delete()
             return True
         except CommentProduct.DoesNotExist:
@@ -73,6 +73,18 @@ class CommentProductRepository:
     @staticmethod
     def get_all_comments_product(id_product):
         return CommentProduct.objects.filter(id_product=id_product)
+    
+    @staticmethod
+    def update_comment_product(id_comment, id_product, id_user, comment):
+        try:
+            comment = CommentProduct.objects.get( id=id_comment )   
+            comment.comment = comment
+            comment.id_user = id_user
+            comment.id_product = id_product
+            comment.save()
+            return True
+        except CommentProduct.DoesNotExist:
+            return False
     
     
 class CommentPageRepository:
@@ -95,6 +107,10 @@ class CommentPageRepository:
             return False
         
 class ProductCostRepository:
+
+    @staticmethod
+    def create_product_cost(product, parameters, raw_materials, labor, indirect):
+        return ProductCost.objects.create(product=product, parameters=parameters, raw_materials=raw_materials, labor=labor, indirect=indirect)
     
     @staticmethod
     def get_price_sell():

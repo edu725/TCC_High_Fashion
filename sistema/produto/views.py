@@ -72,7 +72,7 @@ class CreateProduct(View):
         return render(request, self.template_name, {'form_product':form_product})
 
     def post(self, request, *args, **kwargs):
-        form = ProductForm(request.POST, request.FILES)
+        form = ProductAndCostForm(request.POST, request.FILES)
         if form.is_valid():
             ProductService.create_product(
                 name=form.cleaned_data['name'],
@@ -80,6 +80,13 @@ class CreateProduct(View):
                 type=form.cleaned_data['type_name'],
                 path=form.cleaned_data['path'],
                 collection=form.cleaned_data['collection_name']
+            )
+            ProductCostService.create_product_cost(
+                product=form.cleaned_data['product'],
+                parameters=form.cleaned_data['description'],
+                raw_materials=form.cleaned_data['raw_materials'],
+                labor=form.cleaned_data['labor'],
+                indirect=form.cleaned_data['indirect']
             )
             messages.success(request, "Produto criado com sucesso!")
             # produto = ProductService.get_last_product()
@@ -138,12 +145,39 @@ class CreateCommentProduct(View):
             CommentProductService.create_comment_product(product,user, form.cleaned_data['comment'])
         return redirect('all_products')
 
-@method_decorator(user_is_manager, name='dispatch')
+@method_decorator(user_is_manager_or_common, name='dispatch')
 class DeleteCommentProduct(View):
-    def get(self, comment_id, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
+        comment_id = request.POST.get('comment_id')
         CommentProductService.delete_comment_product(comment_id)
         messages.success(request, "Comentário deletado com sucesso!")
         return redirect('index')
+    
+@method_decorator(user_is_manager_or_common, name='dispatch')
+class UpdateCommentProduct(View):
+    def post(self, request, *args, **kwargs):
+        comment_id = request.POST.get('comment_id')
+        content = request.POST.get('comment')
+        user_id = request.user.id
+        product_id = request.POST.get('product_id')
+
+        # Busca as instâncias necessárias
+        user = get_object_or_404(User, id=user_id)
+        product = get_object_or_404(Product, id=product_id)
+
+        # Se o comentário já existir, atualize; caso contrário, crie um novo
+        if comment_id:
+            comment_product = get_object_or_404(CommentProduct, id=comment_id)
+        else:
+            comment_product = CommentProduct(id_user=user, id_product=product)
+
+        comment_product.comment = content  # Define o conteúdo do comentário
+        comment_product.save()  # Salva ou atualiza o comentário
+
+        messages.success(request, "Comentário salvo com sucesso!")
+        return redirect('index')
+    
+       
     
 @method_decorator(user_is_manager_or_common, name='dispatch')
 class CreateCommentPage(View):
@@ -169,6 +203,35 @@ class CommentPageList(View):
         comment = CommentPageService.list_all_comments_page(page=page, per_page=self.paginate_by)
         form_comment_page = CommentPageForm()
         return render(request, self.template_name, {'comments':comment,'form_comment_page':form_comment_page, 'user':user})
+
+
+class DeleteCommentPage(View):
+    def post(self, request, *args, **kwargs):
+        comment_id = request.POST.get('comment_id')
+        CommentPageService.delete_comment_page(comment_id)
+        messages.success(request, "Comentário deletado com sucesso!")
+        return redirect('mural_comment')
+    
+class UpdateCommentPage(View):
+    def post(self, request, *args, **kwargs):
+        comment_id = request.POST.get('comment_id')
+        content = request.POST.get('comment')
+        user_id = request.user.id
+
+        # Busca as instâncias necessárias
+        user = get_object_or_404(User, id=user_id)
+
+        # Se o comentário já existir, atualize; caso contrário, crie um novo
+        if comment_id:
+            comment_page = get_object_or_404(CommentPage, id=comment_id)
+        else:
+            comment_page = CommentPage(id_user=user)
+
+        comment_page.comment = content  # Define o conteúdo do comentário
+        comment_page.save()  # Salva ou atualiza o comentário
+
+        messages.success(request, "Comentário salvo com sucesso!")
+        return redirect('mural_comment')
     
 
 class HomeView(View):
