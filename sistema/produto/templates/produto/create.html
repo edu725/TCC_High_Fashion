@@ -12,6 +12,7 @@
             <form method="post"  enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form_product.as_p }}
+                {{ form.product_cost_form.as_p }}
                 <button type="submit" class="btn btn-success">Criar</button>
             </form>
         </div>

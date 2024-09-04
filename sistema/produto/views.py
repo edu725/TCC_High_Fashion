@@ -72,7 +72,7 @@ class CreateProduct(View):
         return render(request, self.template_name, {'form_product':form_product})
 
     def post(self, request, *args, **kwargs):
-        form = ProductForm(request.POST, request.FILES)
+        form = ProductAndCostForm(request.POST, request.FILES)
         if form.is_valid():
             ProductService.create_product(
                 name=form.cleaned_data['name'],
@@ -80,6 +80,13 @@ class CreateProduct(View):
                 type=form.cleaned_data['type_name'],
                 path=form.cleaned_data['path'],
                 collection=form.cleaned_data['collection_name']
+            )
+            ProductCostService.create_product_cost(
+                product=form.cleaned_data['product'],
+                parameters=form.cleaned_data['description'],
+                raw_materials=form.cleaned_data['raw_materials'],
+                labor=form.cleaned_data['labor'],
+                indirect=form.cleaned_data['indirect']
             )
             messages.success(request, "Produto criado com sucesso!")
             # produto = ProductService.get_last_product()

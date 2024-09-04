@@ -86,3 +86,13 @@ class CommentPageService():
             comments = paginator.page(paginator.num_pages)
 
         return comments
+    
+class ProductCostService:
+
+    @staticmethod
+    def create_product_cost(product, parameters, raw_materials, labor, indirect):
+        return ProductCostRepository.create_product_cost(product, parameters, raw_materials, labor, indirect)
+    
+    @staticmethod
+    def get_price_sell():
+        return ProductCostRepository.get_price_sell()
