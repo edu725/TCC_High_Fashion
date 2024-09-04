@@ -20,32 +20,25 @@
             height: 100%;
         }
         @font-face {
-            font-family: Catchye;
-            src: url("{% static 'assets/fonts/catchye/Catchye.otf' %}") format(opentype);
-        }
-        @font-face {
-            font-family: Oswald;
-            src: url("{% static 'assets/fonts/Oswald/Oswald-Medium.ttf' %}") format(truetype);
-        }
-        @font-face {
-            font-family: Nerko;
-            src: url("{% static 'assets/fonts/Nerko_One/Nerko_One-Regular.ttf' %}") format(truetype);
-        }
-        @font-face {
-            font-family: Mukta;
-            src: url("{% static 'assets/fonts/Mukta/Mukta-Bold.ttf' %}") format(truetype);
-        }
-        @font-face {
             font-family: Monda;
             src: url("{% static 'assets/fonts/mondapick/Mondapick.ttf' %}") format(truetype);
         }
         @font-face {
-            font-family: Kanit;
-            src: url("{% static 'assets/fonts/Kanit/Kanit-Bold.ttf' %}") format(truetype);
+            font-family: LTSuperior;
+            src: url("{% static 'assets/fonts/lt_superior/LTSuperior-Medium.otf' %}") format(opentype);
         }
         h1{
             font-family: Monda;
             font-size: 60px !important;
+        }
+        p, h5, h4, h3, h2 {
+            font-family: LTSuperior;
+        }
+        p{
+            font-size: 20px;
+        }
+        h5{
+            font-size: 25px;
         }
     </style>
     {% block style %}
