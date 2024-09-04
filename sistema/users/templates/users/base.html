@@ -9,8 +9,6 @@
     {% block title %}
         <title>base</title>
     {% endblock %}
-
-    {% block style %}
     <style>
         .mapBox{
             width: 450px;
@@ -21,7 +19,29 @@
             width: 100%;
             height: 100%;
         }
+        @font-face {
+            font-family: Monda;
+            src: url("{% static 'assets/fonts/mondapick/Mondapick.ttf' %}") format(truetype);
+        }
+        @font-face {
+            font-family: LTSuperior;
+            src: url("{% static 'assets/fonts/lt_superior/LTSuperior-Medium.otf' %}") format(opentype);
+        }
+        h1{
+            font-family: Monda;
+            font-size: 60px !important;
+        }
+        p, h5, h4, h3, h2 {
+            font-family: LTSuperior;
+        }
+        p{
+            font-size: 20px;
+        }
+        h5{
+            font-size: 25px;
+        }
     </style>
+    {% block style %}
     {% endblock %}
 </head>
 <body class="d-flex flex-column min-vh-100">
