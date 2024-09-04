@@ -70,6 +70,10 @@ class CommentPageService():
         return CommentPageRepository.delete_comment_page(id_comment)
     
     @staticmethod
+    def get_all_comments():
+        return CommentPageRepository.get_all_comments_page()
+
+    @staticmethod
     def list_all_comments_page(page, per_page=10):
         all_comments = CommentPageRepository.get_all_comments_page()
         paginator = Paginator(all_comments, per_page)
