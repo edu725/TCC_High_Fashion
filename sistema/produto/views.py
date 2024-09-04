@@ -67,65 +67,74 @@ class Product_Single(View):
 @method_decorator(user_is_manager, name='dispatch')
 class CreateProduct(View):
     template_name = 'produto/create.html'
+
     def get(self, request):
-        form_product = ProductForm()
-        return render(request, self.template_name, {'form_product':form_product})
+        form = ProductAndCostForm()
+        return render(request, self.template_name, {'form': form})
 
     def post(self, request, *args, **kwargs):
-        form = ProductAndCostForm(request.POST, request.FILES)
+        # Passando dados e arquivos para ProductAndCostForm
+        form = ProductAndCostForm(
+            product_form_data=request.POST,
+            product_form_files=request.FILES,
+            product_cost_form_data=request.POST,
+            product_cost_form_files=request.FILES
+        )
+        
         if form.is_valid():
-            ProductService.create_product(
-                name=form.cleaned_data['name'],
-                description=form.cleaned_data['description'],
-                type=form.cleaned_data['type_name'],
-                path=form.cleaned_data['path'],
-                collection=form.cleaned_data['collection_name']
-            )
-            ProductCostService.create_product_cost(
-                product=form.cleaned_data['product'],
-                parameters=form.cleaned_data['description'],
-                raw_materials=form.cleaned_data['raw_materials'],
-                labor=form.cleaned_data['labor'],
-                indirect=form.cleaned_data['indirect']
-            )
-            messages.success(request, "Produto criado com sucesso!")
-            # produto = ProductService.get_last_product()
-            # EmailService.send_email_with_attachment(
-            #     subject="Novo produto adicionado",
-            #     message=f"Confira as Novidades do nosso site como o novo lançamento da/o {produto.name}",
-            #     recipient_list=EmailService.list_all_email_users,
-            #     attachment_path=produto.path,
-            # )
-            return redirect('all_products')
+            product = form.save()
+            if product:
+                messages.success(request, "Produto criado com sucesso!")
+                return redirect('all_products')
+            else:
+                messages.error(request, "Erro ao criar produto.")
         else:
             messages.error(request, "Erro ao criar produto.")
-        return render(request, self.template_name, {'form':form})
+        return render(request, self.template_name, {'form': form})
+    
+
 
 @method_decorator(user_is_manager, name='dispatch')
 class UpdateProduct(View):
     template_name = 'produto/edit_product.html'
-    
-    def get(self, request, product_id, *args, **kwargs):
-        product = ProductService.get_product_by_id(product_id)
-        form = ProductForm(instance=product)
-        return render(request, self.template_name, {'forms':form})
 
-    def post(self, request, product_id,  *args, **kwargs):
-        form = ProductForm(request.POST, request.FILES)
+    def get(self, request, pk):
+        product = ProductService.get_product_by_id(pk)
+        product_cost = ProductCostService.get_id_fk(product.id)
+        
+        # Inicializando o ProductAndCostForm com as instâncias existentes
+        form = ProductAndCostForm(
+            product_instance=product,
+            product_cost_instance=product_cost
+        )
+        
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request, pk):
+        product = get_object_or_404(Product, pk=pk)
+        product_cost = get_object_or_404(ProductCost, product=product)
+        
+        # Passando os dados e arquivos do formulário
+        form = ProductAndCostForm(
+            product_form_data=request.POST,
+            product_form_files=request.FILES,
+            product_cost_form_data=request.POST,
+            product_cost_form_files=request.FILES,
+            product_instance=product,
+            product_cost_instance=product_cost
+        )
+        
         if form.is_valid():
-            ProductService.update_product(
-                 product_id,
-                 name=form.cleaned_data['name'],
-                 description=form.cleaned_data['description'],
-                 type=form.cleaned_data['type_name'],
-                 collection=form.cleaned_data['collection_name'],
-                 path=form.cleaned_data['path']
-             )
-            messages.success(request, 'Produto atualizado com sucesso!')
-            return redirect('all_products')
+            product = form.save()  # Atualiza o produto e o custo
+            if product:
+                messages.success(request, "Produto atualizado com sucesso!")
+                return redirect('all_products')
+            else:
+                messages.error(request, "Erro ao atualizar produto.")
         else:
-            messages.error(request,'Erro ao atualizar produto.')
-            return render(request, self.template_name, {'form':form})
+            messages.error(request, "Erro ao atualizar produto.")
+        
+        return render(request, self.template_name, {'form': form})
 
 @method_decorator(user_is_manager, name='dispatch')
 class DeleteProduct(View):

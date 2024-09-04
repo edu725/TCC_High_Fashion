@@ -2,17 +2,18 @@ from django import forms
 from .models import *
 from tipo.service import TypeService
 from colecao.service import CollectionService
+from parametros.repository import ParametersRepository
 
 
 class ProductForm(forms.ModelForm):
-    type_name=forms.ModelChoiceField(
+    type=forms.ModelChoiceField(
         queryset=None,
         required=True,
         empty_label="",
         label="Tipo de roupa",
         widget=forms.Select(attrs={'class': 'form-control'})
     )
-    collection_name=forms.ModelChoiceField(
+    collection=forms.ModelChoiceField(
         queryset=None,
         required=True,
         empty_label="",
@@ -23,7 +24,7 @@ class ProductForm(forms.ModelForm):
     class Meta:
 
         model = Product
-        fields = ['name','description', 'path']
+        fields = ['name','description', 'path', 'type', 'collection']
         labels = {
             "name": "Nome",
             "description": "Descrição",
@@ -51,8 +52,8 @@ class ProductForm(forms.ModelForm):
 
     def __init__(self ,*args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['type_name'].queryset = TypeService.get_all_types()
-        self.fields['collection_name'].queryset = CollectionService.get_all_collections()
+        self.fields['type'].queryset = TypeService.get_all_types()
+        self.fields['collection'].queryset = CollectionService.get_all_collections()
 
 class CommentProductForm(forms.ModelForm):
     class Meta:
@@ -98,22 +99,36 @@ class ProductAndCostForm(forms.Form):
     product_cost_form = ProductCostForm()
 
     def __init__(self, *args, **kwargs):
+        # Separando dados e arquivos para os dois formulários
+        product_form_data = kwargs.pop('product_form_data', None)
+        product_form_files = kwargs.pop('product_form_files', None)
+        product_cost_form_data = kwargs.pop('product_cost_form_data', None)
+        product_cost_form_files = kwargs.pop('product_cost_form_files', None)
+        product_instance = kwargs.pop('product_instance', None)
+        product_cost_instance = kwargs.pop('product_cost_instance', None)
+        
         super().__init__(*args, **kwargs)
-        self.fields['product_form'] = self.product_form
-        self.fields['product_cost_form'] = self.product_cost_form
+
+        self.product_form = ProductForm(
+            data=product_form_data, 
+            files=product_form_files, 
+            instance=product_instance
+        )
+        self.product_cost_form = ProductCostForm(
+            data=product_cost_form_data, 
+            files=product_cost_form_files, 
+            instance=product_cost_instance
+        )
+
+    def is_valid(self):
+        return self.product_form.is_valid() and self.product_cost_form.is_valid()
 
     def save(self):
-        product_form = self.product_form
-        product_cost_form = self.product_cost_form
-
-        if product_form.is_valid() and product_cost_form.is_valid():
-            # Save Product
-            product = product_form.save()
-
-            # Save ProductCost
-            product_cost = product_cost_form.save(commit=False)
+        if self.is_valid():
+            product = self.product_form.save()
+            product_cost = self.product_cost_form.save(commit=False)
             product_cost.product = product
+            product_cost.parameters = ParametersRepository.get_id_parameter()
             product_cost.save()
-
             return product
         return None

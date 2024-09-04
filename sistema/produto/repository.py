@@ -115,3 +115,7 @@ class ProductCostRepository:
     @staticmethod
     def get_price_sell():
         return ProductCost.get_price_cost() / Parameters.get_divisor()
+    
+    @staticmethod
+    def get_id_fk(fk):
+        return ProductCost.objects.get(product=fk)

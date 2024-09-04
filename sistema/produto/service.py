@@ -99,3 +99,7 @@ class ProductCostService:
     @staticmethod
     def get_price_sell():
         return ProductCostRepository.get_price_sell()
+    
+    @staticmethod
+    def get_id_fk(fk):
+        return ProductCostRepository.get_id_fk(fk)

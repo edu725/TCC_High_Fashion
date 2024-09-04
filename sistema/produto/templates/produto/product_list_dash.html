@@ -7,13 +7,6 @@
 
 {% block style %}
 <style>
-  .title {
-    text-align: center;
-    font-size: 36px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-
   .card {
     margin: 10px;
   }
@@ -31,11 +24,11 @@
 
 {% block content %}
 
-<section>
+<section class="py-5">
 
   <div class="d-flex justify-content-center">
-    <div >
-      <h1 class="title">Produtos</h1>
+    <div>
+      <h1>Produtos</h1>
     </div>
     {% if request.user.is_authenticated %}
     <div class="position-absolute end-0">
@@ -80,7 +73,6 @@
           </div> 
       </div>
       </div>
-      {% include 'produto/partials/_edit_product.html' %}
       {% endfor %}
     </div>
     <nav aria-label="Page navigation example">
