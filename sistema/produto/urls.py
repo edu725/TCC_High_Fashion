@@ -11,7 +11,12 @@ urlpatterns = [
     path('produto/editar/<int:product_id>', UpdateProduct.as_view(), name='update_product'),
     path('produto/deletar/', DeleteProduct.as_view(), name='delete_product'),
     path('criar/comentario/produto/<int:product_id>/<int:user_id>', CreateCommentProduct.as_view(), name='comment_product'),
+    path('deletar/comentario/produto/', DeleteCommentProduct.as_view(), name='delete_comment_product'),
+    path('atualizar/comentario/produto/', UpdateCommentProduct.as_view(), name='update_comment_product'),
     path('mural/', CommentPageList.as_view(), name='mural_comment'),
     path('home/', HomeView.as_view(), name='home'),
-    path('criar/comentario/page/<int:user_id>', CreateCommentPage.as_view(), name='create_comment_page'),  
+    path('criar/comentario/page/<int:user_id>', CreateCommentPage.as_view(), name='create_comment_page'),
+    path('deletar/comentario/page/', DeleteCommentPage.as_view(), name='delete_comment_page'),
+    path('atualizar/comentario/page/', UpdateCommentPage.as_view(), name='update_comment_page'),  
+    
 ]
