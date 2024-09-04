@@ -23,6 +23,18 @@ class UserService:
             users = paginator.page(paginator.num_pages)
 
         return users
+    
+    @staticmethod
+    def list_all_email_users():
+
+        email_all_users = UserService.get_all_users()
+        list_email=[]
+
+        for user in email_all_users:
+
+            list_email.append(user.email)
+
+        return list_email
 
     @staticmethod
     def get_user_details(user_id):
