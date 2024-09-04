@@ -7,7 +7,28 @@
             </div>
             <form id="edit-room-form" method="post" action="{% url 'collection_update' collection.id %}">
                 {% csrf_token %}
-                {{ form_collection.as_p }}
+                <input type="hidden" name="type_id" value="{{ collection.id }}">
+                <div class="mb-3">
+                    <label for="id_name" class="form-label">Nome</label>
+                    <input type="text" name="name" class="form-control" id="id_name" value="{{ collection.name }}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="id_description" class="form-label">Descrição</label>
+                    
+                    <textarea name="description" class="form-control" id="id_description" rows="3" required>{{ collection.description }}</textarea>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="id_image" class="form-label">Imagem</label>
+                    
+                    {% if collection.image %}
+                        <div class="mb-3">
+                            <img src="{{ collection.image.url }}" class="img-fluid mb-2" alt="Imagem da coleção">
+                        </div>
+                    {% endif %}
+                   
+                    <input type="file" name="image" class="form-control" id="id_image">
+                </div>
                 <div class="modal-footer d-flex justify-content-center">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-primary">Salvar</button>

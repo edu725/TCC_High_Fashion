@@ -1,6 +1,5 @@
 from django.shortcuts import render,redirect
 from produto.service import *
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.views import View
 from produto.forms import *
 from colecao.service import CollectionService
@@ -8,6 +7,8 @@ from users.forms import *
 from users.service import *
 from django.urls import reverse_lazy
 from django.contrib import messages
+from django.utils.decorators import method_decorator
+from users.decorators import *
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from notifications.service import EmailService
@@ -26,6 +27,7 @@ class ProductIndex(View):
         form_register = self.form_register
         return render(request, self.template_name,{'form_login':form_login, 'form_register':form_register, 'collections':collections, 'products':product})
 
+@method_decorator(user_is_manager, name='dispatch')
 class ProductListDash(View):
     template_name = 'produto/product_list_dash.html'
     paginate_by = 10
@@ -47,7 +49,7 @@ class ProductList(View):
         products = ProductService.list_all_products(page=page, per_page=per_page)
         return render(request, self.template_name, {'products':products,'form_login':self.form_login, 'form_register':self.form_register})
 
-
+@method_decorator(user_is_manager_or_common, name='dispatch')
 class Product_Single(View):
     template_name = 'produto/product_single.html'
 
@@ -62,6 +64,7 @@ class Product_Single(View):
         user = request.user
         return render(request, self.template_name, {'product':product, 'form_comment_product':form_comment_product, 'comments':comment, 'total_comments':total_comments, 'user':user})
     
+@method_decorator(user_is_manager, name='dispatch')
 class CreateProduct(View):
     template_name = 'produto/create.html'
     def get(self, request):
@@ -90,7 +93,8 @@ class CreateProduct(View):
         else:
             messages.error(request, "Erro ao criar produto.")
         return render(request, self.template_name, {'form':form})
-    
+
+@method_decorator(user_is_manager, name='dispatch')
 class UpdateProduct(View):
     template_name = 'produto/edit_product.html'
     
@@ -116,6 +120,7 @@ class UpdateProduct(View):
             messages.error(request,'Erro ao atualizar produto.')
             return render(request, self.template_name, {'form':form})
 
+@method_decorator(user_is_manager, name='dispatch')
 class DeleteProduct(View):
     def post(self, request):
         id = request.POST['product_id']
@@ -123,7 +128,7 @@ class DeleteProduct(View):
         messages.success(request, "Produto deletado com sucesso!")
         return redirect('all_products')
 
-    
+@method_decorator(user_is_manager_or_common, name='dispatch')
 class CreateCommentProduct(View):
     def post(self, request, product_id, user_id ,*args, **kwargs):
         product = get_object_or_404(Product, id=product_id)
@@ -131,14 +136,16 @@ class CreateCommentProduct(View):
         form = CommentProductForm(request.POST)
         if form.is_valid():
             CommentProductService.create_comment_product(product,user, form.cleaned_data['comment'])
-        return redirect('index')
+        return redirect('all_products')
 
+@method_decorator(user_is_manager, name='dispatch')
 class DeleteCommentProduct(View):
     def get(self, comment_id, request, *args, **kwargs):
         CommentProductService.delete_comment_product(comment_id)
         messages.success(request, "Comentário deletado com sucesso!")
-        return redirect('product_single')
+        return redirect('index')
     
+@method_decorator(user_is_manager_or_common, name='dispatch')
 class CreateCommentPage(View):
     def post(self, request, user_id, *args, **kwargs):
         form = CommentPageForm(request.POST)
@@ -151,6 +158,7 @@ class CreateCommentPage(View):
             messages.error(request, "Erro ao criar comentário.")
             return redirect('mural_comment')
 
+@method_decorator(user_is_manager_or_common, name='dispatch')
 class CommentPageList(View):
     template_name = 'produto/mural_comments.html'
     paginate_by = 10
@@ -162,7 +170,7 @@ class CommentPageList(View):
         form_comment_page = CommentPageForm()
         return render(request, self.template_name, {'comments':comment,'form_comment_page':form_comment_page, 'user':user})
     
-    
+
 class HomeView(View):
     template_name = 'produto/home.html'
 

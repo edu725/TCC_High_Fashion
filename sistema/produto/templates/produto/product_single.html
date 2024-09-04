@@ -37,12 +37,7 @@
                             <p class="h3 py-2">R$25.00</p>
                             <a style="text-decoration: none;" href="#comments">
                                 <p class="py-2">
-                                    <i class="fa fa-star text-warning"></i>
-                                    <i class="fa fa-star text-warning"></i>
-                                    <i class="fa fa-star text-warning"></i>
-                                    <i class="fa fa-star text-warning"></i>
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <span class="list-inline-item text-dark">Rating 4.8 | {{total_comments}} Comentários</span>
+                                    <span class="list-inline-item text-dark"> {{total_comments}} Comentários</span>
                                 </p>
                             </a>
                             
@@ -69,7 +64,7 @@
                 Comentários
             </h2>
             {% for comment in comments %}
-            <div class="container p-2">
+            <div class="container-fluid p-2">
                 <div class="d-flex">
                     <div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
