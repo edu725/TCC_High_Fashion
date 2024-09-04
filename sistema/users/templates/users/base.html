@@ -9,8 +9,6 @@
     {% block title %}
         <title>base</title>
     {% endblock %}
-
-    {% block style %}
     <style>
         .mapBox{
             width: 450px;
@@ -21,7 +19,36 @@
             width: 100%;
             height: 100%;
         }
+        @font-face {
+            font-family: Catchye;
+            src: url("{% static 'assets/fonts/catchye/Catchye.otf' %}") format(opentype);
+        }
+        @font-face {
+            font-family: Oswald;
+            src: url("{% static 'assets/fonts/Oswald/Oswald-Medium.ttf' %}") format(truetype);
+        }
+        @font-face {
+            font-family: Nerko;
+            src: url("{% static 'assets/fonts/Nerko_One/Nerko_One-Regular.ttf' %}") format(truetype);
+        }
+        @font-face {
+            font-family: Mukta;
+            src: url("{% static 'assets/fonts/Mukta/Mukta-Bold.ttf' %}") format(truetype);
+        }
+        @font-face {
+            font-family: Monda;
+            src: url("{% static 'assets/fonts/mondapick/Mondapick.ttf' %}") format(truetype);
+        }
+        @font-face {
+            font-family: Kanit;
+            src: url("{% static 'assets/fonts/Kanit/Kanit-Bold.ttf' %}") format(truetype);
+        }
+        h1{
+            font-family: Monda;
+            font-size: 60px !important;
+        }
     </style>
+    {% block style %}
     {% endblock %}
 </head>
 <body class="d-flex flex-column min-vh-100">
