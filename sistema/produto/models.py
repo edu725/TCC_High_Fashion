@@ -28,6 +28,7 @@ class Product(models.Model):
         return CommentProduct.objects.filter(id_product=self, id_user=user).exists()
 
 class ProductCost(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     parameters = models.ForeignKey(Parameters, on_delete=models.CASCADE)
     raw_materials = models.DecimalField(max_digits=8, decimal_places=2)
     labor = models.DecimalField(max_digits=8, decimal_places=2)
