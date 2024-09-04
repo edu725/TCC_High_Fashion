@@ -27,14 +27,14 @@
 {% block content %}
     <section>
         <!-- Solicitações -->
-        <h1 style="font-family: Modestic;" class="text-center py-5">{% if object %}Editar{% else %}Adicionar{% endif %} Usuário</h1>
-        <div style="background-color: #045CAC; color:white; border-radius: 10px;" class="container p-5">
+        <h1 style="font-family: Monda;" class="text-center py-5">{% if object %}Editar{% else %}Adicionar{% endif %} Usuário</h1>
+        <div style="background-color: #eef7ff; color:black; border-radius: 10px;" class="container p-5 mb-5">
             <div class="py-2">
                 <form method="post">
                     {% csrf_token %}
                     {{ form.as_p }}
                     <div class="text-center py-3">
-                        <button type="submit" style="border-radius: 7px;" class="btn btn-light">Salvar</button>
+                        <button type="submit" style="border-radius: 7px; background-color: #00b7ff; color: white;" class="btn">Salvar</button>
                     </div>
                 </form>
             </div>
