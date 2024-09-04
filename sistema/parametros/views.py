@@ -15,11 +15,16 @@ from django.contrib import messages
 class ParameterView(View):
     template_name = 'parametros/parametros.html'
     def get(self, request, *args, **kwargs):
-        parameters = ParametersService.get_id_parameter()
+        parameter = ParametersService.get_id_parameter()
         form = ParametersForm()
+<<<<<<< HEAD
         return render(request, self.template_name, {'form':form, 'parameters':parameters})
 
 @method_decorator(user_is_manager, name='dispatch')
+=======
+        return render(request, self.template_name, {'form':form, 'parameter':parameter})
+    
+>>>>>>> 298338c2d0bc42c7dac380ecbbbc1ddfb28c14b4
 class ParameterUpdateView(View):
     def post(self, request):
         form = ParametersForm(request.POST)
