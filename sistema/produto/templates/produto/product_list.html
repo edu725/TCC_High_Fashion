@@ -31,7 +31,7 @@
 
 {% block content %}
 
-<section>
+<section class="py-5">
 
   <div class="d-flex justify-content-center">
     <div >
@@ -44,7 +44,7 @@
       {% for product in products %}
       <div class="col-12 col-sm-6 col-md-4 col-lg-3">
         <div class="d-flex justify-content-center">
-          <a href="{% url 'product_single' product.id %}" style="text-decoration:none;">
+          <a href="{% url 'product_single' product.id %}" style="text-decoration:none; color: black;">
           <div class="card" style="width: 18rem;">
               <img src="{{ product.path.url }}" class="card-img-top" alt="{{ product.name }}">
               <div class="card-body text-center">
