@@ -1,0 +1,87 @@
+[
+    {
+        "model": "produto.productcost", 
+
+        "pk": 1,
+        "fields":{
+            "raw_materials": 150 ,
+            "labor": 74,
+            "indirect": 10,
+            "parameters_id": 1,
+            "product_id": 1
+        }
+    },
+    {
+        "model": "produto.productcost", 
+
+        "pk": 2,
+        "fields":{
+            "raw_materials": 141 ,
+            "labor": 54,
+            "indirect": 14,
+            "parameters_id": 1,
+            "product_id": 2
+        }
+    },
+    {
+        "model": "produto.productcost", 
+
+        "pk": 3,
+        "fields":{
+            "raw_materials": 150 ,
+            "labor": 74,
+            "indirect": 10,
+            "parameters_id": 1,
+            "product_id": 3
+        }
+    },
+    {
+        "model": "produto.productcost", 
+
+        "pk": 4,
+        "fields":{
+            "raw_materials": 240 ,
+            "labor": 244,
+            "indirect": 40,
+            "parameters_id": 1,
+            "product_id": 4
+        }
+    },
+    {
+        "model": "produto.productcost", 
+
+        "pk": 6,
+        "fields":{
+            "raw_materials": 140 ,
+            "labor": 54,
+            "indirect": 120,
+            "parameters_id": 1,
+            "product_id": 6
+        }
+    },
+    {
+        "model": "produto.productcost", 
+
+        "pk": 7,
+        "fields":{
+            "raw_materials": 140 ,
+            "labor": 74,
+            "indirect": 110,
+            "parameters_id": 1,
+            "product_id": 7
+        }
+    },
+    {
+        "model": "produto.productcost", 
+
+        "pk": 8,
+        "fields":{
+            "raw_materials": 1140 ,
+            "labor": 74,
+            "indirect": 10,
+            "parameters_id": 1,
+            "product_id": 8
+        }
+    }
+
+]

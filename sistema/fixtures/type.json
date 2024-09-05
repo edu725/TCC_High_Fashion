@@ -60,6 +60,14 @@
 
         "pk": 8,
         "fields":{
+            "name": "Sobretudo"
+        }
+    },
+    {
+        "model": "tipo.type", 
+
+        "pk": 9,
+        "fields":{
             "name": "Conjunto"
         }
     }
