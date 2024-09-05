@@ -89,14 +89,17 @@ class CreateProduct(View):
                 labor=form.cleaned_data['labor'],
                 indirect=form.cleaned_data['indirect']
             )
+            context = {
+                'nome': ProductService.get_last_product()
+            }
+            listemail = UserService.list_all_email_users()
+            EmailService.send_html_email_with_template(
+                subject="Venha conferir os novos produtos da HIGH FASHION",
+                template_name="notifications/email.html",
+                context = context,
+                recipient_list= listemail
+            )
             messages.success(request, "Produto criado com sucesso!")
-            # produto = ProductService.get_last_product()
-            # EmailService.send_email_with_attachment(
-            #     subject="Novo produto adicionado",
-            #     message=f"Confira as Novidades do nosso site como o novo lançamento da/o {produto.name}",
-            #     recipient_list=EmailService.list_all_email_users,
-            #     attachment_path=produto.path,
-            # )
             return redirect('all_products')
         else:
             messages.error(request, "Erro ao criar produto.")
