@@ -24,7 +24,8 @@ class ProductIndex(View):
         collections = CollectionService.get_all_collections()
         product = ProductService.get_all_products()
         user = UserService.get_all_users()
-        last_8 = ProductService.get_last_8()
+        last_8_products = ProductService.get_last_8()
+        last_4_collections = CollectionService.get_last_4_collections()
         comment = CommentPageService.get_all_comments()
         form_login = self.form_login
         form_register = self.form_register
@@ -35,7 +36,8 @@ class ProductIndex(View):
             'collections':collections,
             'products':product,
             'user':user,
-            'last_8':last_8
+            'last_8_products':last_8_products,
+            'last_4_collections':last_4_collections
             })
 
 @method_decorator(user_is_manager, name='dispatch')
