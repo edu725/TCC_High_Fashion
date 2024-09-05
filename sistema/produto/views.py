@@ -16,16 +16,17 @@ from notifications.service import EmailService
 # Create your views here.
 
 class ProductIndex(View):
-    template_name = 'produto/index2.html'
+    template_name = 'produto/home.html'
     form_login = EmailLoginForm
     form_register = UserForm
     
     def get(self, request, *args, **kwargs):
         collections = CollectionService.get_all_collections()
         product = ProductService.get_all_products()
+        user = UserService.get_all_users()
         form_login = self.form_login
         form_register = self.form_register
-        return render(request, self.template_name,{'form_login':form_login, 'form_register':form_register, 'collections':collections, 'products':product})
+        return render(request, self.template_name,{'form_login':form_login, 'form_register':form_register, 'collections':collections, 'products':product, 'user':user})
 
 @method_decorator(user_is_manager, name='dispatch')
 class ProductListDash(View):
@@ -233,13 +234,3 @@ class UpdateCommentPage(View):
         return redirect('mural_comment')
     
 
-class HomeView(View):
-    template_name = 'produto/home.html'
-
-    def get(self, request):
-        products = ProductService.list_all_products()
-        user = UserService.get_all_users()
-        comment = CommentPageService.get_all_comments()
-        collections = CollectionService.get_all_collections()
-        # price = ProductCostService.get_price_sell()
-        return render(request, self.template_name, {'products':products, 'collections':collections, 'comments':comment, 'user':user})
