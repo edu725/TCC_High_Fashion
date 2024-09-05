@@ -34,9 +34,9 @@
   </div>
 
   <div class="container">
-    <div class="row">
+    <div class="row justify-content-center">
       {% for product in products %}
-      <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 d-flex justify-content-center">
         <a href="{% url 'product_single' product.id %}" style="text-decoration:none; color: black;">
           <div class="card" style="width: 18rem; display: flex; flex-direction: column; height: 500px;">
             <div class="card-img-container" style="height: 350px; overflow: hidden;">
@@ -51,7 +51,7 @@
         </a>
       </div>
       {% endfor %}
-    </div>
+    </div>  
   
     <nav aria-label="Page navigation example">
       <ul class="pagination d-flex justify-content-center">
