@@ -24,19 +24,23 @@
     <link rel="stylesheet" href="{% static 'assets/mobirise/css/mbr-additional.css?v=06tEYR' %}" type="text/css">
 
     <style>
-        .imgsob {
-          width: 35vw;
-          height: 65vh;
-        }
         @media only screen and (max-width: 770px) {
             .media{
                 flex-direction: column;
                 text-align: center;
             }
-            .imgsob {
-              width: 60vw;
-              height: 35vh;
-            }
+        }
+        .parallax-1 {
+            width: 100%;
+            background: url("{% static 'assets/img/fundo.jpg' %}");
+            background-size: 100% 100%;
+            background-attachment: fixed;
+        }
+
+        .parallax-1 .para {
+            position: relative;
+            padding: 10px;
+            text-align: center;
         }
     </style>
 {% endblock %}
@@ -70,16 +74,17 @@
               </div>
               </div>
               <div class="image-wrapper d-flex justify-content-center">
-                <img class="imgsob" src="{% static 'assets/img/logoFundo.png' %}" alt="Mobirise Website Builder">
+                <img src="{% static 'assets/img/logoFundo.png' %}" alt="Mobirise Website Builder" style="width: 40%; height:auto;">
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <section data-bs-version="5.1" class="header14 cid-umeacIuPjy mbr-parallax-background" id="call-to-action-9-umeacIuPjy">
-        <div class="container">
-            <div class="row justify-content-center">
+    <section data-bs-version="5.1" class="header14 cid-umeacIuPjy mbr-parallax-background" id="call-to-action-9-umeacIuPjy" style="padding-bottom: 0;">
+        <div class="parallax-1 p-5">
+          <div class="container parallax">
+            <div class="row justify-content-center para">
                 <div class="card col-12 col-md-12 col-lg-10">
                     <div class="card-wrapper">
                         <div class="card-box align-center">
@@ -94,7 +99,9 @@
                     </div>
                 </div>
             </div>
+          </div>
         </div>
+
     </section>
     <section data-bs-version="5.1" class="pricing02 cid-umeacIuSzu" id="product-list-9-umeacIuSzu">
         
