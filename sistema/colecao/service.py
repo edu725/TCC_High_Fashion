@@ -21,6 +21,9 @@ class CollectionService:
     def get_all_collections():
         return CollectionRepository.get_all_collections()
 
+    def get_last_4_collections():
+        return CollectionRepository.get_last_4(limit=4)
+
     @staticmethod
     def get_collection_by_id(id):
         return CollectionRepository.get_collection_by_id(id)

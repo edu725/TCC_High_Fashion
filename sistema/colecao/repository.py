@@ -14,6 +14,10 @@ class CollectionRepository:
         return Collection.objects.create(name=name, description=description, image=image)
     
     @staticmethod
+    def get_last_4(limit=4):
+        return Collection.objects.all().order_by('-id')[:limit]
+
+    @staticmethod
     def update_collection(id_collection, name, description, image):
         collection = CollectionRepository.get_collection_by_id(id=id_collection)
         if collection:
