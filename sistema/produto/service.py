@@ -29,6 +29,10 @@ class ProductService():
     @staticmethod
     def get_last_product():
         return ProductRepository.get_last_product()
+    
+    @staticmethod
+    def get_last_8():
+        return ProductRepository.get_last_8(limit=8)
 
     @staticmethod
     def get_product_by_id(product_id):

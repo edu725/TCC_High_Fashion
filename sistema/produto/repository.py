@@ -25,6 +25,10 @@ class ProductRepository:
         return Product.objects.all()
 
     @staticmethod
+    def get_last_8(limit=8):
+        return Product.objects.all().order_by('-id')[:limit]
+
+    @staticmethod
     def create_product(name, description, type, collection, path):
         """Cria um produto"""
         return Product.objects.create(name=name, description=description, type=type, collection=collection, path=path) 
