@@ -9,12 +9,25 @@
     <div class="row justify-content-center mb-5 mt-5">
         <div class="col-md-6">
             <h1 class="text-center" style="font-family: Monda;">Criar Produto</h1>
+<<<<<<< HEAD
             <form method="post"  enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form.product_form.as_p }}
                 {{ form.product_cost_form.as_p }}
                 <button type="submit" class="btn btn-success">Criar</button>
             </form>
+=======
+            <div class="p-5" style="background-color: #eef7ff; color:black; border-radius: 10px;" class="container mb-5">   
+                <form method="post"  enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form_product.as_p }}
+                    {{ form.product_cost_form.as_p }}
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn" style="border-radius: 7px; background-color: #00b7ff; color: white; text-align: center;">Criar</button>
+                    </div>
+                </form>
+            </div> 
+>>>>>>> 670113f18a7385ee4a32f813983d0d796e3f8afb
         </div>
     </div>
 {% endblock %}

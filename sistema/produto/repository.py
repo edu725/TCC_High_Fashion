@@ -1,5 +1,5 @@
 from .models import *
-from parametros.models import *
+from parametros.repository import *
 
 
 class ProductRepository:
@@ -111,10 +111,6 @@ class ProductCostRepository:
     @staticmethod
     def create_product_cost(product, parameters, raw_materials, labor, indirect):
         return ProductCost.objects.create(product=product, parameters=parameters, raw_materials=raw_materials, labor=labor, indirect=indirect)
-    
-    @staticmethod
-    def get_price_sell():
-        return ProductCost.get_price_cost() / Parameters.get_divisor()
     
     @staticmethod
     def get_id_fk(fk):

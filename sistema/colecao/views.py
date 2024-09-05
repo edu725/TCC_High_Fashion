@@ -26,7 +26,7 @@ class CollectionListView(View):
         
         return render(request, self.template_name, {'collections': collections, 'form_login': self.form_login, 'form_register': self.form_register})
        
-@method_decorator(user_is_manager_or_common, name='dispatch')
+
 class CollectionDetailView(View):
     template_name = 'colecao/collection_single.html'
     form_login = EmailLoginForm

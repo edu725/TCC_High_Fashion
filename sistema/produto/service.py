@@ -96,9 +96,6 @@ class ProductCostService:
     def create_product_cost(product, parameters, raw_materials, labor, indirect):
         return ProductCostRepository.create_product_cost(product, parameters, raw_materials, labor, indirect)
     
-    @staticmethod
-    def get_price_sell():
-        return ProductCostRepository.get_price_sell()
     
     @staticmethod
     def get_id_fk(fk):
