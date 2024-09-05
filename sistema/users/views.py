@@ -13,7 +13,6 @@ from .forms import *
 
 class CustomLoginView(View):
     form_class = EmailLoginForm
-    template_name = 'produto/index.html'
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
@@ -26,7 +25,7 @@ class CustomLoginView(View):
                 return redirect('index')  
             else:
                 messages.error(request, "Email ou senha incorretos")
-        return render(request, self.template_name, {'form': form})
+        return redirect('index')
     
 
 class CustomRegisterView(View):
@@ -40,7 +39,7 @@ class CustomRegisterView(View):
             return redirect('index')
         else:
             messages.error(request, "Ocorreu um erro ao criar a conta.")
-            return render(request, self.template_name, {'form_register': form})
+            return redirect('index')
         
         
 @method_decorator(user_is_manager, name='dispatch')
@@ -60,17 +59,12 @@ class CustomRegisterDashView(View):
 
 @method_decorator(user_is_manager, name='dispatch')
 class UserCreateView(CreateView):
-    template_name = 'produto/index2.html'
     form_login = UserForm
-
-    def get(self, request, *args, **kwargs):
-        form_login = self.form_class()
-        return render(request, self.template_name, {'form_login': form_login})
 
     def post(self, request, *args, **kwargs):
         vorm = self.form_class(request.POST)
         if vorm.is_valid():
-            name = vorm.cleaned_data.get('name')
+            
             email = vorm.cleaned_data.get('email')
             password = vorm.cleaned_data.get('password')
             user = authenticate(request, email=email, password=password)
@@ -80,7 +74,7 @@ class UserCreateView(CreateView):
                 return redirect('index')  
             else:
                 messages.error(request, "Email ou senha incorretos")
-        return render(request, self.template_name, {'vorm': vorm})
+        return redirect('index')
 
     def form_valid(self, form):
         messages.success(self.request, "Usuário criado com sucesso!")
@@ -90,32 +84,13 @@ class UserCreateView(CreateView):
         messages.error(self.request, "Ocorreu um erro ao criar o usuário.")
         return super().form_invalid(form)
 
-   
-
-@method_decorator(user_is_manager, name='dispatch')
-class UserListView(ListView):
-    template_name = 'users/user.html'
-    context_object_name = 'users'
-    paginate_by = 10
-
-    def get_queryset(self):
-        search_query = self.request.GET.get('search', '')
-        page = self.request.GET.get('page', 1)
-        
-        if search_query:
-            users = UserService.search_users(search_query, page=page, per_page=self.paginate_by)
-        else:
-            users = UserService.list_all_users(page=page, per_page=self.paginate_by)
-        
-        return users
-
-
 
 @method_decorator(user_is_manager, name='dispatch')
 class UserUpdateView(UpdateView):
     template_name = 'users/user_register.html'
     form_class = UserForm
-    success_url = reverse_lazy('user_list')
+    success_url = reverse_lazy('dashboard_user')
+    erro_url = reverse_lazy('dashboard_user')    
 
     def get_object(self):
         user_id = self.kwargs['pk']

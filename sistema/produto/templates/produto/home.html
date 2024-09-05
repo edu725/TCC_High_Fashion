@@ -62,12 +62,13 @@
                 <div class="item features-without-image col-12">
                   <div class="item-wrapper">
                     
-                    <p class="mbr-text mbr-fonts-style display-7">
+                    <p class="mbr-text mbr-fonts-style display-7" style="text-align: center; margin-bottom: 0px;">
                       A High Fashion é um site dedicado aos entusiastas da moda de alto padrão, 
-                      oferecendo uma experiência única 
-                      para quem busca as últimas tendências e inspirações no mundo da moda. 
-                      Com um design elegante e sofisticado, o site reflete a essência das 
-                      marcas de luxo que ele representa.
+                      oferecendo uma experiência única e envolvente para aqueles que buscam as últimas tendências e 
+                      inspirações no mundo da moda feminina. Com um design elegante e sofisticado, o site reflete perfeitamente a essência das marcas de luxo que representa.
+                      Além de apresentar as mais recentes coleções, a High Fashion também disponibiliza uma exibição de produtos exclusivos, e um mural de comentários para deixar dicas e feedbacks. 
+                      Os visitantes do site podem explorar uma vasta gama de conteúdo sendo uma fonte constante de inspiração e conhecimento sobre o universo da alta costura. 
+                      Seja para acompanhar as últimas novidades ou para descobrir peças icônicas e tendências emergentes, a High Fashion é o destino ideal para os verdadeiros aficionados por moda de luxo.
                     </p>
                   </div>
                 </div>
@@ -125,11 +126,11 @@
                               <img src="{{ product.path.url }}" alt="Produto">
                           </div>
                           <div class="item-content p-3">
-                              <h4 class="item-title mbr-fonts-style ">
+                              <h4 class="item-title mbr-fonts-style text-center display-7">
                                   {{ product.name }}
                               </h4>
-                              <p class="mbr-text mbr-fonts-style display-10">{{ product.description }}</p>
-                              <div class="mbr-section-btn item-footer">
+                              <p class="mbr-text mbr-fonts-style text-center display-8">{{ product.description }}</p>
+                              <div class="mbr-section-btn item-footer d-flex justify-content-center">
                                   <a href="{% url 'product_single' product.id %}" class="btn item-btn btn-primary display-7">Ver mais</a>
                               </div>
                           </div>
@@ -157,18 +158,18 @@
         </div>
         <div class="row">
           {% for collection in collections %}
-            <div class="item features-image col-12 col-md-6 col-lg-3 active">
+            <div class="item features-image col-12 col-md-6 col-lg-3 active mb-4">
               <div class="item-wrapper">
                 <div class="item-img mb-3">
                   <img src="{{ collection.image.url }}" alt="Mobirise Website Builder" title="">
                 </div>
                 <div class="item-content align-left">
-                  <h5 class="item-title mbr-fonts-style mt-0 mb-2 display-5">
+                  <h5 class="item-title mbr-fonts-style text-center mt-0 mb-2 display-6">
                     <strong>{{ collection.name }}</strong>
                   </h5>
-                  <p class="mbr-text mbr-fonts-style mb-3 display-7">{{ collection.description }}</p>
-                  <div class="mbr-section-btn item-footer">
-                    <a href="{% url 'collection_detail' collection.id %}" class="btn item-btn btn-primary display-7 px-4">Ver</a>
+                  <p class="mbr-text mbr-fonts-style text-center mb-3 display-8">{{ collection.description }}</p>
+                  <div class="mbr-section-btn item-footer justify-content-center d-flex">
+                    <a href="{% url 'collection_detail' collection.id %}" class="btn item-btn btn-primary display-7 px-4">Ver mais</a>
                   </div>
                 </div>
               </div>

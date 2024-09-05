@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    <title>Product Single</title>
+    <title>Detalhes do Produto</title>
 {% endblock %}
 
 {% block style %}
@@ -46,7 +46,7 @@
                             <p>{{product.description}}</p>
 
                             <h6>Coleção:</h6>
-                            <a style="text-decoration: none;" href="">
+                            <a style="text-decoration: none;" href="{% url 'collection_detail' product.collection.id %}">
                                 <p>{{product.collection.name}}</p>
                             </a>
                         </div>

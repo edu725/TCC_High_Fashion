@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    <title>Coleção </title>
+    <title>Detalhaes da Coleção</title>
 {% endblock %}
 
 {% block style %}
@@ -46,18 +46,22 @@
         <div class="text-center">
             <h3>Produtos Relacionados</h3>
         </div>
-        
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center py-5">
             {% for product in products %}
             <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                 <div class="d-flex">
                     <div class="card" style="width: 18rem;">
-                        <img src="{{ product.path.url }}" class="card-img-top" alt="{{ product.name }}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{product.name}}</h5>
-                            <p class="card-text">{{product.description}}</p>
-                            <a href="{% url 'product_single' product.id %}" class="btn btn-primary">Produto</a>
-                        </div>
+                        <a href="{% url 'product_single' product.id %}" style="text-decoration: none; color: #000;" class="">
+                            <img src="{{ product.path.url }}" class="card-img-top" alt="{{ product.name }}">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">{{product.name}}</h5> 
+                                <hr style="margin: 2px 0px 2px 0px;">
+                                <p class="f text-center " style="font-size: 16px; margin: 10px 0px 0px 0px;">Descrição:{{product.description}}</p>
+                                <div class="d-flex justify-content-center">
+                                    
+                                </div>
+                            </div>
+                        </a>
                     </div> 
                 </div>
             </div>
