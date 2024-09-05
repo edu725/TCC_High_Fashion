@@ -32,7 +32,7 @@ class ProductIndex(View):
 @method_decorator(user_is_manager, name='dispatch')
 class ProductListDash(View):
     template_name = 'produto/product_list_dash.html'
-    paginate_by = 10
+    paginate_by = 12
     def get(self, request, *args, **kwargs):
         page = request.GET.get('page', 1)
         per_page = self.paginate_by
@@ -42,7 +42,7 @@ class ProductListDash(View):
 
 class ProductList(View):
     template_name = 'produto/product_list.html'
-    paginate_by = 10
+    paginate_by = 12
     form_login = EmailLoginForm
     form_register = UserForm
     def get(self, request, *args, **kwargs):
@@ -214,7 +214,7 @@ class CreateCommentPage(View):
 @method_decorator(user_is_manager_or_common, name='dispatch')
 class CommentPageList(View):
     template_name = 'produto/mural_comments.html'
-    paginate_by = 10
+    paginate_by = 12
 
     def get(self, request, *args, **kwargs):
         page = request.GET.get('page', 1)
