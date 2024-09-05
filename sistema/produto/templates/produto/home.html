@@ -121,10 +121,10 @@
                               <img src="{{ product.path.url }}" alt="Produto">
                           </div>
                           <div class="item-content">
-                              <h5 class="item-title mbr-fonts-style display-5">
-                                  <strong>{{ product.name }}</strong>
-                              </h5>
-                              <p class="mbr-text mbr-fonts-style display-7">{{ product.description }}</p>
+                              <h4 class="item-title mbr-fonts-style ">
+                                  {{ product.name }}
+                              </h4>
+                              <p class="mbr-text mbr-fonts-style display-10">{{ product.description }}</p>
                               <div class="mbr-section-btn item-footer">
                                   <a href="{% url 'product_single' product.id %}" class="btn item-btn btn-primary display-7">Ver mais</a>
                               </div>
