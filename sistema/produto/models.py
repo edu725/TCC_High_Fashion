@@ -26,6 +26,17 @@ class Product(models.Model):
     
     def product_commented(self, user):
         return CommentProduct.objects.filter(id_product=self, id_user=user).exists()
+    
+    def get_price(self):
+        try:
+            # Obter o primeiro ProductCost relacionado ao produto
+            product_cost = self.productcost_set.first()  # Ajuste o critério se necessário
+            if product_cost:
+                return product_cost.get_price()
+            else:
+                return 0
+        except ProductCost.DoesNotExist:
+            return 0
 
 class ProductCost(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -37,7 +48,12 @@ class ProductCost(models.Model):
     def get_price_cost(self):
         return (self.raw_materials + self.labor + self.indirect)
     
-
+    def get_price(self):
+        cost = self.get_price_cost()
+        divisor = self.parameters.get_divisor()
+        if divisor == 0:
+            raise ValueError("Divisor cannot be zero.")
+        return cost / divisor
 
 class CommentProduct(models.Model):
     id_product = models.ForeignKey(Product, on_delete=models.CASCADE)
