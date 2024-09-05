@@ -4,7 +4,7 @@
 
         "pk": 1,
         "fields":{
-            "name": "Roupa"
+            "name": "Camisa"
         }
     },
     {
@@ -20,7 +20,7 @@
 
         "pk": 3,
         "fields":{
-            "name": "Camisa"
+            "name": "Calça"
         }
     },
     {
