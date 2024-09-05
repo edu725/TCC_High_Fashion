@@ -21,8 +21,3 @@ class ParametersRepository:
             return True
         else:
             return False
-
-    @staticmethod
-    def get_divisor():
-        divisor = ParametersRepository.get_id_parameter()
-        return divisor.get_divisor()
