@@ -10,7 +10,7 @@
     <h1 class="text-center">Mural dos Comentários</h1>
     <div class="row mt-5">
         {% for comment in comments %}
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="container-fluid p-2 mt-4" style="border: 3px black groove; border-radius: 10px;" >
                 <div class="d-flex align-items-center">
                     <div>
@@ -23,6 +23,7 @@
                         <div class="d-flex justify-content-start">
                             <h5 style="margin: 8px;">{{comment.id_user.username}}</h5>
                         </div>
+                        {% if user.id == comment.id_user.id %}
                         <div class="d-flex justify-content-end">                            
                             <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#comment-page-{{ comment.id }}"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="blue" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                 <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
@@ -39,7 +40,8 @@
                                 </svg>
                             </button>
                             </form>   
-                        </div>   
+                        </div> 
+                        {% endif %}  
                     </div>
                 </div>
                 <hr>
@@ -53,7 +55,7 @@
         {% endfor %}
     </div>
 </div>
-<nav aria-label="Page navigation example">
+<nav class="pt-3" aria-label="Page navigation example">
     <ul class="pagination d-flex justify-content-center">
         {% if comments.has_previous %}
             <li class="page-item"><a class="page-link" href="?page={{ comments.previous_page_number }}">Anterior</a></li>
@@ -65,15 +67,16 @@
             <li class="page-item"><a class="page-link" href="?page={{ comments.next_page_number }}">Próxima</a></li>
         {% endif %}
     </ul>
-<div class="px-4">
-    <form method="post" action="{% url 'create_comment_page' user.id %}">
-        {% csrf_token %}
-        {{ form_comment_page.as_p }}
-    
-    <div class="" style="justify-content: space-between;"> 
-      <button type="submit" class="btn btn-primary">Salvar</button>
+    <div class="px-4">
+        <form method="post" action="{% url 'create_comment_page' user.id %}">
+            {% csrf_token %}
+            {{ form_comment_page.as_p }}
+        
+        <div class="d-flex justify-content-center" style="justify-content: space-between;"> 
+        <button type="submit" class="btn btn-primary mb-3">Salvar</button>
+        </div>
+        </form>
     </div>
-    </form>
-</div>
+</nav>
 
 {% endblock %}
