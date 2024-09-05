@@ -38,5 +38,29 @@
         "fields":{
             "name": "Saia"
         }
+    },
+    {
+        "model": "tipo.type", 
+
+        "pk": 6,
+        "fields":{
+            "name": "Sueter"
+        }
+    },
+    {
+        "model": "tipo.type", 
+
+        "pk": 7,
+        "fields":{
+            "name": "Moleton"
+        }
+    },
+    {
+        "model": "tipo.type", 
+
+        "pk": 8,
+        "fields":{
+            "name": "Conjunto"
+        }
     }
 ]
