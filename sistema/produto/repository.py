@@ -57,7 +57,16 @@ class ProductRepository:
             return True
         except Product.DoesNotExist:
             return False
+
+class ProductCostRepository:
+
+    @staticmethod
+    def create_product_cost(product, parameters, raw_materials, labor, indirect):
+        return ProductCost.objects.create(product=product, parameters=parameters, raw_materials=raw_materials, labor=labor, indirect=indirect)
     
+    @staticmethod
+    def get_id_fk(fk):
+        return ProductCost.objects.get(product=fk)
 
 class CommentProductRepository:
     @staticmethod
@@ -109,13 +118,3 @@ class CommentPageRepository:
             return True
         except CommentPage.DoesNotExist:
             return False
-        
-class ProductCostRepository:
-
-    @staticmethod
-    def create_product_cost(product, parameters, raw_materials, labor, indirect):
-        return ProductCost.objects.create(product=product, parameters=parameters, raw_materials=raw_materials, labor=labor, indirect=indirect)
-    
-    @staticmethod
-    def get_id_fk(fk):
-        return ProductCost.objects.get(product=fk)
