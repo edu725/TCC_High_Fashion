@@ -48,8 +48,8 @@
       <br>
       <div class="container">
         <div class="row justify-content-center">
-          <div class="card col-md-12 col-lg-10">
-            <div class="card-wrapper">
+          <div class="card col-md-12 col-lg-10 ">
+            <div class="card-wrapper ">
               <div class="card-content-text">
                 <h3 class="card-title mbr-fonts-style mt-3 mb-4 display-2 text-center">
                 <strong>SOBRE</strong>
@@ -113,15 +113,15 @@
               <div class="row">
                 {% for product in products %}
                   <div class="item features-image col-12 col-md-6 col-lg-3 mb-3">
-                      <div class="item-wrapper" style="background-color: rgb(196, 255, 235);">
+                      <div class="item-wrapper" style="background-color: rgb(246, 255, 252);">
                           <div class="item-img">
                               <img src="{{ product.path.url }}" alt="Produto">
                           </div>
                           <div class="item-content">
-                              <h5 class="item-title mbr-fonts-style display-5">
-                                  <strong>{{ product.name }}</strong>
-                              </h5>
-                              <p class="mbr-text mbr-fonts-style display-7">{{ product.description }}</p>
+                              <h4 class="item-title mbr-fonts-style ">
+                                  {{ product.name }}
+                              </h4>
+                              <p class="mbr-text mbr-fonts-style display-10">{{ product.description }}</p>
                               <div class="mbr-section-btn item-footer">
                                   <a href="{% url 'product_single' product.id %}" class="btn item-btn btn-primary display-7">Ver mais</a>
                               </div>
@@ -184,28 +184,27 @@
             </div>
             <div class="row mbr-masonry" data-masonry="{&quot;percentPosition&quot;: true }">
               {% for comment in comments %}
-              <div class="col-md-3">
-                  <div class="container-fluid p-2 mt-4" style="border: 3px black groove; border-radius: 10px;" >
-                      <div class="d-flex align-items-center">
-                          <div>
-                              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                                  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                                  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-                              </svg>
-                          </div>
-                          <div>
-                            <h5 style="margin: 8px;">{{ comment.id_user.username }}</h5>
-                          </div>
-                      </div>
-                      <hr>
-                      <div class="text-break">
-                          <h5 class="">Conteudo:</h5>
-                          <p>{{comment.comment}}</p>
-                      </div>
-                  </div>
-              </div>
-          {% endfor %}
-            
+                <div class="col-md-3">
+                    <div class="container-fluid p-2 mt-4" style="border: 3px black groove; border-radius: 10px;" >
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                                </svg>
+                            </div>
+                            <div>
+                              <h5 style="margin: 8px;">{{ comment.id_user.username }}</h5>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="text-break">
+                            <h5 class="">Conteudo:</h5>
+                            <p>{{comment.comment}}</p>
+                        </div>
+                    </div>
+                </div>
+              {% endfor %}
             </div>
         </div>
         <br>
