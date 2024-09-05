@@ -67,15 +67,17 @@
             <li class="page-item"><a class="page-link" href="?page={{ comments.next_page_number }}">Próxima</a></li>
         {% endif %}
     </ul>
-    <div class="px-4">
-        <form method="post" action="{% url 'create_comment_page' user.id %}">
-            {% csrf_token %}
-            {{ form_comment_page.as_p }}
-        
-        <div class="d-flex justify-content-center" style="justify-content: space-between;"> 
-        <button type="submit" class="btn btn-primary mb-3">Salvar</button>
+    <div class="container">
+        <div class="px-4">
+            <form method="post" action="{% url 'create_comment_page' user.id %}">
+                {% csrf_token %}
+                {{ form_comment_page.as_p }}
+            
+                <div class="d-flex justify-content-center" style="justify-content: space-between;"> 
+                    <button type="submit" class="btn btn-primary mb-3">Salvar</button>
+                </div>
+            </form>
         </div>
-        </form>
     </div>
 </nav>
 

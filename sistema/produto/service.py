@@ -4,7 +4,7 @@ from .repository import *
 class ProductService():
 
     @staticmethod
-    def list_all_products(page=1, per_page=10):
+    def list_all_products(page=1, per_page=12):
         all_products = ProductRepository.get_all_products()
         paginator = Paginator(all_products, per_page)
 
@@ -77,7 +77,7 @@ class CommentPageService():
         return CommentPageRepository.get_all_comments_page()
 
     @staticmethod
-    def list_all_comments_page(page, per_page=10):
+    def list_all_comments_page(page, per_page=12):
         all_comments = CommentPageRepository.get_all_comments_page()
         paginator = Paginator(all_comments, per_page)
 
