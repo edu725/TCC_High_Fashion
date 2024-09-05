@@ -76,19 +76,20 @@
   <div class="py-5">
     <h1 class="text-center">Criar Coleção</h1>
   </div>    
-    <div class="modal-body">
+    <div class="modal-body pb-5">
       <div class="container" style="width: 80%;">
-        <div class="py-2">
-            <form method="post" action="{% url 'collection_create' %}" enctype="multipart/form-data">
+        <div class="p-5" style="background-color: #eef7ff; color:black; border-radius: 10px;">
+            <form method="post" class="" action="{% url 'collection_create' %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form_collection.as_p }}
+                <div class="text-center py-3">
+                  <button type="submit" style="border-radius: 7px; background-color: #00b7ff; color: white; text-align: center;" class="btn">Cadastrar</button>
+                </form>
+                <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Cancelar</button>
+              </div>
         </div>
       </div>
-      <div class="text-center py-3">
-          <button type="submit" style="border-radius: 7px; background-color: #045CAC; color: white;" class="btn">Cadastrar</button>
-        </form>
-        <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Cancelar</button>
-      </div>
+      
     </div>
 
 {% endblock %}
