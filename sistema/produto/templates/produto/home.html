@@ -99,7 +99,7 @@
     <section data-bs-version="5.1" class="pricing02 cid-umeacIuSzu" id="product-list-9-umeacIuSzu">
         
         
-        <div class="container-fluid">
+        <div class="container-fluid py-5" style="background-color: #EEF7FF;">
             <div class="row justify-content-center">
                 <div class="col-12 content-head">
                     <div class="mbr-section-head mb-5">
@@ -113,11 +113,11 @@
               <div class="row">
                 {% for product in products %}
                   <div class="item features-image col-12 col-md-6 col-lg-3 mb-3">
-                      <div class="item-wrapper" style="background-color: rgb(246, 255, 252);">
+                      <div class="item-wrapper" style="background-color: white;">
                           <div class="item-img">
                               <img src="{{ product.path.url }}" alt="Produto">
                           </div>
-                          <div class="item-content">
+                          <div class="item-content p-3">
                               <h4 class="item-title mbr-fonts-style ">
                                   {{ product.name }}
                               </h4>
@@ -137,7 +137,7 @@
     <section data-bs-version="5.1" class="features03 cid-umeacIw8pL pad" id="events-1-umeacIw8pL">
       
       
-      <div class="container-fluid">
+      <div class="container-fluid py-5">
         <div class="row justify-content-center mb-5">
           <div class="col-12 content-head">
             <div class="mbr-section-head">
@@ -161,7 +161,7 @@
                   </h5>
                   <p class="mbr-text mbr-fonts-style mb-3 display-7">{{ collection.description }}</p>
                   <div class="mbr-section-btn item-footer">
-                    <a href="{% url 'collection_detail' collection.id %}" class="btn item-btn btn-primary display-7">Ver</a>
+                    <a href="{% url 'collection_detail' collection.id %}" class="btn item-btn btn-primary display-7 px-4">Ver</a>
                   </div>
                 </div>
               </div>
