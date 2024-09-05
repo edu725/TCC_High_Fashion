@@ -26,21 +26,21 @@
     <style>
         @media only screen and (max-width: 770px) {
             .media{
-                flex-direction: column;
-                text-align: center;
+              flex-direction: column;
+              text-align: center;
             }
         }
         .parallax-1 {
-            width: 100%;
-            background: url("{% static 'assets/img/fundo.jpg' %}");
-            background-size: 100% 100%;
-            background-attachment: fixed;
+          width: 100%;
+          background: url("{% static 'assets/img/fundo.jpg' %}");
+          background-size: 100% 100%;
+          background-attachment: fixed;
         }
 
         .parallax-1 .para {
-            position: relative;
-            padding: 10px;
-            text-align: center;
+          position: relative;
+          padding: 10px;
+          text-align: center;
         }
         .items-container {
         display: flex;
@@ -154,13 +154,14 @@
                       <p class="mbr-text mbr-fonts-style text-center display-8">{{ product.description }}</p>
                       <div class="mbr-section-btn item-footer d-flex justify-content-center mt-auto">
                         <a href="{% url 'product_single' product.id %}" class="btn item-btn btn-primary display-7">Ver mais</a>
+
                       </div>
                     </div>
                   </div>
                   </div>
                   {% endfor %}
               </div>
-            </div>
+          </div>
         </div>
     </section>
     
