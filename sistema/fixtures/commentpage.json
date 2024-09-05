@@ -4,7 +4,7 @@
 
         "pk": 1,
         "fields":{
-            "comment":"Texto muito fodaaaa", 
+            "comment":"Gostei muito da coleção de inverno", 
             "id_user_id": 1 
         }
     },
@@ -13,7 +13,7 @@
 
         "pk": 2,
         "fields":{
-            "comment":"Texto muito fodaaaa2222", 
+            "comment":"Gostei muito da coleção de verao", 
             "id_user_id": 1
         }
     },
@@ -22,7 +22,7 @@
 
         "pk": 3,
         "fields":{
-            "comment":"Texto muito diferente", 
+            "comment":"Achei o site muito legal", 
             "id_user_id":1
         }
     },
@@ -31,7 +31,7 @@
 
         "pk": 4,
         "fields":{
-            "comment":"Texto muito foda32322", 
+            "comment":"Queria mais conteudo", 
             "id_user_id":1
         }
     }
