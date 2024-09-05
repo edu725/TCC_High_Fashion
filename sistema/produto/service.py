@@ -50,6 +50,15 @@ class ProductService():
     def delete_product(id_product):
         return ProductRepository.delete_product(id_product)
     
+class ProductCostService:
+
+    @staticmethod
+    def create_product_cost(product, parameters, raw_materials, labor, indirect):
+        return ProductCostRepository.create_product_cost(product, parameters, raw_materials, labor, indirect)
+    
+    @staticmethod
+    def get_id_fk(fk):
+        return ProductCostRepository.get_id_fk(fk)
 
 class CommentProductService():
 
@@ -94,13 +103,3 @@ class CommentPageService():
 
         return comments
     
-class ProductCostService:
-
-    @staticmethod
-    def create_product_cost(product, parameters, raw_materials, labor, indirect):
-        return ProductCostRepository.create_product_cost(product, parameters, raw_materials, labor, indirect)
-    
-    
-    @staticmethod
-    def get_id_fk(fk):
-        return ProductCostRepository.get_id_fk(fk)
