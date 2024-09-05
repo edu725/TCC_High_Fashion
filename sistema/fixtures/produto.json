@@ -64,11 +64,11 @@
 
         "pk": 6,
         "fields":{
-            "name": "Roupa de inverno 06",
-            "description": "Roupa de inverno 06",
-            "type": 1,
-            "collection": 1,
-            "path": "\\img\\imgfix\\inverno02.png"
+            "name": "Sobretudo bege",
+            "description": "Sobretudo semi-aberto bege",
+            "type": 9,
+            "collection": 3,
+            "path": "\\img\\imgfix\\outono02.png"
         }
     },
     {
@@ -76,11 +76,11 @@
 
         "pk": 7,
         "fields":{
-            "name": "Roupa de inverno 07",
-            "description": "Roupa de inverno 07",
+            "name": "Camisa branca Estampada",
+            "description": "Camisa de botão branca com estampa laranja",
             "type": 1,
-            "collection": 1,
-            "path": "\\img\\imgfix\\inverno03.png"
+            "collection": 4,
+            "path": "\\img\\imgfix\\primavera01.png"
         }
     },
     {
@@ -88,107 +88,11 @@
 
         "pk": 8,
         "fields":{
-            "name": "Roupa de inverno 08",
-            "description": "Roupa de inverno 08",
-            "type": 1,
-            "collection": 1,
-            "path": "\\img\\imgfix\\inverno04.png"
-        }
-    },
-    {
-        "model": "produto.product", 
-
-        "pk": 9,
-        "fields":{
-            "name": "Roupa de inverno 08",
-            "description": "Roupa de inverno 08",
-            "type": 1,
-            "collection": 1,
-            "path": "\\img\\imgfix\\inverno04.png"
-        }
-    },
-    {
-        "model": "produto.product", 
-
-        "pk": 10,
-        "fields":{
-            "name": "Roupa de inverno 08",
-            "description": "Roupa de inverno 08",
-            "type": 1,
-            "collection": 1,
-            "path": "\\img\\imgfix\\inverno04.png"
-        }
-    },
-    {
-        "model": "produto.product", 
-
-        "pk": 11,
-        "fields":{
-            "name": "Roupa de inverno 08",
-            "description": "Roupa de inverno 08",
-            "type": 1,
-            "collection": 1,
-            "path": "\\img\\imgfix\\inverno04.png"
-        }
-    },
-    {
-        "model": "produto.product", 
-
-        "pk": 12,
-        "fields":{
-            "name": "Roupa de inverno 08",
-            "description": "Roupa de inverno 08",
-            "type": 1,
-            "collection": 1,
-            "path": "\\img\\imgfix\\inverno04.png"
-        }
-    },
-    {
-        "model": "produto.product", 
-
-        "pk": 13,
-        "fields":{
-            "name": "Roupa de inverno 08",
-            "description": "Roupa de inverno 08",
-            "type": 1,
-            "collection": 1,
-            "path": "\\img\\imgfix\\inverno04.png"
-        }
-    },
-    {
-        "model": "produto.product", 
-
-        "pk": 14,
-        "fields":{
-            "name": "Roupa de inverno 08",
-            "description": "Roupa de inverno 08",
-            "type": 1,
-            "collection": 1,
-            "path": "\\img\\imgfix\\inverno04.png"
-        }
-    },
-    {
-        "model": "produto.product", 
-
-        "pk": 15,
-        "fields":{
-            "name": "Roupa de inverno 08",
-            "description": "Roupa de inverno 08",
-            "type": 1,
-            "collection": 1,
-            "path": "\\img\\imgfix\\inverno04.png"
-        }
-    },
-    {
-        "model": "produto.product", 
-
-        "pk": 16,
-        "fields":{
-            "name": "Roupa de inverno 08",
-            "description": "Roupa de inverno 08",
-            "type": 1,
-            "collection": 1,
-            "path": "\\img\\imgfix\\inverno04.png"
+            "name": "Vestido Simples Vermelho",
+            "description": "Vestido simples, vermelho e curto de verão com babado obro a ombro",
+            "type": 4,
+            "collection": 2,
+            "path": "\\img\\imgfix\\verao04.png"
         }
     }
 ]

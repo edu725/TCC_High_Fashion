@@ -16,9 +16,18 @@
             font-family: LTSuperior;
             src: url("{% static 'assets/fonts/lt_superior/LTSuperior-Medium.otf' %}") format(opentype);
         }
+        @media only screen and (max-width: 770px) {
+            h1, strong{
+        
+            font-family: Monda !important;
+            font-size: 24px !important;
+                
+            }
+        }
+        
         h1, strong{
             font-family: Monda !important;
-            font-size: 60px !important;
+            font-size: 60px 
         }
         p, h5, h4, h3, h2 {
             font-family: LTSuperior !important;
