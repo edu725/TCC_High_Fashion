@@ -50,18 +50,16 @@
             <div class="row">
             {% for product in products %}
             <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                <div class="d-flex">
-                    <div class="card" style="width: 18rem;">
-                        <a href="{% url 'product_single' product.id %}" style="text-decoration: none; color: #000;" class="">
-                            <img src="{{ product.path.url }}" class="card-img-top" alt="{{ product.name }}">
-                            <div class="card-body">
-                                <h5 class="card-title text-center">{{product.name}}</h5> 
-                                <hr style="margin: 2px 0px 2px 0px;">
-                                <p class="f text-center " style="font-size: 16px; margin: 10px 0px 0px 0px;">Descrição:{{product.description}}</p>
-                            </div>
-                        </a>
-                    </div> 
-                </div>
+                <div class="card my-3" style="width: 18rem;">
+                    <a href="{% url 'product_single' product.id %}" style="text-decoration: none; color: #000;" class="">
+                        <img src="{{ product.path.url }}" class="card-img-top" alt="{{ product.name }}">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">{{product.name}}</h5> 
+                            <hr style="margin: 2px 0px 2px 0px;">
+                            <p class="f text-center " style="font-size: 16px; margin: 10px 0px 0px 0px;">Descrição:{{product.description}}</p>
+                        </div>
+                    </a>
+                </div> 
             </div>
             {% endfor %}
         </div>

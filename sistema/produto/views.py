@@ -24,10 +24,19 @@ class ProductIndex(View):
         collections = CollectionService.get_all_collections()
         product = ProductService.get_all_products()
         user = UserService.get_all_users()
+        last_8 = ProductService.get_last_8()
         comment = CommentPageService.get_all_comments()
         form_login = self.form_login
         form_register = self.form_register
-        return render(request, self.template_name,{'form_login':form_login, 'form_register':form_register, 'comments': comment,'collections':collections, 'products':product, 'user':user})
+        return render(request, self.template_name,{
+            'form_login':form_login,
+            'form_register':form_register,
+            'comments': comment,
+            'collections':collections,
+            'products':product,
+            'user':user,
+            'last_8':last_8
+            })
 
 @method_decorator(user_is_manager, name='dispatch')
 class ProductListDash(View):
