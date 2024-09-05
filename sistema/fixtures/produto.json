@@ -4,9 +4,9 @@
 
         "pk": 1,
         "fields":{
-            "name": "Roupa de inverno 01",
-            "description": "Roupa de inverno 01",
-            "type": 1,
+            "name": "Sueter Branco",
+            "description": "Sueter de Malha branca",
+            "type": 6,
             "collection": 1,
             "path": "\\img\\imgfix\\inverno01.png"
         }
@@ -16,9 +16,9 @@
 
         "pk": 2,
         "fields":{
-            "name": "Roupa de inverno 02",
-            "description": "Roupa de inverno 02",
-            "type": 1,
+            "name": "Sueter de lã",
+            "description": "Sueter de lã com degrade de cores",
+            "type": 6,
             "collection": 1,
             "path": "\\img\\imgfix\\inverno02.png"
         }
@@ -28,9 +28,9 @@
 
         "pk": 3,
         "fields":{
-            "name": "Roupa de inverno 03",
-            "description": "Roupa de inverno 03",
-            "type": 1,
+            "name": "Jaqueta Branca",
+            "description": "Jaqueta de lã branca",
+            "type": 2,
             "collection": 1,
             "path": "\\img\\imgfix\\inverno03.png"
         }
@@ -40,9 +40,9 @@
 
         "pk": 4,
         "fields":{
-            "name": "Roupa de inverno 04",
-            "description": "Roupa de inverno 04",
-            "type": 1,
+            "name": "Moletom Vermelho",
+            "description": "Moletom vermelho",
+            "type": 7,
             "collection": 1,
             "path": "\\img\\imgfix\\inverno04.png"
         }
@@ -52,11 +52,11 @@
 
         "pk": 5,
         "fields":{
-            "name": "Roupa de inverno 05",
-            "description": "Roupa de inverno 05",
-            "type": 1,
-            "collection": 1,
-            "path": "\\img\\imgfix\\inverno01.png"
+            "name": "Conjunto de outono",
+            "description": "Conjunto de Outono em tons pretos",
+            "type": 8,
+            "collection": 3,
+            "path": "\\img\\imgfix\\outono01.png"
         }
     },
     {
@@ -87,6 +87,102 @@
         "model": "produto.product", 
 
         "pk": 8,
+        "fields":{
+            "name": "Roupa de inverno 08",
+            "description": "Roupa de inverno 08",
+            "type": 1,
+            "collection": 1,
+            "path": "\\img\\imgfix\\inverno04.png"
+        }
+    },
+    {
+        "model": "produto.product", 
+
+        "pk": 9,
+        "fields":{
+            "name": "Roupa de inverno 08",
+            "description": "Roupa de inverno 08",
+            "type": 1,
+            "collection": 1,
+            "path": "\\img\\imgfix\\inverno04.png"
+        }
+    },
+    {
+        "model": "produto.product", 
+
+        "pk": 10,
+        "fields":{
+            "name": "Roupa de inverno 08",
+            "description": "Roupa de inverno 08",
+            "type": 1,
+            "collection": 1,
+            "path": "\\img\\imgfix\\inverno04.png"
+        }
+    },
+    {
+        "model": "produto.product", 
+
+        "pk": 11,
+        "fields":{
+            "name": "Roupa de inverno 08",
+            "description": "Roupa de inverno 08",
+            "type": 1,
+            "collection": 1,
+            "path": "\\img\\imgfix\\inverno04.png"
+        }
+    },
+    {
+        "model": "produto.product", 
+
+        "pk": 12,
+        "fields":{
+            "name": "Roupa de inverno 08",
+            "description": "Roupa de inverno 08",
+            "type": 1,
+            "collection": 1,
+            "path": "\\img\\imgfix\\inverno04.png"
+        }
+    },
+    {
+        "model": "produto.product", 
+
+        "pk": 13,
+        "fields":{
+            "name": "Roupa de inverno 08",
+            "description": "Roupa de inverno 08",
+            "type": 1,
+            "collection": 1,
+            "path": "\\img\\imgfix\\inverno04.png"
+        }
+    },
+    {
+        "model": "produto.product", 
+
+        "pk": 14,
+        "fields":{
+            "name": "Roupa de inverno 08",
+            "description": "Roupa de inverno 08",
+            "type": 1,
+            "collection": 1,
+            "path": "\\img\\imgfix\\inverno04.png"
+        }
+    },
+    {
+        "model": "produto.product", 
+
+        "pk": 15,
+        "fields":{
+            "name": "Roupa de inverno 08",
+            "description": "Roupa de inverno 08",
+            "type": 1,
+            "collection": 1,
+            "path": "\\img\\imgfix\\inverno04.png"
+        }
+    },
+    {
+        "model": "produto.product", 
+
+        "pk": 16,
         "fields":{
             "name": "Roupa de inverno 08",
             "description": "Roupa de inverno 08",
